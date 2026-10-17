@@ -1,57 +1,25 @@
 import 'package:flutter/widgets.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:pulse/core/theme/keys.dart';
 
-/// User-selectable colour of a category or account. Persisted by [name].
-enum ColorKey { lime, coral, sky, violet, amber, teal, pink, grey }
+export 'keys.dart';
 
-/// Icon of a category. Persisted by [name].
-///
-/// The first ten are offered in the "Νέα κατηγορία" picker; the rest are used
-/// by built-in categories (bills, salary, freelance, other).
-enum IconKey {
-  cart,
-  food,
-  car,
-  home,
-  film,
-  heart,
-  gift,
-  plane,
-  book,
-  shirt,
-  bolt,
-  salary,
-  laptop,
-  tag;
-
-  static const List<IconKey> pickable = [
-    cart,
-    food,
-    car,
-    home,
-    film,
-    heart,
-    gift,
-    plane,
-    book,
-    shirt,
-  ];
-
+extension IconKeyGlyph on IconKey {
   IconData get icon => switch (this) {
-    cart => LucideIcons.shoppingCart,
-    food => LucideIcons.utensils,
-    car => LucideIcons.car,
-    home => LucideIcons.house,
-    film => LucideIcons.film,
-    heart => LucideIcons.heart,
-    gift => LucideIcons.gift,
-    plane => LucideIcons.plane,
-    book => LucideIcons.book,
-    shirt => LucideIcons.shirt,
-    bolt => LucideIcons.zap,
-    salary => LucideIcons.briefcase,
-    laptop => LucideIcons.laptop,
-    tag => LucideIcons.tag,
+    IconKey.cart => LucideIcons.shoppingCart,
+    IconKey.food => LucideIcons.utensils,
+    IconKey.car => LucideIcons.car,
+    IconKey.home => LucideIcons.house,
+    IconKey.film => LucideIcons.film,
+    IconKey.heart => LucideIcons.heart,
+    IconKey.gift => LucideIcons.gift,
+    IconKey.plane => LucideIcons.plane,
+    IconKey.book => LucideIcons.book,
+    IconKey.shirt => LucideIcons.shirt,
+    IconKey.bolt => LucideIcons.zap,
+    IconKey.salary => LucideIcons.briefcase,
+    IconKey.laptop => LucideIcons.laptop,
+    IconKey.tag => LucideIcons.tag,
   };
 }
 

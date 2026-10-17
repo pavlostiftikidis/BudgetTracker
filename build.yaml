@@ -8,6 +8,7 @@ targets:
           schema_dir: drift_schemas/
           test_dir: test/drift/
           store_date_time_values_as_text: false
+          generate_manager: false
       json_serializable:
         options:
           explicit_to_json: true

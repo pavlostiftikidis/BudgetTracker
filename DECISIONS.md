@@ -55,3 +55,64 @@ have broken another requirement. Newest decisions are appended per phase.
   (The mockup's `22α` is the older katharevousa form.)
 - Text scale is clamped at 1.3 app-wide (`MediaQuery.withClampedTextScaling`),
   the level the spec requires layouts to survive.
+
+## Data layer (phase 2)
+
+- **Structure:** besides `core/`, `data/` and `features/`, pure business rules
+  (balances, budget maths, recurring schedule) live in **`lib/domain/`**. They
+  depend only on the models and `core/`, so they are unit-tested without
+  Flutter or a database.
+- **Ids are client-generated UUID v4 strings**, not autoincrement integers, so a
+  future sync backend can merge rows from several devices without remapping.
+- **Enums are stored as text** (`textEnum`) so reordering an enum can never
+  corrupt data. Dates use drift's default (Unix seconds, local time).
+- **Extra fields beyond the spec:**
+  - `Txn.title`: merchant or short title ("Σκλαβενίτης"); the UI falls back to
+    the category name. Needed for the Edit screen's "merchant/title".
+  - `Txn.occurrenceKey`: `yyyy-MM-dd` of the recurring occurrence. A unique
+    index on `(recurringRuleId, occurrenceKey)` makes materialisation
+    idempotent at the database level, so it holds even if a rule's
+    `nextDueDate` were rolled back. A soft-deleted occurrence is not
+    re-created.
+  - `RecurringRule.title`: the name shown in the list ("Ενοίκιο").
+  - `Account.last4`, `creditLimitCents`, `statementDay`, `goalCents`: they
+    drive the account subtitles in the mockups ("Τράπεζα · ••4417",
+    "Όριο €2.000 · λήξη 5 Νοε", "Στόχος €5.000 · 65%").
+- **Where settings live:** income, payday and currency are in the `settings`
+  table. Theme and the onboarding flag are in `shared_preferences`, because
+  they are needed synchronously before the database opens. The biometric lock
+  flag will go in `flutter_secure_storage` (phase 6).
+- **Balances** are computed with one SQL aggregate per account and kind
+  (`UNION` with the incoming side of transfers), not by loading every
+  transaction. The same maths exists as a pure function for unit tests.
+- **Categories and accounts that are in use are archived, not deleted.** A
+  category also counts as "in use" when a recurring rule references it.
+- **Budget period label:** a period is named after the calendar month that
+  holds most of its days ("15 Oct–14 Nov" → Οκτώβριος, "31 Oct–29 Nov" →
+  Νοέμβριος).
+- **No `rxdart`:** the one stream combinator needed (`combineLatest2`) is a
+  30-line helper in `core/utils/streams.dart`.
+- **drift managers are disabled** (`generate_manager: false`); the app uses
+  DAOs only.
+- **Migrations:** `schemaVersion` 1 with an exported snapshot in
+  `drift_schemas/`. Adding a version means bumping `schemaVersion`, running
+  `dart run drift_dev make-migrations` (it generates step helpers and
+  migration tests under `test/drift/`), and adding the step in `onUpgrade`.
+  Core value types (`Money`, `BudgetPeriod`, enums) are pure Dart (`meta`
+  rather than Flutter), so drift can load the schema in a plain VM.
+
+## Demo data
+
+- `--dart-define=SEED_DEMO=true` is honoured **only in debug builds**, and only
+  on an empty database. It marks onboarding as done.
+- The data is generated **relative to today** over the current and five
+  previous periods (payday on the 1st), so the app always looks alive and
+  Insights has history. Up to the 18th of the month the category totals
+  match the mockups (Σούπερ μάρκετ €312, Εστίαση €186, Λογαριασμοί €218,
+  Μετακίνηση €94, Ψυχαγωγία €41 → €851 / €980, "4 από 5 εντός ορίου"). The
+  previous period is tuned so Εστίαση shows "+24%".
+- The credit card is paid off on the 5th of each month from the previous
+  month's card spending, so it carries a realistic negative balance.
+  Seeded rent, salary, ΔΕΗ, Netflix and Spotify transactions are linked to
+  their recurring rules, so materialisation right after seeding creates
+  nothing.

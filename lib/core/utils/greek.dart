@@ -1,3 +1,4 @@
+import 'package:intl/date_symbols.dart';
 import 'package:intl/intl.dart';
 
 const String kLocale = 'el';
@@ -46,11 +47,18 @@ String greekUpper(String input) {
   return out.toString();
 }
 
+/// Locale symbols, read directly: some date patterns ("LLLL") are treated as
+/// skeletons by intl and come back in the genitive.
+DateSymbols get _symbols => DateFormat(null, kLocale).dateSymbols;
+
+/// Index into intl's weekday arrays, which start on Sunday.
+int _weekdayIndex(DateTime d) => d.weekday % 7;
+
 /// "Οκτώβριος" (standalone, nominative).
-String monthName(DateTime d) => DateFormat('LLLL', kLocale).format(d);
+String monthName(DateTime d) => _symbols.STANDALONEMONTHS[d.month - 1];
 
 /// "Οκτωβρίου" (genitive, as used in "ΕΞΟΔΑ ΟΚΤΩΒΡΙΟΥ").
-String monthGenitive(DateTime d) => DateFormat('MMMM', kLocale).format(d);
+String monthGenitive(DateTime d) => _symbols.MONTHS[d.month - 1];
 
 /// "Οκτώβριο" (accusative, as in "από τον Οκτώβριο"). Every Greek month name
 /// is masculine in -ος, so the accusative drops the final ς.
@@ -60,27 +68,27 @@ String monthAccusative(DateTime d) {
 }
 
 /// "Σεπ" (short standalone).
-String monthShort(DateTime d) => DateFormat('LLL', kLocale).format(d);
+String monthShort(DateTime d) => _symbols.STANDALONESHORTMONTHS[d.month - 1];
 
 /// Feminine ordinal for a day of the month: "1η", "15η", "20ή", "30ή".
 /// The accent follows the stress of the spoken word (εικοστή, τριακοστή).
 String dayOrdinal(int day) => day == 20 || day == 30 ? '$dayή' : '$dayη';
 
 /// "Παρασκευή".
-String weekdayName(DateTime d) => DateFormat('EEEE', kLocale).format(d);
+String weekdayName(DateTime d) => _symbols.STANDALONEWEEKDAYS[_weekdayIndex(d)];
 
 /// "Παρ" → shown upper-cased in strips ("ΠΑΡ").
-String weekdayShort(DateTime d) => DateFormat('EEE', kLocale).format(d);
+String weekdayShort(DateTime d) => _symbols.STANDALONESHORTWEEKDAYS[_weekdayIndex(d)];
 
 /// "Π" — single-letter weekday for bar charts.
-String weekdayNarrow(DateTime d) => DateFormat('EEEEE', kLocale).format(d);
+String weekdayNarrow(DateTime d) => _symbols.STANDALONENARROWWEEKDAYS[_weekdayIndex(d)];
 
 /// "5 Νοε".
 String dayMonthShort(DateTime d) =>
     '${d.day} ${greekTitleCaseShortMonth(monthShortGenitive(d))}';
 
 /// Genitive abbreviation ("Νοε").
-String monthShortGenitive(DateTime d) => DateFormat('MMM', kLocale).format(d);
+String monthShortGenitive(DateTime d) => _symbols.SHORTMONTHS[d.month - 1];
 
 String greekTitleCaseShortMonth(String s) => s.replaceAll('.', '');
 
