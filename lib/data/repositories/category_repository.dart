@@ -27,9 +27,8 @@ class DriftCategoryRepository implements CategoryRepository {
   final AppDatabase _db;
 
   @override
-  Stream<List<TxnCategory>> watchCategories({bool includeArchived = false}) => _db.categoriesDao
-      .watchAll(includeArchived: includeArchived)
-      .map((rows) => [for (final r in rows) r.toModel()]);
+  Stream<List<TxnCategory>> watchCategories({bool includeArchived = false}) =>
+      _db.categoriesDao.watchAll(includeArchived: includeArchived).map((rows) => [for (final r in rows) r.toModel()]);
 
   @override
   Stream<Map<String, int>> watchTxnCounts() => _db.categoriesDao.watchTxnCounts();

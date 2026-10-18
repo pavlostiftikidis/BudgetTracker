@@ -11,8 +11,7 @@ _Account _$AccountFromJson(Map<String, dynamic> json) => _Account(
   name: json['name'] as String,
   type: $enumDecode(_$AccountTypeEnumMap, json['type']),
   openingBalanceCents: (json['openingBalanceCents'] as num?)?.toInt() ?? 0,
-  colorKey:
-      $enumDecodeNullable(_$ColorKeyEnumMap, json['colorKey']) ?? ColorKey.sky,
+  colorKey: $enumDecodeNullable(_$ColorKeyEnumMap, json['colorKey']) ?? ColorKey.sky,
   isCredit: json['isCredit'] as bool? ?? false,
   creditLimitCents: (json['creditLimitCents'] as num?)?.toInt(),
   statementDay: (json['statementDay'] as num?)?.toInt(),
@@ -66,22 +65,18 @@ _TxnCategory _$TxnCategoryFromJson(Map<String, dynamic> json) => _TxnCategory(
   archived: json['archived'] as bool? ?? false,
 );
 
-Map<String, dynamic> _$TxnCategoryToJson(_TxnCategory instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'kind': _$CategoryKindEnumMap[instance.kind]!,
-      'colorKey': _$ColorKeyEnumMap[instance.colorKey]!,
-      'iconKey': _$IconKeyEnumMap[instance.iconKey]!,
-      'monthlyLimitCents': instance.monthlyLimitCents,
-      'sortOrder': instance.sortOrder,
-      'archived': instance.archived,
-    };
-
-const _$CategoryKindEnumMap = {
-  CategoryKind.expense: 'expense',
-  CategoryKind.income: 'income',
+Map<String, dynamic> _$TxnCategoryToJson(_TxnCategory instance) => <String, dynamic>{
+  'id': instance.id,
+  'name': instance.name,
+  'kind': _$CategoryKindEnumMap[instance.kind]!,
+  'colorKey': _$ColorKeyEnumMap[instance.colorKey]!,
+  'iconKey': _$IconKeyEnumMap[instance.iconKey]!,
+  'monthlyLimitCents': instance.monthlyLimitCents,
+  'sortOrder': instance.sortOrder,
+  'archived': instance.archived,
 };
+
+const _$CategoryKindEnumMap = {CategoryKind.expense: 'expense', CategoryKind.income: 'income'};
 
 const _$IconKeyEnumMap = {
   IconKey.cart: 'cart',
@@ -115,9 +110,7 @@ _Txn _$TxnFromJson(Map<String, dynamic> json) => _Txn(
   recurringRuleId: json['recurringRuleId'] as String?,
   occurrenceKey: json['occurrenceKey'] as String?,
   receiptPath: json['receiptPath'] as String?,
-  deletedAt: json['deletedAt'] == null
-      ? null
-      : DateTime.parse(json['deletedAt'] as String),
+  deletedAt: json['deletedAt'] == null ? null : DateTime.parse(json['deletedAt'] as String),
 );
 
 Map<String, dynamic> _$TxnToJson(_Txn instance) => <String, dynamic>{
@@ -138,51 +131,45 @@ Map<String, dynamic> _$TxnToJson(_Txn instance) => <String, dynamic>{
   'deletedAt': instance.deletedAt?.toIso8601String(),
 };
 
-const _$TxnKindEnumMap = {
-  TxnKind.expense: 'expense',
-  TxnKind.income: 'income',
-  TxnKind.transfer: 'transfer',
+const _$TxnKindEnumMap = {TxnKind.expense: 'expense', TxnKind.income: 'income', TxnKind.transfer: 'transfer'};
+
+_RecurringRule _$RecurringRuleFromJson(Map<String, dynamic> json) => _RecurringRule(
+  id: json['id'] as String,
+  title: json['title'] as String,
+  kind: $enumDecode(_$TxnKindEnumMap, json['kind']),
+  amountCents: (json['amountCents'] as num).toInt(),
+  accountId: json['accountId'] as String,
+  frequency: $enumDecode(_$FrequencyEnumMap, json['frequency']),
+  startDate: DateTime.parse(json['startDate'] as String),
+  nextDueDate: DateTime.parse(json['nextDueDate'] as String),
+  createdAt: DateTime.parse(json['createdAt'] as String),
+  updatedAt: DateTime.parse(json['updatedAt'] as String),
+  categoryId: json['categoryId'] as String?,
+  note: json['note'] as String?,
+  interval: (json['interval'] as num?)?.toInt() ?? 1,
+  dayOfMonth: (json['dayOfMonth'] as num?)?.toInt(),
+  weekday: (json['weekday'] as num?)?.toInt(),
+  active: json['active'] as bool? ?? true,
+);
+
+Map<String, dynamic> _$RecurringRuleToJson(_RecurringRule instance) => <String, dynamic>{
+  'id': instance.id,
+  'title': instance.title,
+  'kind': _$TxnKindEnumMap[instance.kind]!,
+  'amountCents': instance.amountCents,
+  'accountId': instance.accountId,
+  'frequency': _$FrequencyEnumMap[instance.frequency]!,
+  'startDate': instance.startDate.toIso8601String(),
+  'nextDueDate': instance.nextDueDate.toIso8601String(),
+  'createdAt': instance.createdAt.toIso8601String(),
+  'updatedAt': instance.updatedAt.toIso8601String(),
+  'categoryId': instance.categoryId,
+  'note': instance.note,
+  'interval': instance.interval,
+  'dayOfMonth': instance.dayOfMonth,
+  'weekday': instance.weekday,
+  'active': instance.active,
 };
-
-_RecurringRule _$RecurringRuleFromJson(Map<String, dynamic> json) =>
-    _RecurringRule(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      kind: $enumDecode(_$TxnKindEnumMap, json['kind']),
-      amountCents: (json['amountCents'] as num).toInt(),
-      accountId: json['accountId'] as String,
-      frequency: $enumDecode(_$FrequencyEnumMap, json['frequency']),
-      startDate: DateTime.parse(json['startDate'] as String),
-      nextDueDate: DateTime.parse(json['nextDueDate'] as String),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
-      categoryId: json['categoryId'] as String?,
-      note: json['note'] as String?,
-      interval: (json['interval'] as num?)?.toInt() ?? 1,
-      dayOfMonth: (json['dayOfMonth'] as num?)?.toInt(),
-      weekday: (json['weekday'] as num?)?.toInt(),
-      active: json['active'] as bool? ?? true,
-    );
-
-Map<String, dynamic> _$RecurringRuleToJson(_RecurringRule instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'kind': _$TxnKindEnumMap[instance.kind]!,
-      'amountCents': instance.amountCents,
-      'accountId': instance.accountId,
-      'frequency': _$FrequencyEnumMap[instance.frequency]!,
-      'startDate': instance.startDate.toIso8601String(),
-      'nextDueDate': instance.nextDueDate.toIso8601String(),
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      'categoryId': instance.categoryId,
-      'note': instance.note,
-      'interval': instance.interval,
-      'dayOfMonth': instance.dayOfMonth,
-      'weekday': instance.weekday,
-      'active': instance.active,
-    };
 
 const _$FrequencyEnumMap = {
   Frequency.monthly: 'monthly',
@@ -193,20 +180,17 @@ const _$FrequencyEnumMap = {
 
 _AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) => _AppSettings(
   monthlyIncomeCents: (json['monthlyIncomeCents'] as num?)?.toInt() ?? 0,
-  paydayKind:
-      $enumDecodeNullable(_$PaydayKindEnumMap, json['paydayKind']) ??
-      PaydayKind.first,
+  paydayKind: $enumDecodeNullable(_$PaydayKindEnumMap, json['paydayKind']) ?? PaydayKind.first,
   paydayDay: (json['paydayDay'] as num?)?.toInt() ?? 1,
   currency: json['currency'] as String? ?? 'EUR',
 );
 
-Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) =>
-    <String, dynamic>{
-      'monthlyIncomeCents': instance.monthlyIncomeCents,
-      'paydayKind': _$PaydayKindEnumMap[instance.paydayKind]!,
-      'paydayDay': instance.paydayDay,
-      'currency': instance.currency,
-    };
+Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) => <String, dynamic>{
+  'monthlyIncomeCents': instance.monthlyIncomeCents,
+  'paydayKind': _$PaydayKindEnumMap[instance.paydayKind]!,
+  'paydayDay': instance.paydayDay,
+  'currency': instance.currency,
+};
 
 const _$PaydayKindEnumMap = {
   PaydayKind.first: 'first',

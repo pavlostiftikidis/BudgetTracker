@@ -84,8 +84,7 @@ String weekdayShort(DateTime d) => _symbols.STANDALONESHORTWEEKDAYS[_weekdayInde
 String weekdayNarrow(DateTime d) => _symbols.STANDALONENARROWWEEKDAYS[_weekdayIndex(d)];
 
 /// "5 Νοε".
-String dayMonthShort(DateTime d) =>
-    '${d.day} ${greekTitleCaseShortMonth(monthShortGenitive(d))}';
+String dayMonthShort(DateTime d) => '${d.day} ${greekTitleCaseShortMonth(monthShortGenitive(d))}';
 
 /// Genitive abbreviation ("Νοε").
 String monthShortGenitive(DateTime d) => _symbols.SHORTMONTHS[d.month - 1];
@@ -93,8 +92,7 @@ String monthShortGenitive(DateTime d) => _symbols.SHORTMONTHS[d.month - 1];
 String greekTitleCaseShortMonth(String s) => s.replaceAll('.', '');
 
 /// "Παρ 16 Οκτ, 19:05".
-String dateTimeShort(DateTime d) =>
-    '${weekdayShort(d)} ${dayMonthShort(d)}, ${DateFormat('HH:mm', kLocale).format(d)}';
+String dateTimeShort(DateTime d) => '${weekdayShort(d)} ${dayMonthShort(d)}, ${DateFormat('HH:mm', kLocale).format(d)}';
 
 /// "Τετ, 14 Οκτ".
 String dayHeader(DateTime d) => '${weekdayShort(d)}, ${dayMonthShort(d)}';

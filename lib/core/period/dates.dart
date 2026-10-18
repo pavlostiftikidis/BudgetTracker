@@ -38,10 +38,8 @@ final class DateRange {
 
   bool contains(DateTime t) => !t.isBefore(start) && t.isBefore(end);
 
-  DateRange union(DateRange other) => DateRange(
-    start.isBefore(other.start) ? start : other.start,
-    end.isAfter(other.end) ? end : other.end,
-  );
+  DateRange union(DateRange other) =>
+      DateRange(start.isBefore(other.start) ? start : other.start, end.isAfter(other.end) ? end : other.end);
 
   @override
   bool operator ==(Object other) => other is DateRange && other.start == start && other.end == end;

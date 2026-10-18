@@ -15,9 +15,7 @@ final appPrefsProvider = AppPrefsProvider._();
 
 /// Overridden in `main` (and in tests) with a ready instance.
 
-final class AppPrefsProvider
-    extends $FunctionalProvider<AppPrefs, AppPrefs, AppPrefs>
-    with $Provider<AppPrefs> {
+final class AppPrefsProvider extends $FunctionalProvider<AppPrefs, AppPrefs, AppPrefs> with $Provider<AppPrefs> {
   /// Overridden in `main` (and in tests) with a ready instance.
   AppPrefsProvider._()
     : super(
@@ -35,8 +33,7 @@ final class AppPrefsProvider
 
   @$internal
   @override
-  $ProviderElement<AppPrefs> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $ProviderElement<AppPrefs> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
 
   @override
   AppPrefs create(Ref ref) {
@@ -45,10 +42,7 @@ final class AppPrefsProvider
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(AppPrefs value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<AppPrefs>(value),
-    );
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<AppPrefs>(value));
   }
 }
 
@@ -57,8 +51,7 @@ String _$appPrefsHash() => r'ad7feed77cf4cc3fff0e01cafd6147f409f80b19';
 @ProviderFor(ThemeModeController)
 final themeModeControllerProvider = ThemeModeControllerProvider._();
 
-final class ThemeModeControllerProvider
-    extends $NotifierProvider<ThemeModeController, ThemeMode> {
+final class ThemeModeControllerProvider extends $NotifierProvider<ThemeModeController, ThemeMode> {
   ThemeModeControllerProvider._()
     : super(
         from: null,
@@ -79,15 +72,11 @@ final class ThemeModeControllerProvider
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(ThemeMode value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<ThemeMode>(value),
-    );
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<ThemeMode>(value));
   }
 }
 
-String _$themeModeControllerHash() =>
-    r'8caac9afc18b096ec79254db3ee967698a642aa4';
+String _$themeModeControllerHash() => r'8caac9afc18b096ec79254db3ee967698a642aa4';
 
 abstract class _$ThemeModeController extends $Notifier<ThemeMode> {
   ThemeMode build();
@@ -96,13 +85,7 @@ abstract class _$ThemeModeController extends $Notifier<ThemeMode> {
   WhenComplete runBuild() {
     final ref = this.ref as $Ref<ThemeMode, ThemeMode>;
     final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<ThemeMode, ThemeMode>,
-              ThemeMode,
-              Object?,
-              Object?
-            >;
+        ref.element as $ClassProviderElement<AnyNotifier<ThemeMode, ThemeMode>, ThemeMode, Object?, Object?>;
     return element.handleCreate(ref, build);
   }
 }
@@ -110,8 +93,7 @@ abstract class _$ThemeModeController extends $Notifier<ThemeMode> {
 @ProviderFor(OnboardingDone)
 final onboardingDoneProvider = OnboardingDoneProvider._();
 
-final class OnboardingDoneProvider
-    extends $NotifierProvider<OnboardingDone, bool> {
+final class OnboardingDoneProvider extends $NotifierProvider<OnboardingDone, bool> {
   OnboardingDoneProvider._()
     : super(
         from: null,
@@ -132,10 +114,7 @@ final class OnboardingDoneProvider
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(bool value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<bool>(value),
-    );
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<bool>(value));
   }
 }
 
@@ -147,14 +126,7 @@ abstract class _$OnboardingDone extends $Notifier<bool> {
   @override
   WhenComplete runBuild() {
     final ref = this.ref as $Ref<bool, bool>;
-    final element =
-        ref.element
-            as $ClassProviderElement<
-              AnyNotifier<bool, bool>,
-              bool,
-              Object?,
-              Object?
-            >;
+    final element = ref.element as $ClassProviderElement<AnyNotifier<bool, bool>, bool, Object?, Object?>;
     return element.handleCreate(ref, build);
   }
 }

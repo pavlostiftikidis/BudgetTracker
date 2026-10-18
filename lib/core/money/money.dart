@@ -78,11 +78,7 @@ final class Money implements Comparable<Money> {
   ({String whole, String decimals, String symbol}) get heroParts {
     final abs = cents.abs();
     final sign = cents < 0 ? kMinus : '';
-    return (
-      whole: '$sign${_grouped.format(abs ~/ 100)}',
-      decimals: '$decimalSeparator${_two(abs % 100)}',
-      symbol: '€',
-    );
+    return (whole: '$sign${_grouped.format(abs ~/ 100)}', decimals: '$decimalSeparator${_two(abs % 100)}', symbol: '€');
   }
 
   /// Plain number without symbol: "1.057,70" (or "1.058" without cents).

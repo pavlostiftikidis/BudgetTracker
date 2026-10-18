@@ -71,7 +71,11 @@ abstract class Txn with _$Txn {
     required int amountCents,
     required String accountId,
 
-    required DateTime date, required DateTime createdAt, required DateTime updatedAt, /// Destination account, transfers only.
+    required DateTime date,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+
+    /// Destination account, transfers only.
     String? toAccountId,
 
     /// Null for transfers.
@@ -114,7 +118,12 @@ abstract class RecurringRule with _$RecurringRule {
     required TxnKind kind,
     required int amountCents,
     required String accountId,
-    required Frequency frequency, required DateTime startDate, required DateTime nextDueDate, required DateTime createdAt, required DateTime updatedAt, String? categoryId,
+    required Frequency frequency,
+    required DateTime startDate,
+    required DateTime nextDueDate,
+    required DateTime createdAt,
+    required DateTime updatedAt,
+    String? categoryId,
     String? note,
 
     /// Months for [Frequency.everyNMonths], weeks for weekly, years for

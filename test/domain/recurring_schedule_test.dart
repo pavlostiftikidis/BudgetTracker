@@ -77,11 +77,15 @@ void main() {
       3100,
     );
     expect(
-      RecurringSchedule.monthlyEquivalentCents(rule(account: 'a', nextDue: t0, cents: 12000, frequency: Frequency.yearly)),
+      RecurringSchedule.monthlyEquivalentCents(
+        rule(account: 'a', nextDue: t0, cents: 12000, frequency: Frequency.yearly),
+      ),
       1000,
     );
     expect(
-      RecurringSchedule.monthlyEquivalentCents(rule(account: 'a', nextDue: t0, cents: 1000, frequency: Frequency.weekly)),
+      RecurringSchedule.monthlyEquivalentCents(
+        rule(account: 'a', nextDue: t0, cents: 1000, frequency: Frequency.weekly),
+      ),
       4333,
     );
   });

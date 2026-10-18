@@ -74,9 +74,7 @@ GoRouter router(Ref ref) {
         parentNavigatorKey: rootNavigatorKey,
         pageBuilder: (context, state) => MaterialPage(
           fullscreenDialog: true,
-          child: AddTransactionScreen(
-            transfer: state.uri.queryParameters['mode'] == 'transfer',
-          ),
+          child: AddTransactionScreen(transfer: state.uri.queryParameters['mode'] == 'transfer'),
         ),
       ),
       GoRoute(
@@ -91,26 +89,14 @@ GoRouter router(Ref ref) {
           ),
         ],
       ),
-      GoRoute(
-        path: Routes.accounts,
-        parentNavigatorKey: rootNavigatorKey,
-        builder: (_, _) => const AccountsScreen(),
-      ),
+      GoRoute(path: Routes.accounts, parentNavigatorKey: rootNavigatorKey, builder: (_, _) => const AccountsScreen()),
       GoRoute(
         path: Routes.categories,
         parentNavigatorKey: rootNavigatorKey,
         builder: (_, _) => const CategoriesScreen(),
       ),
-      GoRoute(
-        path: Routes.recurring,
-        parentNavigatorKey: rootNavigatorKey,
-        builder: (_, _) => const RecurringScreen(),
-      ),
-      GoRoute(
-        path: Routes.settings,
-        parentNavigatorKey: rootNavigatorKey,
-        builder: (_, _) => const SettingsScreen(),
-      ),
+      GoRoute(path: Routes.recurring, parentNavigatorKey: rootNavigatorKey, builder: (_, _) => const RecurringScreen()),
+      GoRoute(path: Routes.settings, parentNavigatorKey: rootNavigatorKey, builder: (_, _) => const SettingsScreen()),
       GoRoute(
         path: Routes.onboarding,
         parentNavigatorKey: rootNavigatorKey,

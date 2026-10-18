@@ -7,13 +7,7 @@ import 'package:pulse/core/widgets/buttons.dart';
 
 /// Back (or close) button, screen title and optional trailing actions.
 class PageHeader extends StatelessWidget {
-  const new({
-    required this.title,
-    this.trailing = const [],
-    this.close = false,
-    this.onBack,
-    super.key,
-  });
+  const new({required this.title, this.trailing = const [], this.close = false, this.onBack, super.key});
 
   final String title;
   final List<Widget> trailing;
@@ -36,10 +30,7 @@ class PageHeader extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           Expanded(
-            child: Semantics(
-              header: true,
-              child: Text(title, style: PulseText.screenTitle.copyWith(fontSize: 24)),
-            ),
+            child: Semantics(header: true, child: Text(title, style: PulseText.screenTitle.copyWith(fontSize: 24))),
           ),
           for (final w in trailing) ...[const SizedBox(width: 8), w],
         ],

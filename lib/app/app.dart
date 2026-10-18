@@ -22,9 +22,7 @@ class _PulseAppState extends ConsumerState<PulseApp> {
     super.initState();
     // Recurring occurrences that fell due while the app was in the
     // background become transactions on resume.
-    _lifecycle = AppLifecycleListener(
-      onResume: () => ref.read(recurringRepositoryProvider).materializeDue(),
-    );
+    _lifecycle = AppLifecycleListener(onResume: () => ref.read(recurringRepositoryProvider).materializeDue());
   }
 
   @override

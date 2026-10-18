@@ -16,13 +16,7 @@ class PillNavItem {
 /// with icon and label; the others are icon-only. The trailing lime circle
 /// opens "Νέα κίνηση".
 class FloatingPillNav extends StatelessWidget {
-  const new({
-    required this.items,
-    required this.currentIndex,
-    required this.onSelect,
-    required this.onAdd,
-    super.key,
-  });
+  const new({required this.items, required this.currentIndex, required this.onSelect, required this.onAdd, super.key});
 
   final List<PillNavItem> items;
   final int currentIndex;
@@ -52,11 +46,7 @@ class FloatingPillNav extends StatelessWidget {
                 flex: i == currentIndex ? 3 : 1,
                 child: Align(
                   alignment: i == currentIndex ? AlignmentDirectional.centerStart : Alignment.center,
-                  child: _NavTab(
-                    item: items[i],
-                    active: i == currentIndex,
-                    onTap: () => onSelect(i),
-                  ),
+                  child: _NavTab(item: items[i], active: i == currentIndex, onTap: () => onSelect(i)),
                 ),
               ),
             ],
@@ -147,10 +137,7 @@ class _AddButton extends StatelessWidget {
             key: const ValueKey('nav-add'),
             onTap: onTap,
             customBorder: const CircleBorder(),
-            child: SizedBox.square(
-              dimension: 52,
-              child: Icon(LucideIcons.plus, size: 24, color: c.onAccent),
-            ),
+            child: SizedBox.square(dimension: 52, child: Icon(LucideIcons.plus, size: 24, color: c.onAccent)),
           ),
         ),
       ),

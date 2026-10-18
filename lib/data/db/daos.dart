@@ -173,8 +173,9 @@ class TxnsDao extends DatabaseAccessor<AppDatabase> with _$TxnsDaoMixin {
 class RecurringDao extends DatabaseAccessor<AppDatabase> with _$RecurringDaoMixin {
   new(super.attachedDatabase);
 
-  Stream<List<RecurringRuleRow>> watchAll() =>
-      (select(recurringRules)..orderBy([(r) => OrderingTerm.asc(r.nextDueDate), (r) => OrderingTerm.asc(r.title)])).watch();
+  Stream<List<RecurringRuleRow>> watchAll() => (select(
+    recurringRules,
+  )..orderBy([(r) => OrderingTerm.asc(r.nextDueDate), (r) => OrderingTerm.asc(r.title)])).watch();
 
   Future<RecurringRuleRow?> byId(String id) =>
       (select(recurringRules)..where((r) => r.id.equals(id))).getSingleOrNull();

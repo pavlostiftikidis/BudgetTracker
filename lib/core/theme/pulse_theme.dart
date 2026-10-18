@@ -55,18 +55,12 @@ abstract final class PulseTheme {
       colorScheme: scheme,
       fontFamily: PulseFonts.sans,
     );
-    const roundedSheet = RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(Radii.sheet)),
-    );
+    const roundedSheet = RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(Radii.sheet)));
     return base.copyWith(
       scaffoldBackgroundColor: c.bg,
       canvasColor: c.bg,
       splashFactory: InkRipple.splashFactory,
-      textTheme: base.textTheme.apply(
-        fontFamily: PulseFonts.sans,
-        bodyColor: c.text,
-        displayColor: c.text,
-      ),
+      textTheme: base.textTheme.apply(fontFamily: PulseFonts.sans, bodyColor: c.text, displayColor: c.text),
       iconTheme: IconThemeData(color: c.text, size: 22),
       dividerTheme: DividerThemeData(color: c.line, thickness: 1, space: 1),
       textSelectionTheme: TextSelectionThemeData(
@@ -103,10 +97,7 @@ abstract final class PulseTheme {
         fillColor: c.surface2,
         hintStyle: PulseText.body.copyWith(color: c.muted),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(16),
-          borderSide: BorderSide.none,
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide(color: c.accentInk, width: 1.5),
@@ -122,9 +113,7 @@ abstract final class PulseTheme {
         dayForegroundColor: WidgetStateProperty.resolveWith(
           (s) => s.contains(WidgetState.selected) ? c.onAccent : c.text,
         ),
-        dayBackgroundColor: WidgetStateProperty.resolveWith(
-          (s) => s.contains(WidgetState.selected) ? c.accent : null,
-        ),
+        dayBackgroundColor: WidgetStateProperty.resolveWith((s) => s.contains(WidgetState.selected) ? c.accent : null),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(

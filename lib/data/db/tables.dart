@@ -79,8 +79,7 @@ class Txns extends Table {
   TextColumn get title => text().nullable()();
   DateTimeColumn get date => dateTime()();
   TextColumn get note => text().nullable()();
-  TextColumn get recurringRuleId =>
-      text().nullable().references(RecurringRules, #id, onDelete: KeyAction.setNull)();
+  TextColumn get recurringRuleId => text().nullable().references(RecurringRules, #id, onDelete: KeyAction.setNull)();
   TextColumn get occurrenceKey => text().nullable()();
   TextColumn get receiptPath => text().nullable()();
   DateTimeColumn get deletedAt => dateTime().nullable()();

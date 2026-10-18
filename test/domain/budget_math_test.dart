@@ -96,7 +96,10 @@ void main() {
     test('archived categories are not budgeted', () {
       final s = BudgetSummary.compute(
         period: period,
-        categories: [groceries, category(id: 'x', limit: 10000, archived: true)],
+        categories: [
+          groceries,
+          category(id: 'x', limit: 10000, archived: true),
+        ],
         txns: const [],
         today: t0,
       );

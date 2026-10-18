@@ -116,10 +116,7 @@ class PrimaryButton extends StatelessWidget {
                     ),
                   ),
                 ),
-                if (trailingArrow) ...[
-                  const SizedBox(width: 10),
-                  Icon(LucideIcons.arrowRight, size: 20, color: fg),
-                ],
+                if (trailingArrow) ...[const SizedBox(width: 10), Icon(LucideIcons.arrowRight, size: 20, color: fg)],
               ],
             ),
           ),
@@ -132,14 +129,7 @@ class PrimaryButton extends StatelessWidget {
 
 /// Outlined secondary action ("Νέος", coral delete button).
 class OutlineButtonPill extends StatelessWidget {
-  const new({
-    required this.label,
-    required this.onPressed,
-    this.icon,
-    this.color,
-    this.height = 52,
-    super.key,
-  });
+  const new({required this.label, required this.onPressed, this.icon, this.color, this.height = 52, super.key});
 
   final String label;
   final VoidCallback? onPressed;
@@ -169,10 +159,7 @@ class OutlineButtonPill extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  if (icon != null) ...[
-                    Icon(icon, size: 18, color: fg),
-                    const SizedBox(width: 8),
-                  ],
+                  if (icon != null) ...[Icon(icon, size: 18, color: fg), const SizedBox(width: 8)],
                   Flexible(
                     child: Text(label, style: PulseText.label.copyWith(color: fg)),
                   ),

@@ -11,10 +11,7 @@ class PlaceholderBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        context.l10n.placeholderScreen(name),
-        style: PulseText.body.copyWith(color: context.colors.muted),
-      ),
+      child: Text(context.l10n.placeholderScreen(name), style: PulseText.body.copyWith(color: context.colors.muted)),
     );
   }
 }

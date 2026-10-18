@@ -116,3 +116,38 @@ have broken another requirement. Newest decisions are appended per phase.
   Seeded rent, salary, ΔΕΗ, Netflix and Spotify transactions are linked to
   their recurring rules, so materialisation right after seeding creates
   nothing.
+
+## Transactions, accounts, transfers (phase 3)
+
+- **Transfers:** Accounts › "Μεταφορά" opens the transfer bottom sheet from
+  the mockup (Από / Προς with swap, amount on a keypad, the note, "Μεταφορά
+  €X"). The same rows also power a transfer mode of "Νέα κίνηση"
+  (`/add?mode=transfer`, a third segment), so both spec bullets point at one
+  implementation. Transfers have no category and never count as income or
+  expense.
+- **Form state** (amount being typed, selected chip, picked date) is local
+  widget state. Riverpod holds application state (repositories, streams,
+  derived view models). Writes that touch more than one repository go
+  through `TxnActions`.
+- **Default account:** a card for expenses, a bank account for income,
+  otherwise the first account. Transfers default to bank → savings.
+- **A new transaction dated today keeps the current time;** any other day is
+  stored at 12:00, so time-zone shifts never move it to another day.
+- **Validation messages** appear under the composer. Saving with €0 explains
+  why rather than silently disabling the button.
+- **"Επανάληψη κάθε μήνα"** creates a monthly rule anchored on the
+  transaction's day of month, links the transaction as its first occurrence,
+  and schedules the next one a month later. Switching it off deletes the
+  rule. Past occurrences stay as ordinary transactions.
+- **Receipts** are copied into the app's documents folder
+  (`receipts/<txnId>-<ts>.jpg`), so they survive the picker's temp cleanup.
+  The camera and photo-library usage strings are in `Info.plist`.
+- **Undo** snackbar: the messenger, colours and strings are captured before
+  any `await`, so the toast still appears after the Edit screen pops.
+- **Swipe tile:** besides the drag gesture, "Επεξ." and "Διαγραφή" are
+  exposed as semantics custom actions, so screen-reader users can reach them
+  without swiping.
+- **Search** ignores case and Greek accents (it compares `greekUpper` keys),
+  and matches title, category, account and note.
+- Widget tests run with "reduce motion" on (the blinking caret is static),
+  which also covers that accessibility path.

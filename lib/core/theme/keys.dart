@@ -23,16 +23,5 @@ enum IconKey {
   laptop,
   tag;
 
-  static const List<IconKey> pickable = [
-    cart,
-    food,
-    car,
-    home,
-    film,
-    heart,
-    gift,
-    plane,
-    book,
-    shirt,
-  ];
+  static const List<IconKey> pickable = [cart, food, car, home, film, heart, gift, plane, book, shirt];
 }

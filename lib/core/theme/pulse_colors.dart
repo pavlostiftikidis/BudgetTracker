@@ -122,11 +122,7 @@ class PulseColors extends ThemeExtension<PulseColors> {
     if (isDark) {
       return Tint(fill: bright, ink: bright, soft: bright.withValues(alpha: 0.15));
     }
-    return Tint(
-      fill: bright,
-      ink: Palette.lightInk[key]!,
-      soft: bright.withValues(alpha: 0.35),
-    );
+    return Tint(fill: bright, ink: Palette.lightInk[key]!, soft: bright.withValues(alpha: 0.35));
   }
 
   @override

@@ -3,8 +3,7 @@
 part of 'app_database.dart';
 
 // ignore_for_file: type=lint
-class $AccountsTable extends Accounts
-    with TableInfo<$AccountsTable, AccountRow> {
+class $AccountsTable extends Accounts with TableInfo<$AccountsTable, AccountRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -24,24 +23,19 @@ class $AccountsTable extends Accounts
     'name',
     aliasedName,
     false,
-    additionalChecks: GeneratedColumn.checkTextLength(
-      minTextLength: 1,
-      maxTextLength: 60,
-    ),
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 60),
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
   @override
-  late final GeneratedColumnWithTypeConverter<AccountType, String> type =
-      GeneratedColumn<String>(
-        'type',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<AccountType>($AccountsTable.$convertertype);
-  static const VerificationMeta _openingBalanceCentsMeta =
-      const VerificationMeta('openingBalanceCents');
+  late final GeneratedColumnWithTypeConverter<AccountType, String> type = GeneratedColumn<String>(
+    'type',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<AccountType>($AccountsTable.$convertertype);
+  static const VerificationMeta _openingBalanceCentsMeta = const VerificationMeta('openingBalanceCents');
   @override
   late final GeneratedColumn<int> openingBalanceCents = GeneratedColumn<int>(
     'opening_balance_cents',
@@ -52,17 +46,14 @@ class $AccountsTable extends Accounts
     defaultValue: const Constant(0),
   );
   @override
-  late final GeneratedColumnWithTypeConverter<ColorKey, String> colorKey =
-      GeneratedColumn<String>(
-        'color_key',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<ColorKey>($AccountsTable.$convertercolorKey);
-  static const VerificationMeta _isCreditMeta = const VerificationMeta(
-    'isCredit',
-  );
+  late final GeneratedColumnWithTypeConverter<ColorKey, String> colorKey = GeneratedColumn<String>(
+    'color_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<ColorKey>($AccountsTable.$convertercolorKey);
+  static const VerificationMeta _isCreditMeta = const VerificationMeta('isCredit');
   @override
   late final GeneratedColumn<bool> isCredit = GeneratedColumn<bool>(
     'is_credit',
@@ -70,14 +61,10 @@ class $AccountsTable extends Accounts
     false,
     type: DriftSqlType.bool,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("is_credit" IN (0, 1))',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("is_credit" IN (0, 1))'),
     defaultValue: const Constant(false),
   );
-  static const VerificationMeta _creditLimitCentsMeta = const VerificationMeta(
-    'creditLimitCents',
-  );
+  static const VerificationMeta _creditLimitCentsMeta = const VerificationMeta('creditLimitCents');
   @override
   late final GeneratedColumn<int> creditLimitCents = GeneratedColumn<int>(
     'credit_limit_cents',
@@ -86,9 +73,7 @@ class $AccountsTable extends Accounts
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _statementDayMeta = const VerificationMeta(
-    'statementDay',
-  );
+  static const VerificationMeta _statementDayMeta = const VerificationMeta('statementDay');
   @override
   late final GeneratedColumn<int> statementDay = GeneratedColumn<int>(
     'statement_day',
@@ -103,16 +88,11 @@ class $AccountsTable extends Accounts
     'last4',
     aliasedName,
     true,
-    additionalChecks: GeneratedColumn.checkTextLength(
-      minTextLength: 4,
-      maxTextLength: 4,
-    ),
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 4, maxTextLength: 4),
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _goalCentsMeta = const VerificationMeta(
-    'goalCents',
-  );
+  static const VerificationMeta _goalCentsMeta = const VerificationMeta('goalCents');
   @override
   late final GeneratedColumn<int> goalCents = GeneratedColumn<int>(
     'goal_cents',
@@ -121,9 +101,7 @@ class $AccountsTable extends Accounts
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _archivedMeta = const VerificationMeta(
-    'archived',
-  );
+  static const VerificationMeta _archivedMeta = const VerificationMeta('archived');
   @override
   late final GeneratedColumn<bool> archived = GeneratedColumn<bool>(
     'archived',
@@ -131,14 +109,10 @@ class $AccountsTable extends Accounts
     false,
     type: DriftSqlType.bool,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("archived" IN (0, 1))',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("archived" IN (0, 1))'),
     defaultValue: const Constant(false),
   );
-  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
-    'sortOrder',
-  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta('sortOrder');
   @override
   late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
     'sort_order',
@@ -169,10 +143,7 @@ class $AccountsTable extends Accounts
   String get actualTableName => $name;
   static const String $name = 'accounts';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<AccountRow> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<AccountRow> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -181,69 +152,39 @@ class $AccountsTable extends Accounts
       context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
-      context.handle(
-        _nameMeta,
-        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
-      );
+      context.handle(_nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('opening_balance_cents')) {
       context.handle(
         _openingBalanceCentsMeta,
-        openingBalanceCents.isAcceptableOrUnknown(
-          data['opening_balance_cents']!,
-          _openingBalanceCentsMeta,
-        ),
+        openingBalanceCents.isAcceptableOrUnknown(data['opening_balance_cents']!, _openingBalanceCentsMeta),
       );
     }
     if (data.containsKey('is_credit')) {
-      context.handle(
-        _isCreditMeta,
-        isCredit.isAcceptableOrUnknown(data['is_credit']!, _isCreditMeta),
-      );
+      context.handle(_isCreditMeta, isCredit.isAcceptableOrUnknown(data['is_credit']!, _isCreditMeta));
     }
     if (data.containsKey('credit_limit_cents')) {
       context.handle(
         _creditLimitCentsMeta,
-        creditLimitCents.isAcceptableOrUnknown(
-          data['credit_limit_cents']!,
-          _creditLimitCentsMeta,
-        ),
+        creditLimitCents.isAcceptableOrUnknown(data['credit_limit_cents']!, _creditLimitCentsMeta),
       );
     }
     if (data.containsKey('statement_day')) {
-      context.handle(
-        _statementDayMeta,
-        statementDay.isAcceptableOrUnknown(
-          data['statement_day']!,
-          _statementDayMeta,
-        ),
-      );
+      context.handle(_statementDayMeta, statementDay.isAcceptableOrUnknown(data['statement_day']!, _statementDayMeta));
     }
     if (data.containsKey('last4')) {
-      context.handle(
-        _last4Meta,
-        last4.isAcceptableOrUnknown(data['last4']!, _last4Meta),
-      );
+      context.handle(_last4Meta, last4.isAcceptableOrUnknown(data['last4']!, _last4Meta));
     }
     if (data.containsKey('goal_cents')) {
-      context.handle(
-        _goalCentsMeta,
-        goalCents.isAcceptableOrUnknown(data['goal_cents']!, _goalCentsMeta),
-      );
+      context.handle(_goalCentsMeta, goalCents.isAcceptableOrUnknown(data['goal_cents']!, _goalCentsMeta));
     }
     if (data.containsKey('archived')) {
-      context.handle(
-        _archivedMeta,
-        archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta),
-      );
+      context.handle(_archivedMeta, archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta));
     }
     if (data.containsKey('sort_order')) {
-      context.handle(
-        _sortOrderMeta,
-        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
-      );
+      context.handle(_sortOrderMeta, sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta));
     }
     return context;
   }
@@ -254,58 +195,28 @@ class $AccountsTable extends Accounts
   AccountRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return AccountRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      name: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}name'],
-      )!,
+      id: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       type: $AccountsTable.$convertertype.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}type'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}type'])!,
       ),
       openingBalanceCents: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}opening_balance_cents'],
       )!,
       colorKey: $AccountsTable.$convertercolorKey.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}color_key'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}color_key'])!,
       ),
-      isCredit: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}is_credit'],
-      )!,
+      isCredit: attachedDatabase.typeMapping.read(DriftSqlType.bool, data['${effectivePrefix}is_credit'])!,
       creditLimitCents: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}credit_limit_cents'],
       ),
-      statementDay: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}statement_day'],
-      ),
-      last4: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}last4'],
-      ),
-      goalCents: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}goal_cents'],
-      ),
-      archived: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}archived'],
-      )!,
-      sortOrder: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}sort_order'],
-      )!,
+      statementDay: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}statement_day']),
+      last4: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}last4']),
+      goalCents: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}goal_cents']),
+      archived: attachedDatabase.typeMapping.read(DriftSqlType.bool, data['${effectivePrefix}archived'])!,
+      sortOrder: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}sort_order'])!,
     );
   }
 
@@ -314,10 +225,12 @@ class $AccountsTable extends Accounts
     return $AccountsTable(attachedDatabase, alias);
   }
 
-  static JsonTypeConverter2<AccountType, String, String> $convertertype =
-      const EnumNameConverter<AccountType>(AccountType.values);
-  static JsonTypeConverter2<ColorKey, String, String> $convertercolorKey =
-      const EnumNameConverter<ColorKey>(ColorKey.values);
+  static JsonTypeConverter2<AccountType, String, String> $convertertype = const EnumNameConverter<AccountType>(
+    AccountType.values,
+  );
+  static JsonTypeConverter2<ColorKey, String, String> $convertercolorKey = const EnumNameConverter<ColorKey>(
+    ColorKey.values,
+  );
 }
 
 class AccountRow extends DataClass implements Insertable<AccountRow> {
@@ -357,9 +270,7 @@ class AccountRow extends DataClass implements Insertable<AccountRow> {
     }
     map['opening_balance_cents'] = Variable<int>(openingBalanceCents);
     {
-      map['color_key'] = Variable<String>(
-        $AccountsTable.$convertercolorKey.toSql(colorKey),
-      );
+      map['color_key'] = Variable<String>($AccountsTable.$convertercolorKey.toSql(colorKey));
     }
     map['is_credit'] = Variable<bool>(isCredit);
     if (!nullToAbsent || creditLimitCents != null) {
@@ -387,40 +298,23 @@ class AccountRow extends DataClass implements Insertable<AccountRow> {
       openingBalanceCents: Value(openingBalanceCents),
       colorKey: Value(colorKey),
       isCredit: Value(isCredit),
-      creditLimitCents: creditLimitCents == null && nullToAbsent
-          ? const Value.absent()
-          : Value(creditLimitCents),
-      statementDay: statementDay == null && nullToAbsent
-          ? const Value.absent()
-          : Value(statementDay),
-      last4: last4 == null && nullToAbsent
-          ? const Value.absent()
-          : Value(last4),
-      goalCents: goalCents == null && nullToAbsent
-          ? const Value.absent()
-          : Value(goalCents),
+      creditLimitCents: creditLimitCents == null && nullToAbsent ? const Value.absent() : Value(creditLimitCents),
+      statementDay: statementDay == null && nullToAbsent ? const Value.absent() : Value(statementDay),
+      last4: last4 == null && nullToAbsent ? const Value.absent() : Value(last4),
+      goalCents: goalCents == null && nullToAbsent ? const Value.absent() : Value(goalCents),
       archived: Value(archived),
       sortOrder: Value(sortOrder),
     );
   }
 
-  factory AccountRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory AccountRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return AccountRow(
       id: serializer.fromJson<String>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      type: $AccountsTable.$convertertype.fromJson(
-        serializer.fromJson<String>(json['type']),
-      ),
-      openingBalanceCents: serializer.fromJson<int>(
-        json['openingBalanceCents'],
-      ),
-      colorKey: $AccountsTable.$convertercolorKey.fromJson(
-        serializer.fromJson<String>(json['colorKey']),
-      ),
+      type: $AccountsTable.$convertertype.fromJson(serializer.fromJson<String>(json['type'])),
+      openingBalanceCents: serializer.fromJson<int>(json['openingBalanceCents']),
+      colorKey: $AccountsTable.$convertercolorKey.fromJson(serializer.fromJson<String>(json['colorKey'])),
       isCredit: serializer.fromJson<bool>(json['isCredit']),
       creditLimitCents: serializer.fromJson<int?>(json['creditLimitCents']),
       statementDay: serializer.fromJson<int?>(json['statementDay']),
@@ -436,13 +330,9 @@ class AccountRow extends DataClass implements Insertable<AccountRow> {
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'name': serializer.toJson<String>(name),
-      'type': serializer.toJson<String>(
-        $AccountsTable.$convertertype.toJson(type),
-      ),
+      'type': serializer.toJson<String>($AccountsTable.$convertertype.toJson(type)),
       'openingBalanceCents': serializer.toJson<int>(openingBalanceCents),
-      'colorKey': serializer.toJson<String>(
-        $AccountsTable.$convertercolorKey.toJson(colorKey),
-      ),
+      'colorKey': serializer.toJson<String>($AccountsTable.$convertercolorKey.toJson(colorKey)),
       'isCredit': serializer.toJson<bool>(isCredit),
       'creditLimitCents': serializer.toJson<int?>(creditLimitCents),
       'statementDay': serializer.toJson<int?>(statementDay),
@@ -473,9 +363,7 @@ class AccountRow extends DataClass implements Insertable<AccountRow> {
     openingBalanceCents: openingBalanceCents ?? this.openingBalanceCents,
     colorKey: colorKey ?? this.colorKey,
     isCredit: isCredit ?? this.isCredit,
-    creditLimitCents: creditLimitCents.present
-        ? creditLimitCents.value
-        : this.creditLimitCents,
+    creditLimitCents: creditLimitCents.present ? creditLimitCents.value : this.creditLimitCents,
     statementDay: statementDay.present ? statementDay.value : this.statementDay,
     last4: last4.present ? last4.value : this.last4,
     goalCents: goalCents.present ? goalCents.value : this.goalCents,
@@ -487,17 +375,11 @@ class AccountRow extends DataClass implements Insertable<AccountRow> {
       id: data.id.present ? data.id.value : this.id,
       name: data.name.present ? data.name.value : this.name,
       type: data.type.present ? data.type.value : this.type,
-      openingBalanceCents: data.openingBalanceCents.present
-          ? data.openingBalanceCents.value
-          : this.openingBalanceCents,
+      openingBalanceCents: data.openingBalanceCents.present ? data.openingBalanceCents.value : this.openingBalanceCents,
       colorKey: data.colorKey.present ? data.colorKey.value : this.colorKey,
       isCredit: data.isCredit.present ? data.isCredit.value : this.isCredit,
-      creditLimitCents: data.creditLimitCents.present
-          ? data.creditLimitCents.value
-          : this.creditLimitCents,
-      statementDay: data.statementDay.present
-          ? data.statementDay.value
-          : this.statementDay,
+      creditLimitCents: data.creditLimitCents.present ? data.creditLimitCents.value : this.creditLimitCents,
+      statementDay: data.statementDay.present ? data.statementDay.value : this.statementDay,
       last4: data.last4.present ? data.last4.value : this.last4,
       goalCents: data.goalCents.present ? data.goalCents.value : this.goalCents,
       archived: data.archived.present ? data.archived.value : this.archived,
@@ -623,8 +505,7 @@ class AccountsCompanion extends UpdateCompanion<AccountRow> {
       if (id != null) 'id': id,
       if (name != null) 'name': name,
       if (type != null) 'type': type,
-      if (openingBalanceCents != null)
-        'opening_balance_cents': openingBalanceCents,
+      if (openingBalanceCents != null) 'opening_balance_cents': openingBalanceCents,
       if (colorKey != null) 'color_key': colorKey,
       if (isCredit != null) 'is_credit': isCredit,
       if (creditLimitCents != null) 'credit_limit_cents': creditLimitCents,
@@ -679,17 +560,13 @@ class AccountsCompanion extends UpdateCompanion<AccountRow> {
       map['name'] = Variable<String>(name.value);
     }
     if (type.present) {
-      map['type'] = Variable<String>(
-        $AccountsTable.$convertertype.toSql(type.value),
-      );
+      map['type'] = Variable<String>($AccountsTable.$convertertype.toSql(type.value));
     }
     if (openingBalanceCents.present) {
       map['opening_balance_cents'] = Variable<int>(openingBalanceCents.value);
     }
     if (colorKey.present) {
-      map['color_key'] = Variable<String>(
-        $AccountsTable.$convertercolorKey.toSql(colorKey.value),
-      );
+      map['color_key'] = Variable<String>($AccountsTable.$convertercolorKey.toSql(colorKey.value));
     }
     if (isCredit.present) {
       map['is_credit'] = Variable<bool>(isCredit.value);
@@ -739,8 +616,7 @@ class AccountsCompanion extends UpdateCompanion<AccountRow> {
   }
 }
 
-class $CategoriesTable extends Categories
-    with TableInfo<$CategoriesTable, CategoryRow> {
+class $CategoriesTable extends Categories with TableInfo<$CategoriesTable, CategoryRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -760,43 +636,35 @@ class $CategoriesTable extends Categories
     'name',
     aliasedName,
     false,
-    additionalChecks: GeneratedColumn.checkTextLength(
-      minTextLength: 1,
-      maxTextLength: 40,
-    ),
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 40),
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
   @override
-  late final GeneratedColumnWithTypeConverter<CategoryKind, String> kind =
-      GeneratedColumn<String>(
-        'kind',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<CategoryKind>($CategoriesTable.$converterkind);
+  late final GeneratedColumnWithTypeConverter<CategoryKind, String> kind = GeneratedColumn<String>(
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<CategoryKind>($CategoriesTable.$converterkind);
   @override
-  late final GeneratedColumnWithTypeConverter<ColorKey, String> colorKey =
-      GeneratedColumn<String>(
-        'color_key',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<ColorKey>($CategoriesTable.$convertercolorKey);
+  late final GeneratedColumnWithTypeConverter<ColorKey, String> colorKey = GeneratedColumn<String>(
+    'color_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<ColorKey>($CategoriesTable.$convertercolorKey);
   @override
-  late final GeneratedColumnWithTypeConverter<IconKey, String> iconKey =
-      GeneratedColumn<String>(
-        'icon_key',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<IconKey>($CategoriesTable.$convertericonKey);
-  static const VerificationMeta _monthlyLimitCentsMeta = const VerificationMeta(
-    'monthlyLimitCents',
-  );
+  late final GeneratedColumnWithTypeConverter<IconKey, String> iconKey = GeneratedColumn<String>(
+    'icon_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<IconKey>($CategoriesTable.$convertericonKey);
+  static const VerificationMeta _monthlyLimitCentsMeta = const VerificationMeta('monthlyLimitCents');
   @override
   late final GeneratedColumn<int> monthlyLimitCents = GeneratedColumn<int>(
     'monthly_limit_cents',
@@ -805,9 +673,7 @@ class $CategoriesTable extends Categories
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _sortOrderMeta = const VerificationMeta(
-    'sortOrder',
-  );
+  static const VerificationMeta _sortOrderMeta = const VerificationMeta('sortOrder');
   @override
   late final GeneratedColumn<int> sortOrder = GeneratedColumn<int>(
     'sort_order',
@@ -817,9 +683,7 @@ class $CategoriesTable extends Categories
     requiredDuringInsert: false,
     defaultValue: const Constant(0),
   );
-  static const VerificationMeta _archivedMeta = const VerificationMeta(
-    'archived',
-  );
+  static const VerificationMeta _archivedMeta = const VerificationMeta('archived');
   @override
   late final GeneratedColumn<bool> archived = GeneratedColumn<bool>(
     'archived',
@@ -827,32 +691,18 @@ class $CategoriesTable extends Categories
     false,
     type: DriftSqlType.bool,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("archived" IN (0, 1))',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("archived" IN (0, 1))'),
     defaultValue: const Constant(false),
   );
   @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    name,
-    kind,
-    colorKey,
-    iconKey,
-    monthlyLimitCents,
-    sortOrder,
-    archived,
-  ];
+  List<GeneratedColumn> get $columns => [id, name, kind, colorKey, iconKey, monthlyLimitCents, sortOrder, archived];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'categories';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<CategoryRow> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<CategoryRow> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -861,33 +711,21 @@ class $CategoriesTable extends Categories
       context.missing(_idMeta);
     }
     if (data.containsKey('name')) {
-      context.handle(
-        _nameMeta,
-        name.isAcceptableOrUnknown(data['name']!, _nameMeta),
-      );
+      context.handle(_nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
     } else if (isInserting) {
       context.missing(_nameMeta);
     }
     if (data.containsKey('monthly_limit_cents')) {
       context.handle(
         _monthlyLimitCentsMeta,
-        monthlyLimitCents.isAcceptableOrUnknown(
-          data['monthly_limit_cents']!,
-          _monthlyLimitCentsMeta,
-        ),
+        monthlyLimitCents.isAcceptableOrUnknown(data['monthly_limit_cents']!, _monthlyLimitCentsMeta),
       );
     }
     if (data.containsKey('sort_order')) {
-      context.handle(
-        _sortOrderMeta,
-        sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta),
-      );
+      context.handle(_sortOrderMeta, sortOrder.isAcceptableOrUnknown(data['sort_order']!, _sortOrderMeta));
     }
     if (data.containsKey('archived')) {
-      context.handle(
-        _archivedMeta,
-        archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta),
-      );
+      context.handle(_archivedMeta, archived.isAcceptableOrUnknown(data['archived']!, _archivedMeta));
     }
     return context;
   }
@@ -898,44 +736,23 @@ class $CategoriesTable extends Categories
   CategoryRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return CategoryRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      name: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}name'],
-      )!,
+      id: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}name'])!,
       kind: $CategoriesTable.$converterkind.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}kind'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
       ),
       colorKey: $CategoriesTable.$convertercolorKey.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}color_key'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}color_key'])!,
       ),
       iconKey: $CategoriesTable.$convertericonKey.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}icon_key'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}icon_key'])!,
       ),
       monthlyLimitCents: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}monthly_limit_cents'],
       ),
-      sortOrder: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}sort_order'],
-      )!,
-      archived: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}archived'],
-      )!,
+      sortOrder: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}sort_order'])!,
+      archived: attachedDatabase.typeMapping.read(DriftSqlType.bool, data['${effectivePrefix}archived'])!,
     );
   }
 
@@ -944,12 +761,15 @@ class $CategoriesTable extends Categories
     return $CategoriesTable(attachedDatabase, alias);
   }
 
-  static JsonTypeConverter2<CategoryKind, String, String> $converterkind =
-      const EnumNameConverter<CategoryKind>(CategoryKind.values);
-  static JsonTypeConverter2<ColorKey, String, String> $convertercolorKey =
-      const EnumNameConverter<ColorKey>(ColorKey.values);
-  static JsonTypeConverter2<IconKey, String, String> $convertericonKey =
-      const EnumNameConverter<IconKey>(IconKey.values);
+  static JsonTypeConverter2<CategoryKind, String, String> $converterkind = const EnumNameConverter<CategoryKind>(
+    CategoryKind.values,
+  );
+  static JsonTypeConverter2<ColorKey, String, String> $convertercolorKey = const EnumNameConverter<ColorKey>(
+    ColorKey.values,
+  );
+  static JsonTypeConverter2<IconKey, String, String> $convertericonKey = const EnumNameConverter<IconKey>(
+    IconKey.values,
+  );
 }
 
 class CategoryRow extends DataClass implements Insertable<CategoryRow> {
@@ -977,19 +797,13 @@ class CategoryRow extends DataClass implements Insertable<CategoryRow> {
     map['id'] = Variable<String>(id);
     map['name'] = Variable<String>(name);
     {
-      map['kind'] = Variable<String>(
-        $CategoriesTable.$converterkind.toSql(kind),
-      );
+      map['kind'] = Variable<String>($CategoriesTable.$converterkind.toSql(kind));
     }
     {
-      map['color_key'] = Variable<String>(
-        $CategoriesTable.$convertercolorKey.toSql(colorKey),
-      );
+      map['color_key'] = Variable<String>($CategoriesTable.$convertercolorKey.toSql(colorKey));
     }
     {
-      map['icon_key'] = Variable<String>(
-        $CategoriesTable.$convertericonKey.toSql(iconKey),
-      );
+      map['icon_key'] = Variable<String>($CategoriesTable.$convertericonKey.toSql(iconKey));
     }
     if (!nullToAbsent || monthlyLimitCents != null) {
       map['monthly_limit_cents'] = Variable<int>(monthlyLimitCents);
@@ -1006,31 +820,20 @@ class CategoryRow extends DataClass implements Insertable<CategoryRow> {
       kind: Value(kind),
       colorKey: Value(colorKey),
       iconKey: Value(iconKey),
-      monthlyLimitCents: monthlyLimitCents == null && nullToAbsent
-          ? const Value.absent()
-          : Value(monthlyLimitCents),
+      monthlyLimitCents: monthlyLimitCents == null && nullToAbsent ? const Value.absent() : Value(monthlyLimitCents),
       sortOrder: Value(sortOrder),
       archived: Value(archived),
     );
   }
 
-  factory CategoryRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory CategoryRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return CategoryRow(
       id: serializer.fromJson<String>(json['id']),
       name: serializer.fromJson<String>(json['name']),
-      kind: $CategoriesTable.$converterkind.fromJson(
-        serializer.fromJson<String>(json['kind']),
-      ),
-      colorKey: $CategoriesTable.$convertercolorKey.fromJson(
-        serializer.fromJson<String>(json['colorKey']),
-      ),
-      iconKey: $CategoriesTable.$convertericonKey.fromJson(
-        serializer.fromJson<String>(json['iconKey']),
-      ),
+      kind: $CategoriesTable.$converterkind.fromJson(serializer.fromJson<String>(json['kind'])),
+      colorKey: $CategoriesTable.$convertercolorKey.fromJson(serializer.fromJson<String>(json['colorKey'])),
+      iconKey: $CategoriesTable.$convertericonKey.fromJson(serializer.fromJson<String>(json['iconKey'])),
       monthlyLimitCents: serializer.fromJson<int?>(json['monthlyLimitCents']),
       sortOrder: serializer.fromJson<int>(json['sortOrder']),
       archived: serializer.fromJson<bool>(json['archived']),
@@ -1042,15 +845,9 @@ class CategoryRow extends DataClass implements Insertable<CategoryRow> {
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'name': serializer.toJson<String>(name),
-      'kind': serializer.toJson<String>(
-        $CategoriesTable.$converterkind.toJson(kind),
-      ),
-      'colorKey': serializer.toJson<String>(
-        $CategoriesTable.$convertercolorKey.toJson(colorKey),
-      ),
-      'iconKey': serializer.toJson<String>(
-        $CategoriesTable.$convertericonKey.toJson(iconKey),
-      ),
+      'kind': serializer.toJson<String>($CategoriesTable.$converterkind.toJson(kind)),
+      'colorKey': serializer.toJson<String>($CategoriesTable.$convertercolorKey.toJson(colorKey)),
+      'iconKey': serializer.toJson<String>($CategoriesTable.$convertericonKey.toJson(iconKey)),
       'monthlyLimitCents': serializer.toJson<int?>(monthlyLimitCents),
       'sortOrder': serializer.toJson<int>(sortOrder),
       'archived': serializer.toJson<bool>(archived),
@@ -1072,9 +869,7 @@ class CategoryRow extends DataClass implements Insertable<CategoryRow> {
     kind: kind ?? this.kind,
     colorKey: colorKey ?? this.colorKey,
     iconKey: iconKey ?? this.iconKey,
-    monthlyLimitCents: monthlyLimitCents.present
-        ? monthlyLimitCents.value
-        : this.monthlyLimitCents,
+    monthlyLimitCents: monthlyLimitCents.present ? monthlyLimitCents.value : this.monthlyLimitCents,
     sortOrder: sortOrder ?? this.sortOrder,
     archived: archived ?? this.archived,
   );
@@ -1085,9 +880,7 @@ class CategoryRow extends DataClass implements Insertable<CategoryRow> {
       kind: data.kind.present ? data.kind.value : this.kind,
       colorKey: data.colorKey.present ? data.colorKey.value : this.colorKey,
       iconKey: data.iconKey.present ? data.iconKey.value : this.iconKey,
-      monthlyLimitCents: data.monthlyLimitCents.present
-          ? data.monthlyLimitCents.value
-          : this.monthlyLimitCents,
+      monthlyLimitCents: data.monthlyLimitCents.present ? data.monthlyLimitCents.value : this.monthlyLimitCents,
       sortOrder: data.sortOrder.present ? data.sortOrder.value : this.sortOrder,
       archived: data.archived.present ? data.archived.value : this.archived,
     );
@@ -1109,16 +902,7 @@ class CategoryRow extends DataClass implements Insertable<CategoryRow> {
   }
 
   @override
-  int get hashCode => Object.hash(
-    id,
-    name,
-    kind,
-    colorKey,
-    iconKey,
-    monthlyLimitCents,
-    sortOrder,
-    archived,
-  );
+  int get hashCode => Object.hash(id, name, kind, colorKey, iconKey, monthlyLimitCents, sortOrder, archived);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -1227,19 +1011,13 @@ class CategoriesCompanion extends UpdateCompanion<CategoryRow> {
       map['name'] = Variable<String>(name.value);
     }
     if (kind.present) {
-      map['kind'] = Variable<String>(
-        $CategoriesTable.$converterkind.toSql(kind.value),
-      );
+      map['kind'] = Variable<String>($CategoriesTable.$converterkind.toSql(kind.value));
     }
     if (colorKey.present) {
-      map['color_key'] = Variable<String>(
-        $CategoriesTable.$convertercolorKey.toSql(colorKey.value),
-      );
+      map['color_key'] = Variable<String>($CategoriesTable.$convertercolorKey.toSql(colorKey.value));
     }
     if (iconKey.present) {
-      map['icon_key'] = Variable<String>(
-        $CategoriesTable.$convertericonKey.toSql(iconKey.value),
-      );
+      map['icon_key'] = Variable<String>($CategoriesTable.$convertericonKey.toSql(iconKey.value));
     }
     if (monthlyLimitCents.present) {
       map['monthly_limit_cents'] = Variable<int>(monthlyLimitCents.value);
@@ -1273,8 +1051,7 @@ class CategoriesCompanion extends UpdateCompanion<CategoryRow> {
   }
 }
 
-class $RecurringRulesTable extends RecurringRules
-    with TableInfo<$RecurringRulesTable, RecurringRuleRow> {
+class $RecurringRulesTable extends RecurringRules with TableInfo<$RecurringRulesTable, RecurringRuleRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -1294,25 +1071,19 @@ class $RecurringRulesTable extends RecurringRules
     'title',
     aliasedName,
     false,
-    additionalChecks: GeneratedColumn.checkTextLength(
-      minTextLength: 1,
-      maxTextLength: 60,
-    ),
+    additionalChecks: GeneratedColumn.checkTextLength(minTextLength: 1, maxTextLength: 60),
     type: DriftSqlType.string,
     requiredDuringInsert: true,
   );
   @override
-  late final GeneratedColumnWithTypeConverter<TxnKind, String> kind =
-      GeneratedColumn<String>(
-        'kind',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<TxnKind>($RecurringRulesTable.$converterkind);
-  static const VerificationMeta _amountCentsMeta = const VerificationMeta(
-    'amountCents',
-  );
+  late final GeneratedColumnWithTypeConverter<TxnKind, String> kind = GeneratedColumn<String>(
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<TxnKind>($RecurringRulesTable.$converterkind);
+  static const VerificationMeta _amountCentsMeta = const VerificationMeta('amountCents');
   @override
   late final GeneratedColumn<int> amountCents = GeneratedColumn<int>(
     'amount_cents',
@@ -1322,9 +1093,7 @@ class $RecurringRulesTable extends RecurringRules
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _accountIdMeta = const VerificationMeta(
-    'accountId',
-  );
+  static const VerificationMeta _accountIdMeta = const VerificationMeta('accountId');
   @override
   late final GeneratedColumn<String> accountId = GeneratedColumn<String>(
     'account_id',
@@ -1332,13 +1101,9 @@ class $RecurringRulesTable extends RecurringRules
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES accounts (id)',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES accounts (id)'),
   );
-  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
-    'categoryId',
-  );
+  static const VerificationMeta _categoryIdMeta = const VerificationMeta('categoryId');
   @override
   late final GeneratedColumn<String> categoryId = GeneratedColumn<String>(
     'category_id',
@@ -1346,9 +1111,7 @@ class $RecurringRulesTable extends RecurringRules
     true,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES categories (id)',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES categories (id)'),
   );
   static const VerificationMeta _noteMeta = const VerificationMeta('note');
   @override
@@ -1360,17 +1123,14 @@ class $RecurringRulesTable extends RecurringRules
     requiredDuringInsert: false,
   );
   @override
-  late final GeneratedColumnWithTypeConverter<Frequency, String> frequency =
-      GeneratedColumn<String>(
-        'frequency',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<Frequency>($RecurringRulesTable.$converterfrequency);
-  static const VerificationMeta _intervalMeta = const VerificationMeta(
-    'interval',
-  );
+  late final GeneratedColumnWithTypeConverter<Frequency, String> frequency = GeneratedColumn<String>(
+    'frequency',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<Frequency>($RecurringRulesTable.$converterfrequency);
+  static const VerificationMeta _intervalMeta = const VerificationMeta('interval');
   @override
   late final GeneratedColumn<int> interval = GeneratedColumn<int>(
     'interval',
@@ -1380,9 +1140,7 @@ class $RecurringRulesTable extends RecurringRules
     requiredDuringInsert: false,
     defaultValue: const Constant(1),
   );
-  static const VerificationMeta _dayOfMonthMeta = const VerificationMeta(
-    'dayOfMonth',
-  );
+  static const VerificationMeta _dayOfMonthMeta = const VerificationMeta('dayOfMonth');
   @override
   late final GeneratedColumn<int> dayOfMonth = GeneratedColumn<int>(
     'day_of_month',
@@ -1391,9 +1149,7 @@ class $RecurringRulesTable extends RecurringRules
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _weekdayMeta = const VerificationMeta(
-    'weekday',
-  );
+  static const VerificationMeta _weekdayMeta = const VerificationMeta('weekday');
   @override
   late final GeneratedColumn<int> weekday = GeneratedColumn<int>(
     'weekday',
@@ -1402,9 +1158,7 @@ class $RecurringRulesTable extends RecurringRules
     type: DriftSqlType.int,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _startDateMeta = const VerificationMeta(
-    'startDate',
-  );
+  static const VerificationMeta _startDateMeta = const VerificationMeta('startDate');
   @override
   late final GeneratedColumn<DateTime> startDate = GeneratedColumn<DateTime>(
     'start_date',
@@ -1413,9 +1167,7 @@ class $RecurringRulesTable extends RecurringRules
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _nextDueDateMeta = const VerificationMeta(
-    'nextDueDate',
-  );
+  static const VerificationMeta _nextDueDateMeta = const VerificationMeta('nextDueDate');
   @override
   late final GeneratedColumn<DateTime> nextDueDate = GeneratedColumn<DateTime>(
     'next_due_date',
@@ -1432,14 +1184,10 @@ class $RecurringRulesTable extends RecurringRules
     false,
     type: DriftSqlType.bool,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'CHECK ("active" IN (0, 1))',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('CHECK ("active" IN (0, 1))'),
     defaultValue: const Constant(true),
   );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
     'created_at',
@@ -1448,9 +1196,7 @@ class $RecurringRulesTable extends RecurringRules
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
     'updated_at',
@@ -1484,10 +1230,7 @@ class $RecurringRulesTable extends RecurringRules
   String get actualTableName => $name;
   static const String $name = 'recurring_rules';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<RecurringRuleRow> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<RecurringRuleRow> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -1496,103 +1239,55 @@ class $RecurringRulesTable extends RecurringRules
       context.missing(_idMeta);
     }
     if (data.containsKey('title')) {
-      context.handle(
-        _titleMeta,
-        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
-      );
+      context.handle(_titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
     } else if (isInserting) {
       context.missing(_titleMeta);
     }
     if (data.containsKey('amount_cents')) {
-      context.handle(
-        _amountCentsMeta,
-        amountCents.isAcceptableOrUnknown(
-          data['amount_cents']!,
-          _amountCentsMeta,
-        ),
-      );
+      context.handle(_amountCentsMeta, amountCents.isAcceptableOrUnknown(data['amount_cents']!, _amountCentsMeta));
     } else if (isInserting) {
       context.missing(_amountCentsMeta);
     }
     if (data.containsKey('account_id')) {
-      context.handle(
-        _accountIdMeta,
-        accountId.isAcceptableOrUnknown(data['account_id']!, _accountIdMeta),
-      );
+      context.handle(_accountIdMeta, accountId.isAcceptableOrUnknown(data['account_id']!, _accountIdMeta));
     } else if (isInserting) {
       context.missing(_accountIdMeta);
     }
     if (data.containsKey('category_id')) {
-      context.handle(
-        _categoryIdMeta,
-        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
-      );
+      context.handle(_categoryIdMeta, categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta));
     }
     if (data.containsKey('note')) {
-      context.handle(
-        _noteMeta,
-        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
-      );
+      context.handle(_noteMeta, note.isAcceptableOrUnknown(data['note']!, _noteMeta));
     }
     if (data.containsKey('interval')) {
-      context.handle(
-        _intervalMeta,
-        interval.isAcceptableOrUnknown(data['interval']!, _intervalMeta),
-      );
+      context.handle(_intervalMeta, interval.isAcceptableOrUnknown(data['interval']!, _intervalMeta));
     }
     if (data.containsKey('day_of_month')) {
-      context.handle(
-        _dayOfMonthMeta,
-        dayOfMonth.isAcceptableOrUnknown(
-          data['day_of_month']!,
-          _dayOfMonthMeta,
-        ),
-      );
+      context.handle(_dayOfMonthMeta, dayOfMonth.isAcceptableOrUnknown(data['day_of_month']!, _dayOfMonthMeta));
     }
     if (data.containsKey('weekday')) {
-      context.handle(
-        _weekdayMeta,
-        weekday.isAcceptableOrUnknown(data['weekday']!, _weekdayMeta),
-      );
+      context.handle(_weekdayMeta, weekday.isAcceptableOrUnknown(data['weekday']!, _weekdayMeta));
     }
     if (data.containsKey('start_date')) {
-      context.handle(
-        _startDateMeta,
-        startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta),
-      );
+      context.handle(_startDateMeta, startDate.isAcceptableOrUnknown(data['start_date']!, _startDateMeta));
     } else if (isInserting) {
       context.missing(_startDateMeta);
     }
     if (data.containsKey('next_due_date')) {
-      context.handle(
-        _nextDueDateMeta,
-        nextDueDate.isAcceptableOrUnknown(
-          data['next_due_date']!,
-          _nextDueDateMeta,
-        ),
-      );
+      context.handle(_nextDueDateMeta, nextDueDate.isAcceptableOrUnknown(data['next_due_date']!, _nextDueDateMeta));
     } else if (isInserting) {
       context.missing(_nextDueDateMeta);
     }
     if (data.containsKey('active')) {
-      context.handle(
-        _activeMeta,
-        active.isAcceptableOrUnknown(data['active']!, _activeMeta),
-      );
+      context.handle(_activeMeta, active.isAcceptableOrUnknown(data['active']!, _activeMeta));
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta, createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta, updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
@@ -1605,74 +1300,26 @@ class $RecurringRulesTable extends RecurringRules
   RecurringRuleRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return RecurringRuleRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
-      title: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}title'],
-      )!,
+      id: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      title: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       kind: $RecurringRulesTable.$converterkind.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}kind'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
       ),
-      amountCents: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}amount_cents'],
-      )!,
-      accountId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}account_id'],
-      )!,
-      categoryId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}category_id'],
-      ),
-      note: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}note'],
-      ),
+      amountCents: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}amount_cents'])!,
+      accountId: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}account_id'])!,
+      categoryId: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}category_id']),
+      note: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}note']),
       frequency: $RecurringRulesTable.$converterfrequency.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}frequency'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}frequency'])!,
       ),
-      interval: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}interval'],
-      )!,
-      dayOfMonth: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}day_of_month'],
-      ),
-      weekday: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}weekday'],
-      ),
-      startDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}start_date'],
-      )!,
-      nextDueDate: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}next_due_date'],
-      )!,
-      active: attachedDatabase.typeMapping.read(
-        DriftSqlType.bool,
-        data['${effectivePrefix}active'],
-      )!,
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}updated_at'],
-      )!,
+      interval: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}interval'])!,
+      dayOfMonth: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}day_of_month']),
+      weekday: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}weekday']),
+      startDate: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}start_date'])!,
+      nextDueDate: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}next_due_date'])!,
+      active: attachedDatabase.typeMapping.read(DriftSqlType.bool, data['${effectivePrefix}active'])!,
+      createdAt: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
     );
   }
 
@@ -1681,14 +1328,13 @@ class $RecurringRulesTable extends RecurringRules
     return $RecurringRulesTable(attachedDatabase, alias);
   }
 
-  static JsonTypeConverter2<TxnKind, String, String> $converterkind =
-      const EnumNameConverter<TxnKind>(TxnKind.values);
-  static JsonTypeConverter2<Frequency, String, String> $converterfrequency =
-      const EnumNameConverter<Frequency>(Frequency.values);
+  static JsonTypeConverter2<TxnKind, String, String> $converterkind = const EnumNameConverter<TxnKind>(TxnKind.values);
+  static JsonTypeConverter2<Frequency, String, String> $converterfrequency = const EnumNameConverter<Frequency>(
+    Frequency.values,
+  );
 }
 
-class RecurringRuleRow extends DataClass
-    implements Insertable<RecurringRuleRow> {
+class RecurringRuleRow extends DataClass implements Insertable<RecurringRuleRow> {
   final String id;
   final String title;
   final TxnKind kind;
@@ -1729,9 +1375,7 @@ class RecurringRuleRow extends DataClass
     map['id'] = Variable<String>(id);
     map['title'] = Variable<String>(title);
     {
-      map['kind'] = Variable<String>(
-        $RecurringRulesTable.$converterkind.toSql(kind),
-      );
+      map['kind'] = Variable<String>($RecurringRulesTable.$converterkind.toSql(kind));
     }
     map['amount_cents'] = Variable<int>(amountCents);
     map['account_id'] = Variable<String>(accountId);
@@ -1742,9 +1386,7 @@ class RecurringRuleRow extends DataClass
       map['note'] = Variable<String>(note);
     }
     {
-      map['frequency'] = Variable<String>(
-        $RecurringRulesTable.$converterfrequency.toSql(frequency),
-      );
+      map['frequency'] = Variable<String>($RecurringRulesTable.$converterfrequency.toSql(frequency));
     }
     map['interval'] = Variable<int>(interval);
     if (!nullToAbsent || dayOfMonth != null) {
@@ -1768,18 +1410,12 @@ class RecurringRuleRow extends DataClass
       kind: Value(kind),
       amountCents: Value(amountCents),
       accountId: Value(accountId),
-      categoryId: categoryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(categoryId),
+      categoryId: categoryId == null && nullToAbsent ? const Value.absent() : Value(categoryId),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
       frequency: Value(frequency),
       interval: Value(interval),
-      dayOfMonth: dayOfMonth == null && nullToAbsent
-          ? const Value.absent()
-          : Value(dayOfMonth),
-      weekday: weekday == null && nullToAbsent
-          ? const Value.absent()
-          : Value(weekday),
+      dayOfMonth: dayOfMonth == null && nullToAbsent ? const Value.absent() : Value(dayOfMonth),
+      weekday: weekday == null && nullToAbsent ? const Value.absent() : Value(weekday),
       startDate: Value(startDate),
       nextDueDate: Value(nextDueDate),
       active: Value(active),
@@ -1788,24 +1424,17 @@ class RecurringRuleRow extends DataClass
     );
   }
 
-  factory RecurringRuleRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory RecurringRuleRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return RecurringRuleRow(
       id: serializer.fromJson<String>(json['id']),
       title: serializer.fromJson<String>(json['title']),
-      kind: $RecurringRulesTable.$converterkind.fromJson(
-        serializer.fromJson<String>(json['kind']),
-      ),
+      kind: $RecurringRulesTable.$converterkind.fromJson(serializer.fromJson<String>(json['kind'])),
       amountCents: serializer.fromJson<int>(json['amountCents']),
       accountId: serializer.fromJson<String>(json['accountId']),
       categoryId: serializer.fromJson<String?>(json['categoryId']),
       note: serializer.fromJson<String?>(json['note']),
-      frequency: $RecurringRulesTable.$converterfrequency.fromJson(
-        serializer.fromJson<String>(json['frequency']),
-      ),
+      frequency: $RecurringRulesTable.$converterfrequency.fromJson(serializer.fromJson<String>(json['frequency'])),
       interval: serializer.fromJson<int>(json['interval']),
       dayOfMonth: serializer.fromJson<int?>(json['dayOfMonth']),
       weekday: serializer.fromJson<int?>(json['weekday']),
@@ -1822,16 +1451,12 @@ class RecurringRuleRow extends DataClass
     return <String, dynamic>{
       'id': serializer.toJson<String>(id),
       'title': serializer.toJson<String>(title),
-      'kind': serializer.toJson<String>(
-        $RecurringRulesTable.$converterkind.toJson(kind),
-      ),
+      'kind': serializer.toJson<String>($RecurringRulesTable.$converterkind.toJson(kind)),
       'amountCents': serializer.toJson<int>(amountCents),
       'accountId': serializer.toJson<String>(accountId),
       'categoryId': serializer.toJson<String?>(categoryId),
       'note': serializer.toJson<String?>(note),
-      'frequency': serializer.toJson<String>(
-        $RecurringRulesTable.$converterfrequency.toJson(frequency),
-      ),
+      'frequency': serializer.toJson<String>($RecurringRulesTable.$converterfrequency.toJson(frequency)),
       'interval': serializer.toJson<int>(interval),
       'dayOfMonth': serializer.toJson<int?>(dayOfMonth),
       'weekday': serializer.toJson<int?>(weekday),
@@ -1883,24 +1508,16 @@ class RecurringRuleRow extends DataClass
       id: data.id.present ? data.id.value : this.id,
       title: data.title.present ? data.title.value : this.title,
       kind: data.kind.present ? data.kind.value : this.kind,
-      amountCents: data.amountCents.present
-          ? data.amountCents.value
-          : this.amountCents,
+      amountCents: data.amountCents.present ? data.amountCents.value : this.amountCents,
       accountId: data.accountId.present ? data.accountId.value : this.accountId,
-      categoryId: data.categoryId.present
-          ? data.categoryId.value
-          : this.categoryId,
+      categoryId: data.categoryId.present ? data.categoryId.value : this.categoryId,
       note: data.note.present ? data.note.value : this.note,
       frequency: data.frequency.present ? data.frequency.value : this.frequency,
       interval: data.interval.present ? data.interval.value : this.interval,
-      dayOfMonth: data.dayOfMonth.present
-          ? data.dayOfMonth.value
-          : this.dayOfMonth,
+      dayOfMonth: data.dayOfMonth.present ? data.dayOfMonth.value : this.dayOfMonth,
       weekday: data.weekday.present ? data.weekday.value : this.weekday,
       startDate: data.startDate.present ? data.startDate.value : this.startDate,
-      nextDueDate: data.nextDueDate.present
-          ? data.nextDueDate.value
-          : this.nextDueDate,
+      nextDueDate: data.nextDueDate.present ? data.nextDueDate.value : this.nextDueDate,
       active: data.active.present ? data.active.value : this.active,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
@@ -2126,9 +1743,7 @@ class RecurringRulesCompanion extends UpdateCompanion<RecurringRuleRow> {
       map['title'] = Variable<String>(title.value);
     }
     if (kind.present) {
-      map['kind'] = Variable<String>(
-        $RecurringRulesTable.$converterkind.toSql(kind.value),
-      );
+      map['kind'] = Variable<String>($RecurringRulesTable.$converterkind.toSql(kind.value));
     }
     if (amountCents.present) {
       map['amount_cents'] = Variable<int>(amountCents.value);
@@ -2143,9 +1758,7 @@ class RecurringRulesCompanion extends UpdateCompanion<RecurringRuleRow> {
       map['note'] = Variable<String>(note.value);
     }
     if (frequency.present) {
-      map['frequency'] = Variable<String>(
-        $RecurringRulesTable.$converterfrequency.toSql(frequency.value),
-      );
+      map['frequency'] = Variable<String>($RecurringRulesTable.$converterfrequency.toSql(frequency.value));
     }
     if (interval.present) {
       map['interval'] = Variable<int>(interval.value);
@@ -2217,17 +1830,14 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     requiredDuringInsert: true,
   );
   @override
-  late final GeneratedColumnWithTypeConverter<TxnKind, String> kind =
-      GeneratedColumn<String>(
-        'kind',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: true,
-      ).withConverter<TxnKind>($TxnsTable.$converterkind);
-  static const VerificationMeta _amountCentsMeta = const VerificationMeta(
-    'amountCents',
-  );
+  late final GeneratedColumnWithTypeConverter<TxnKind, String> kind = GeneratedColumn<String>(
+    'kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  ).withConverter<TxnKind>($TxnsTable.$converterkind);
+  static const VerificationMeta _amountCentsMeta = const VerificationMeta('amountCents');
   @override
   late final GeneratedColumn<int> amountCents = GeneratedColumn<int>(
     'amount_cents',
@@ -2237,9 +1847,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _accountIdMeta = const VerificationMeta(
-    'accountId',
-  );
+  static const VerificationMeta _accountIdMeta = const VerificationMeta('accountId');
   @override
   late final GeneratedColumn<String> accountId = GeneratedColumn<String>(
     'account_id',
@@ -2247,13 +1855,9 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     false,
     type: DriftSqlType.string,
     requiredDuringInsert: true,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES accounts (id)',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES accounts (id)'),
   );
-  static const VerificationMeta _toAccountIdMeta = const VerificationMeta(
-    'toAccountId',
-  );
+  static const VerificationMeta _toAccountIdMeta = const VerificationMeta('toAccountId');
   @override
   late final GeneratedColumn<String> toAccountId = GeneratedColumn<String>(
     'to_account_id',
@@ -2261,13 +1865,9 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     true,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES accounts (id)',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES accounts (id)'),
   );
-  static const VerificationMeta _categoryIdMeta = const VerificationMeta(
-    'categoryId',
-  );
+  static const VerificationMeta _categoryIdMeta = const VerificationMeta('categoryId');
   @override
   late final GeneratedColumn<String> categoryId = GeneratedColumn<String>(
     'category_id',
@@ -2275,9 +1875,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     true,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES categories (id)',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES categories (id)'),
   );
   static const VerificationMeta _titleMeta = const VerificationMeta('title');
   @override
@@ -2306,9 +1904,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _recurringRuleIdMeta = const VerificationMeta(
-    'recurringRuleId',
-  );
+  static const VerificationMeta _recurringRuleIdMeta = const VerificationMeta('recurringRuleId');
   @override
   late final GeneratedColumn<String> recurringRuleId = GeneratedColumn<String>(
     'recurring_rule_id',
@@ -2316,13 +1912,9 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     true,
     type: DriftSqlType.string,
     requiredDuringInsert: false,
-    defaultConstraints: GeneratedColumn.constraintIsAlways(
-      'REFERENCES recurring_rules (id) ON DELETE SET NULL',
-    ),
+    defaultConstraints: GeneratedColumn.constraintIsAlways('REFERENCES recurring_rules (id) ON DELETE SET NULL'),
   );
-  static const VerificationMeta _occurrenceKeyMeta = const VerificationMeta(
-    'occurrenceKey',
-  );
+  static const VerificationMeta _occurrenceKeyMeta = const VerificationMeta('occurrenceKey');
   @override
   late final GeneratedColumn<String> occurrenceKey = GeneratedColumn<String>(
     'occurrence_key',
@@ -2331,9 +1923,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _receiptPathMeta = const VerificationMeta(
-    'receiptPath',
-  );
+  static const VerificationMeta _receiptPathMeta = const VerificationMeta('receiptPath');
   @override
   late final GeneratedColumn<String> receiptPath = GeneratedColumn<String>(
     'receipt_path',
@@ -2342,9 +1932,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _deletedAtMeta = const VerificationMeta(
-    'deletedAt',
-  );
+  static const VerificationMeta _deletedAtMeta = const VerificationMeta('deletedAt');
   @override
   late final GeneratedColumn<DateTime> deletedAt = GeneratedColumn<DateTime>(
     'deleted_at',
@@ -2353,9 +1941,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
   );
-  static const VerificationMeta _createdAtMeta = const VerificationMeta(
-    'createdAt',
-  );
+  static const VerificationMeta _createdAtMeta = const VerificationMeta('createdAt');
   @override
   late final GeneratedColumn<DateTime> createdAt = GeneratedColumn<DateTime>(
     'created_at',
@@ -2364,9 +1950,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     type: DriftSqlType.dateTime,
     requiredDuringInsert: true,
   );
-  static const VerificationMeta _updatedAtMeta = const VerificationMeta(
-    'updatedAt',
-  );
+  static const VerificationMeta _updatedAtMeta = const VerificationMeta('updatedAt');
   @override
   late final GeneratedColumn<DateTime> updatedAt = GeneratedColumn<DateTime>(
     'updated_at',
@@ -2399,10 +1983,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
   String get actualTableName => $name;
   static const String $name = 'txns';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<TxnRow> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<TxnRow> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -2411,105 +1992,57 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
       context.missing(_idMeta);
     }
     if (data.containsKey('amount_cents')) {
-      context.handle(
-        _amountCentsMeta,
-        amountCents.isAcceptableOrUnknown(
-          data['amount_cents']!,
-          _amountCentsMeta,
-        ),
-      );
+      context.handle(_amountCentsMeta, amountCents.isAcceptableOrUnknown(data['amount_cents']!, _amountCentsMeta));
     } else if (isInserting) {
       context.missing(_amountCentsMeta);
     }
     if (data.containsKey('account_id')) {
-      context.handle(
-        _accountIdMeta,
-        accountId.isAcceptableOrUnknown(data['account_id']!, _accountIdMeta),
-      );
+      context.handle(_accountIdMeta, accountId.isAcceptableOrUnknown(data['account_id']!, _accountIdMeta));
     } else if (isInserting) {
       context.missing(_accountIdMeta);
     }
     if (data.containsKey('to_account_id')) {
-      context.handle(
-        _toAccountIdMeta,
-        toAccountId.isAcceptableOrUnknown(
-          data['to_account_id']!,
-          _toAccountIdMeta,
-        ),
-      );
+      context.handle(_toAccountIdMeta, toAccountId.isAcceptableOrUnknown(data['to_account_id']!, _toAccountIdMeta));
     }
     if (data.containsKey('category_id')) {
-      context.handle(
-        _categoryIdMeta,
-        categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta),
-      );
+      context.handle(_categoryIdMeta, categoryId.isAcceptableOrUnknown(data['category_id']!, _categoryIdMeta));
     }
     if (data.containsKey('title')) {
-      context.handle(
-        _titleMeta,
-        title.isAcceptableOrUnknown(data['title']!, _titleMeta),
-      );
+      context.handle(_titleMeta, title.isAcceptableOrUnknown(data['title']!, _titleMeta));
     }
     if (data.containsKey('date')) {
-      context.handle(
-        _dateMeta,
-        date.isAcceptableOrUnknown(data['date']!, _dateMeta),
-      );
+      context.handle(_dateMeta, date.isAcceptableOrUnknown(data['date']!, _dateMeta));
     } else if (isInserting) {
       context.missing(_dateMeta);
     }
     if (data.containsKey('note')) {
-      context.handle(
-        _noteMeta,
-        note.isAcceptableOrUnknown(data['note']!, _noteMeta),
-      );
+      context.handle(_noteMeta, note.isAcceptableOrUnknown(data['note']!, _noteMeta));
     }
     if (data.containsKey('recurring_rule_id')) {
       context.handle(
         _recurringRuleIdMeta,
-        recurringRuleId.isAcceptableOrUnknown(
-          data['recurring_rule_id']!,
-          _recurringRuleIdMeta,
-        ),
+        recurringRuleId.isAcceptableOrUnknown(data['recurring_rule_id']!, _recurringRuleIdMeta),
       );
     }
     if (data.containsKey('occurrence_key')) {
       context.handle(
         _occurrenceKeyMeta,
-        occurrenceKey.isAcceptableOrUnknown(
-          data['occurrence_key']!,
-          _occurrenceKeyMeta,
-        ),
+        occurrenceKey.isAcceptableOrUnknown(data['occurrence_key']!, _occurrenceKeyMeta),
       );
     }
     if (data.containsKey('receipt_path')) {
-      context.handle(
-        _receiptPathMeta,
-        receiptPath.isAcceptableOrUnknown(
-          data['receipt_path']!,
-          _receiptPathMeta,
-        ),
-      );
+      context.handle(_receiptPathMeta, receiptPath.isAcceptableOrUnknown(data['receipt_path']!, _receiptPathMeta));
     }
     if (data.containsKey('deleted_at')) {
-      context.handle(
-        _deletedAtMeta,
-        deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta),
-      );
+      context.handle(_deletedAtMeta, deletedAt.isAcceptableOrUnknown(data['deleted_at']!, _deletedAtMeta));
     }
     if (data.containsKey('created_at')) {
-      context.handle(
-        _createdAtMeta,
-        createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta),
-      );
+      context.handle(_createdAtMeta, createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     } else if (isInserting) {
       context.missing(_createdAtMeta);
     }
     if (data.containsKey('updated_at')) {
-      context.handle(
-        _updatedAtMeta,
-        updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
-      );
+      context.handle(_updatedAtMeta, updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta));
     } else if (isInserting) {
       context.missing(_updatedAtMeta);
     }
@@ -2526,68 +2059,26 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
   TxnRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return TxnRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}id'],
-      )!,
+      id: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}id'])!,
       kind: $TxnsTable.$converterkind.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}kind'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}kind'])!,
       ),
-      amountCents: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}amount_cents'],
-      )!,
-      accountId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}account_id'],
-      )!,
-      toAccountId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}to_account_id'],
-      ),
-      categoryId: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}category_id'],
-      ),
-      title: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}title'],
-      ),
-      date: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}date'],
-      )!,
-      note: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}note'],
-      ),
+      amountCents: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}amount_cents'])!,
+      accountId: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}account_id'])!,
+      toAccountId: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}to_account_id']),
+      categoryId: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}category_id']),
+      title: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}title']),
+      date: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}date'])!,
+      note: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}note']),
       recurringRuleId: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}recurring_rule_id'],
       ),
-      occurrenceKey: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}occurrence_key'],
-      ),
-      receiptPath: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}receipt_path'],
-      ),
-      deletedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}deleted_at'],
-      ),
-      createdAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}created_at'],
-      )!,
-      updatedAt: attachedDatabase.typeMapping.read(
-        DriftSqlType.dateTime,
-        data['${effectivePrefix}updated_at'],
-      )!,
+      occurrenceKey: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}occurrence_key']),
+      receiptPath: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}receipt_path']),
+      deletedAt: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}deleted_at']),
+      createdAt: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
+      updatedAt: attachedDatabase.typeMapping.read(DriftSqlType.dateTime, data['${effectivePrefix}updated_at'])!,
     );
   }
 
@@ -2596,8 +2087,7 @@ class $TxnsTable extends Txns with TableInfo<$TxnsTable, TxnRow> {
     return $TxnsTable(attachedDatabase, alias);
   }
 
-  static JsonTypeConverter2<TxnKind, String, String> $converterkind =
-      const EnumNameConverter<TxnKind>(TxnKind.values);
+  static JsonTypeConverter2<TxnKind, String, String> $converterkind = const EnumNameConverter<TxnKind>(TxnKind.values);
 }
 
 class TxnRow extends DataClass implements Insertable<TxnRow> {
@@ -2678,44 +2168,25 @@ class TxnRow extends DataClass implements Insertable<TxnRow> {
       kind: Value(kind),
       amountCents: Value(amountCents),
       accountId: Value(accountId),
-      toAccountId: toAccountId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(toAccountId),
-      categoryId: categoryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(categoryId),
-      title: title == null && nullToAbsent
-          ? const Value.absent()
-          : Value(title),
+      toAccountId: toAccountId == null && nullToAbsent ? const Value.absent() : Value(toAccountId),
+      categoryId: categoryId == null && nullToAbsent ? const Value.absent() : Value(categoryId),
+      title: title == null && nullToAbsent ? const Value.absent() : Value(title),
       date: Value(date),
       note: note == null && nullToAbsent ? const Value.absent() : Value(note),
-      recurringRuleId: recurringRuleId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(recurringRuleId),
-      occurrenceKey: occurrenceKey == null && nullToAbsent
-          ? const Value.absent()
-          : Value(occurrenceKey),
-      receiptPath: receiptPath == null && nullToAbsent
-          ? const Value.absent()
-          : Value(receiptPath),
-      deletedAt: deletedAt == null && nullToAbsent
-          ? const Value.absent()
-          : Value(deletedAt),
+      recurringRuleId: recurringRuleId == null && nullToAbsent ? const Value.absent() : Value(recurringRuleId),
+      occurrenceKey: occurrenceKey == null && nullToAbsent ? const Value.absent() : Value(occurrenceKey),
+      receiptPath: receiptPath == null && nullToAbsent ? const Value.absent() : Value(receiptPath),
+      deletedAt: deletedAt == null && nullToAbsent ? const Value.absent() : Value(deletedAt),
       createdAt: Value(createdAt),
       updatedAt: Value(updatedAt),
     );
   }
 
-  factory TxnRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory TxnRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return TxnRow(
       id: serializer.fromJson<String>(json['id']),
-      kind: $TxnsTable.$converterkind.fromJson(
-        serializer.fromJson<String>(json['kind']),
-      ),
+      kind: $TxnsTable.$converterkind.fromJson(serializer.fromJson<String>(json['kind'])),
       amountCents: serializer.fromJson<int>(json['amountCents']),
       accountId: serializer.fromJson<String>(json['accountId']),
       toAccountId: serializer.fromJson<String?>(json['toAccountId']),
@@ -2779,12 +2250,8 @@ class TxnRow extends DataClass implements Insertable<TxnRow> {
     title: title.present ? title.value : this.title,
     date: date ?? this.date,
     note: note.present ? note.value : this.note,
-    recurringRuleId: recurringRuleId.present
-        ? recurringRuleId.value
-        : this.recurringRuleId,
-    occurrenceKey: occurrenceKey.present
-        ? occurrenceKey.value
-        : this.occurrenceKey,
+    recurringRuleId: recurringRuleId.present ? recurringRuleId.value : this.recurringRuleId,
+    occurrenceKey: occurrenceKey.present ? occurrenceKey.value : this.occurrenceKey,
     receiptPath: receiptPath.present ? receiptPath.value : this.receiptPath,
     deletedAt: deletedAt.present ? deletedAt.value : this.deletedAt,
     createdAt: createdAt ?? this.createdAt,
@@ -2794,28 +2261,16 @@ class TxnRow extends DataClass implements Insertable<TxnRow> {
     return TxnRow(
       id: data.id.present ? data.id.value : this.id,
       kind: data.kind.present ? data.kind.value : this.kind,
-      amountCents: data.amountCents.present
-          ? data.amountCents.value
-          : this.amountCents,
+      amountCents: data.amountCents.present ? data.amountCents.value : this.amountCents,
       accountId: data.accountId.present ? data.accountId.value : this.accountId,
-      toAccountId: data.toAccountId.present
-          ? data.toAccountId.value
-          : this.toAccountId,
-      categoryId: data.categoryId.present
-          ? data.categoryId.value
-          : this.categoryId,
+      toAccountId: data.toAccountId.present ? data.toAccountId.value : this.toAccountId,
+      categoryId: data.categoryId.present ? data.categoryId.value : this.categoryId,
       title: data.title.present ? data.title.value : this.title,
       date: data.date.present ? data.date.value : this.date,
       note: data.note.present ? data.note.value : this.note,
-      recurringRuleId: data.recurringRuleId.present
-          ? data.recurringRuleId.value
-          : this.recurringRuleId,
-      occurrenceKey: data.occurrenceKey.present
-          ? data.occurrenceKey.value
-          : this.occurrenceKey,
-      receiptPath: data.receiptPath.present
-          ? data.receiptPath.value
-          : this.receiptPath,
+      recurringRuleId: data.recurringRuleId.present ? data.recurringRuleId.value : this.recurringRuleId,
+      occurrenceKey: data.occurrenceKey.present ? data.occurrenceKey.value : this.occurrenceKey,
+      receiptPath: data.receiptPath.present ? data.receiptPath.value : this.receiptPath,
       deletedAt: data.deletedAt.present ? data.deletedAt.value : this.deletedAt,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
       updatedAt: data.updatedAt.present ? data.updatedAt.value : this.updatedAt,
@@ -3025,9 +2480,7 @@ class TxnsCompanion extends UpdateCompanion<TxnRow> {
       map['id'] = Variable<String>(id.value);
     }
     if (kind.present) {
-      map['kind'] = Variable<String>(
-        $TxnsTable.$converterkind.toSql(kind.value),
-      );
+      map['kind'] = Variable<String>($TxnsTable.$converterkind.toSql(kind.value));
     }
     if (amountCents.present) {
       map['amount_cents'] = Variable<int>(amountCents.value);
@@ -3098,8 +2551,7 @@ class TxnsCompanion extends UpdateCompanion<TxnRow> {
   }
 }
 
-class $SettingsEntriesTable extends SettingsEntries
-    with TableInfo<$SettingsEntriesTable, SettingsRow> {
+class $SettingsEntriesTable extends SettingsEntries with TableInfo<$SettingsEntriesTable, SettingsRow> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
@@ -3114,8 +2566,7 @@ class $SettingsEntriesTable extends SettingsEntries
     requiredDuringInsert: false,
     defaultValue: const Constant(1),
   );
-  static const VerificationMeta _monthlyIncomeCentsMeta =
-      const VerificationMeta('monthlyIncomeCents');
+  static const VerificationMeta _monthlyIncomeCentsMeta = const VerificationMeta('monthlyIncomeCents');
   @override
   late final GeneratedColumn<int> monthlyIncomeCents = GeneratedColumn<int>(
     'monthly_income_cents',
@@ -3126,18 +2577,15 @@ class $SettingsEntriesTable extends SettingsEntries
     defaultValue: const Constant(0),
   );
   @override
-  late final GeneratedColumnWithTypeConverter<PaydayKind, String> paydayKind =
-      GeneratedColumn<String>(
-        'payday_kind',
-        aliasedName,
-        false,
-        type: DriftSqlType.string,
-        requiredDuringInsert: false,
-        defaultValue: Constant(PaydayKind.first.name),
-      ).withConverter<PaydayKind>($SettingsEntriesTable.$converterpaydayKind);
-  static const VerificationMeta _paydayDayMeta = const VerificationMeta(
-    'paydayDay',
-  );
+  late final GeneratedColumnWithTypeConverter<PaydayKind, String> paydayKind = GeneratedColumn<String>(
+    'payday_kind',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+    defaultValue: Constant(PaydayKind.first.name),
+  ).withConverter<PaydayKind>($SettingsEntriesTable.$converterpaydayKind);
+  static const VerificationMeta _paydayDayMeta = const VerificationMeta('paydayDay');
   @override
   late final GeneratedColumn<int> paydayDay = GeneratedColumn<int>(
     'payday_day',
@@ -3147,9 +2595,7 @@ class $SettingsEntriesTable extends SettingsEntries
     requiredDuringInsert: false,
     defaultValue: const Constant(1),
   );
-  static const VerificationMeta _currencyMeta = const VerificationMeta(
-    'currency',
-  );
+  static const VerificationMeta _currencyMeta = const VerificationMeta('currency');
   @override
   late final GeneratedColumn<String> currency = GeneratedColumn<String>(
     'currency',
@@ -3160,23 +2606,14 @@ class $SettingsEntriesTable extends SettingsEntries
     defaultValue: const Constant('EUR'),
   );
   @override
-  List<GeneratedColumn> get $columns => [
-    id,
-    monthlyIncomeCents,
-    paydayKind,
-    paydayDay,
-    currency,
-  ];
+  List<GeneratedColumn> get $columns => [id, monthlyIncomeCents, paydayKind, paydayDay, currency];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
   String get actualTableName => $name;
   static const String $name = 'settings';
   @override
-  VerificationContext validateIntegrity(
-    Insertable<SettingsRow> instance, {
-    bool isInserting = false,
-  }) {
+  VerificationContext validateIntegrity(Insertable<SettingsRow> instance, {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
@@ -3185,23 +2622,14 @@ class $SettingsEntriesTable extends SettingsEntries
     if (data.containsKey('monthly_income_cents')) {
       context.handle(
         _monthlyIncomeCentsMeta,
-        monthlyIncomeCents.isAcceptableOrUnknown(
-          data['monthly_income_cents']!,
-          _monthlyIncomeCentsMeta,
-        ),
+        monthlyIncomeCents.isAcceptableOrUnknown(data['monthly_income_cents']!, _monthlyIncomeCentsMeta),
       );
     }
     if (data.containsKey('payday_day')) {
-      context.handle(
-        _paydayDayMeta,
-        paydayDay.isAcceptableOrUnknown(data['payday_day']!, _paydayDayMeta),
-      );
+      context.handle(_paydayDayMeta, paydayDay.isAcceptableOrUnknown(data['payday_day']!, _paydayDayMeta));
     }
     if (data.containsKey('currency')) {
-      context.handle(
-        _currencyMeta,
-        currency.isAcceptableOrUnknown(data['currency']!, _currencyMeta),
-      );
+      context.handle(_currencyMeta, currency.isAcceptableOrUnknown(data['currency']!, _currencyMeta));
     }
     return context;
   }
@@ -3212,28 +2640,16 @@ class $SettingsEntriesTable extends SettingsEntries
   SettingsRow map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
     return SettingsRow(
-      id: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}id'],
-      )!,
+      id: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}id'])!,
       monthlyIncomeCents: attachedDatabase.typeMapping.read(
         DriftSqlType.int,
         data['${effectivePrefix}monthly_income_cents'],
       )!,
       paydayKind: $SettingsEntriesTable.$converterpaydayKind.fromSql(
-        attachedDatabase.typeMapping.read(
-          DriftSqlType.string,
-          data['${effectivePrefix}payday_kind'],
-        )!,
+        attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}payday_kind'])!,
       ),
-      paydayDay: attachedDatabase.typeMapping.read(
-        DriftSqlType.int,
-        data['${effectivePrefix}payday_day'],
-      )!,
-      currency: attachedDatabase.typeMapping.read(
-        DriftSqlType.string,
-        data['${effectivePrefix}currency'],
-      )!,
+      paydayDay: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}payday_day'])!,
+      currency: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}currency'])!,
     );
   }
 
@@ -3242,8 +2658,9 @@ class $SettingsEntriesTable extends SettingsEntries
     return $SettingsEntriesTable(attachedDatabase, alias);
   }
 
-  static JsonTypeConverter2<PaydayKind, String, String> $converterpaydayKind =
-      const EnumNameConverter<PaydayKind>(PaydayKind.values);
+  static JsonTypeConverter2<PaydayKind, String, String> $converterpaydayKind = const EnumNameConverter<PaydayKind>(
+    PaydayKind.values,
+  );
 }
 
 class SettingsRow extends DataClass implements Insertable<SettingsRow> {
@@ -3265,9 +2682,7 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     map['id'] = Variable<int>(id);
     map['monthly_income_cents'] = Variable<int>(monthlyIncomeCents);
     {
-      map['payday_kind'] = Variable<String>(
-        $SettingsEntriesTable.$converterpaydayKind.toSql(paydayKind),
-      );
+      map['payday_kind'] = Variable<String>($SettingsEntriesTable.$converterpaydayKind.toSql(paydayKind));
     }
     map['payday_day'] = Variable<int>(paydayDay);
     map['currency'] = Variable<String>(currency);
@@ -3284,17 +2699,12 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     );
   }
 
-  factory SettingsRow.fromJson(
-    Map<String, dynamic> json, {
-    ValueSerializer? serializer,
-  }) {
+  factory SettingsRow.fromJson(Map<String, dynamic> json, {ValueSerializer? serializer}) {
     serializer ??= driftRuntimeOptions.defaultSerializer;
     return SettingsRow(
       id: serializer.fromJson<int>(json['id']),
       monthlyIncomeCents: serializer.fromJson<int>(json['monthlyIncomeCents']),
-      paydayKind: $SettingsEntriesTable.$converterpaydayKind.fromJson(
-        serializer.fromJson<String>(json['paydayKind']),
-      ),
+      paydayKind: $SettingsEntriesTable.$converterpaydayKind.fromJson(serializer.fromJson<String>(json['paydayKind'])),
       paydayDay: serializer.fromJson<int>(json['paydayDay']),
       currency: serializer.fromJson<String>(json['currency']),
     );
@@ -3305,36 +2715,25 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     return <String, dynamic>{
       'id': serializer.toJson<int>(id),
       'monthlyIncomeCents': serializer.toJson<int>(monthlyIncomeCents),
-      'paydayKind': serializer.toJson<String>(
-        $SettingsEntriesTable.$converterpaydayKind.toJson(paydayKind),
-      ),
+      'paydayKind': serializer.toJson<String>($SettingsEntriesTable.$converterpaydayKind.toJson(paydayKind)),
       'paydayDay': serializer.toJson<int>(paydayDay),
       'currency': serializer.toJson<String>(currency),
     };
   }
 
-  SettingsRow copyWith({
-    int? id,
-    int? monthlyIncomeCents,
-    PaydayKind? paydayKind,
-    int? paydayDay,
-    String? currency,
-  }) => SettingsRow(
-    id: id ?? this.id,
-    monthlyIncomeCents: monthlyIncomeCents ?? this.monthlyIncomeCents,
-    paydayKind: paydayKind ?? this.paydayKind,
-    paydayDay: paydayDay ?? this.paydayDay,
-    currency: currency ?? this.currency,
-  );
+  SettingsRow copyWith({int? id, int? monthlyIncomeCents, PaydayKind? paydayKind, int? paydayDay, String? currency}) =>
+      SettingsRow(
+        id: id ?? this.id,
+        monthlyIncomeCents: monthlyIncomeCents ?? this.monthlyIncomeCents,
+        paydayKind: paydayKind ?? this.paydayKind,
+        paydayDay: paydayDay ?? this.paydayDay,
+        currency: currency ?? this.currency,
+      );
   SettingsRow copyWithCompanion(SettingsEntriesCompanion data) {
     return SettingsRow(
       id: data.id.present ? data.id.value : this.id,
-      monthlyIncomeCents: data.monthlyIncomeCents.present
-          ? data.monthlyIncomeCents.value
-          : this.monthlyIncomeCents,
-      paydayKind: data.paydayKind.present
-          ? data.paydayKind.value
-          : this.paydayKind,
+      monthlyIncomeCents: data.monthlyIncomeCents.present ? data.monthlyIncomeCents.value : this.monthlyIncomeCents,
+      paydayKind: data.paydayKind.present ? data.paydayKind.value : this.paydayKind,
       paydayDay: data.paydayDay.present ? data.paydayDay.value : this.paydayDay,
       currency: data.currency.present ? data.currency.value : this.currency,
     );
@@ -3353,8 +2752,7 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, monthlyIncomeCents, paydayKind, paydayDay, currency);
+  int get hashCode => Object.hash(id, monthlyIncomeCents, paydayKind, paydayDay, currency);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -3395,8 +2793,7 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
-      if (monthlyIncomeCents != null)
-        'monthly_income_cents': monthlyIncomeCents,
+      if (monthlyIncomeCents != null) 'monthly_income_cents': monthlyIncomeCents,
       if (paydayKind != null) 'payday_kind': paydayKind,
       if (paydayDay != null) 'payday_day': paydayDay,
       if (currency != null) 'currency': currency,
@@ -3429,9 +2826,7 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
       map['monthly_income_cents'] = Variable<int>(monthlyIncomeCents.value);
     }
     if (paydayKind.present) {
-      map['payday_kind'] = Variable<String>(
-        $SettingsEntriesTable.$converterpaydayKind.toSql(paydayKind.value),
-      );
+      map['payday_kind'] = Variable<String>($SettingsEntriesTable.$converterpaydayKind.toSql(paydayKind.value));
     }
     if (paydayDay.present) {
       map['payday_day'] = Variable<int>(paydayDay.value);
@@ -3461,25 +2856,16 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $CategoriesTable categories = $CategoriesTable(this);
   late final $RecurringRulesTable recurringRules = $RecurringRulesTable(this);
   late final $TxnsTable txns = $TxnsTable(this);
-  late final $SettingsEntriesTable settingsEntries = $SettingsEntriesTable(
-    this,
-  );
-  late final Index txnsByDate = Index(
-    'txns_by_date',
-    'CREATE INDEX txns_by_date ON txns (date)',
-  );
-  late final Index txnsByCategory = Index(
-    'txns_by_category',
-    'CREATE INDEX txns_by_category ON txns (category_id)',
-  );
+  late final $SettingsEntriesTable settingsEntries = $SettingsEntriesTable(this);
+  late final Index txnsByDate = Index('txns_by_date', 'CREATE INDEX txns_by_date ON txns (date)');
+  late final Index txnsByCategory = Index('txns_by_category', 'CREATE INDEX txns_by_category ON txns (category_id)');
   late final AccountsDao accountsDao = AccountsDao(this as AppDatabase);
   late final CategoriesDao categoriesDao = CategoriesDao(this as AppDatabase);
   late final TxnsDao txnsDao = TxnsDao(this as AppDatabase);
   late final RecurringDao recurringDao = RecurringDao(this as AppDatabase);
   late final SettingsDao settingsDao = SettingsDao(this as AppDatabase);
   @override
-  Iterable<TableInfo<Table, Object?>> get allTables =>
-      allSchemaEntities.whereType<TableInfo<Table, Object?>>();
+  Iterable<TableInfo<Table, Object?>> get allTables => allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities => [
     accounts,
@@ -3493,10 +2879,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   @override
   StreamQueryUpdateRules get streamUpdateRules => const StreamQueryUpdateRules([
     WritePropagation(
-      on: TableUpdateQuery.onTableName(
-        'recurring_rules',
-        limitUpdateKind: UpdateKind.delete,
-      ),
+      on: TableUpdateQuery.onTableName('recurring_rules', limitUpdateKind: UpdateKind.delete),
       result: [TableUpdate('txns', kind: UpdateKind.update)],
     ),
   ]);

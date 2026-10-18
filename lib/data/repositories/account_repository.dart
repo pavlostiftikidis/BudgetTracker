@@ -24,16 +24,12 @@ class DriftAccountRepository implements AccountRepository {
   final AppDatabase _db;
 
   @override
-  Stream<List<Account>> watchAccounts({bool includeArchived = false}) => _db.accountsDao
-      .watchAll(includeArchived: includeArchived)
-      .map((rows) => [for (final r in rows) r.toModel()]);
+  Stream<List<Account>> watchAccounts({bool includeArchived = false}) =>
+      _db.accountsDao.watchAll(includeArchived: includeArchived).map((rows) => [for (final r in rows) r.toModel()]);
 
   @override
-  Stream<Map<String, Money>> watchBalances() => combineLatest2(
-    watchAccounts(includeArchived: true),
-    _db.accountsDao.watchFlows(),
-    balancesFromFlows,
-  );
+  Stream<Map<String, Money>> watchBalances() =>
+      combineLatest2(watchAccounts(includeArchived: true), _db.accountsDao.watchFlows(), balancesFromFlows);
 
   @override
   Future<void> save(Account account) => _db.accountsDao.upsert(account.toCompanion());

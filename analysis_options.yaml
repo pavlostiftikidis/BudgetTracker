@@ -19,3 +19,6 @@ linter:
     public_member_api_docs: false
     # dart format decides line length.
     lines_longer_than_80_chars: false
+
+formatter:
+  page_width: 120

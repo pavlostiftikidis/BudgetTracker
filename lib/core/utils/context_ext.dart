@@ -8,8 +8,7 @@ extension PulseContext on BuildContext {
   AppLocalizations get l10n => AppLocalizations.of(this);
 
   /// [d], or zero when the platform asks for reduced motion.
-  Duration motion(Duration d) =>
-      MediaQuery.maybeDisableAnimationsOf(this) ?? false ? Duration.zero : d;
+  Duration motion(Duration d) => MediaQuery.maybeDisableAnimationsOf(this) ?? false ? Duration.zero : d;
 
   bool get reduceMotion => MediaQuery.maybeDisableAnimationsOf(this) ?? false;
 }

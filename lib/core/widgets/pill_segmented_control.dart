@@ -65,9 +65,7 @@ class PillSegmentedControl<T> extends StatelessWidget {
                         s.label,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: PulseText.label.copyWith(
-                          color: s.value == selected ? c.bg : c.muted,
-                        ),
+                        style: PulseText.label.copyWith(color: s.value == selected ? c.bg : c.muted),
                       ),
                     ),
                   ),

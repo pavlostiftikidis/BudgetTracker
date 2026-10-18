@@ -23,15 +23,22 @@ Future<ProviderContainer> pumpPulseApp(
   List<Override> overrides = const [],
   Size size = const Size(390, 844),
   double textScale = 1,
+  bool reduceMotion = true,
 }) async {
   await initLocale();
   tester.view
     ..physicalSize = size * 3
     ..devicePixelRatio = 3;
-  tester.platformDispatcher.textScaleFactorTestValue = textScale;
+  tester.platformDispatcher
+    ..textScaleFactorTestValue = textScale
+    // Reduced motion: stops the blinking caret and other looping
+    // animations so pumpAndSettle can settle (and covers that setting).
+    ..accessibilityFeaturesTestValue = FakeAccessibilityFeatures(disableAnimations: reduceMotion);
   addTearDown(() {
     tester.view.reset();
-    tester.platformDispatcher.clearTextScaleFactorTestValue();
+    tester.platformDispatcher
+      ..clearTextScaleFactorTestValue()
+      ..clearAccessibilityFeaturesTestValue();
   });
 
   final database = db ?? memoryDb();
@@ -51,9 +58,7 @@ Future<ProviderContainer> pumpPulseApp(
     await database.close();
   });
 
-  await tester.pumpWidget(
-    UncontrolledProviderScope(container: container, child: const PulseApp()),
-  );
+  await tester.pumpWidget(UncontrolledProviderScope(container: container, child: const PulseApp()));
   await settle(tester);
   return container;
 }

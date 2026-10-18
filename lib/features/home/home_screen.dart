@@ -32,6 +32,10 @@ class HomeScreen extends StatelessWidget {
         MonoLabel(l10n.homeBalanceLabel),
         const SizedBox(height: 6),
         Text(l10n.navHome, style: PulseText.screenTitle),
+        const SizedBox(height: 20),
+        OutlineButtonPill(label: l10n.txnsTitle, onPressed: () => context.push(Routes.transactions)),
+        const SizedBox(height: 10),
+        OutlineButtonPill(label: l10n.accountsTitle, onPressed: () => context.push(Routes.accounts)),
       ],
     );
   }

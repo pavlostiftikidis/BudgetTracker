@@ -17,8 +17,7 @@ final appStartupProvider = AppStartupProvider._();
 /// Runs once before the first frame of content: optional demo seed, purge
 /// of old soft-deleted rows, and recurring materialisation.
 
-final class AppStartupProvider
-    extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
+final class AppStartupProvider extends $FunctionalProvider<AsyncValue<void>, void, FutureOr<void>>
     with $FutureModifier<void>, $FutureProvider<void> {
   /// Runs once before the first frame of content: optional demo seed, purge
   /// of old soft-deleted rows, and recurring materialisation.
@@ -38,8 +37,7 @@ final class AppStartupProvider
 
   @$internal
   @override
-  $FutureProviderElement<void> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+  $FutureProviderElement<void> $createElement($ProviderPointer pointer) => $FutureProviderElement(pointer);
 
   @override
   FutureOr<void> create(Ref ref) {

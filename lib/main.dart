@@ -12,10 +12,5 @@ Future<void> main() async {
   registerFontLicenses();
   final prefs = SharedAppPrefs(await SharedPreferences.getInstance());
 
-  runApp(
-    ProviderScope(
-      overrides: [appPrefsProvider.overrideWithValue(prefs)],
-      child: const PulseApp(),
-    ),
-  );
+  runApp(ProviderScope(overrides: [appPrefsProvider.overrideWithValue(prefs)], child: const PulseApp()));
 }

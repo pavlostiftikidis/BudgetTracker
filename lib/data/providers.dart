@@ -48,6 +48,10 @@ Stream<AppSettings> settings(Ref ref) => ref.watch(settingsRepositoryProvider).w
 @Riverpod(keepAlive: true)
 Stream<List<Account>> accounts(Ref ref) => ref.watch(accountRepositoryProvider).watchAccounts();
 
+/// Archived ones too, for labelling old transactions.
+@Riverpod(keepAlive: true)
+Stream<List<Account>> allAccounts(Ref ref) => ref.watch(accountRepositoryProvider).watchAccounts(includeArchived: true);
+
 @Riverpod(keepAlive: true)
 Stream<Map<String, Money>> balances(Ref ref) => ref.watch(accountRepositoryProvider).watchBalances();
 

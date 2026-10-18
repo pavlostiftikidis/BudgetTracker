@@ -110,10 +110,7 @@ void main() {
     });
 
     test('15 Oct – 14 Nov is October', () {
-      expect(
-        BudgetPeriod.containing(d(2026, 10, 18), const Payday(PaydayKind.fifteenth)).labelMonth,
-        d(2026, 10, 1),
-      );
+      expect(BudgetPeriod.containing(d(2026, 10, 18), const Payday(PaydayKind.fifteenth)).labelMonth, d(2026, 10, 1));
     });
 
     test('31 Oct – 29 Nov is November', () {

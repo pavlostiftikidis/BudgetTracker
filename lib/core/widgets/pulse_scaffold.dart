@@ -17,8 +17,7 @@ class PulseScaffold extends StatelessWidget {
   /// inside the shell pad their scroll views by this much.
   static const double navClearance = 68 + 24 + 20;
 
-  static double bottomClearance(BuildContext context) =>
-      navClearance + MediaQuery.paddingOf(context).bottom;
+  static double bottomClearance(BuildContext context) => navClearance + MediaQuery.paddingOf(context).bottom;
 
   final Widget body;
   final Widget? floatingNav;
@@ -37,25 +36,10 @@ class PulseScaffold extends StatelessWidget {
       body: Stack(
         children: [
           Positioned.fill(
-            child: SafeArea(
-              bottom: safeBottom && floatingNav == null,
-              child: body,
-            ),
+            child: SafeArea(bottom: safeBottom && floatingNav == null, child: body),
           ),
-          if (floatingAction != null)
-            Positioned(
-              left: 20,
-              right: 20,
-              bottom: 24 + bottomInset,
-              child: floatingAction!,
-            ),
-          if (floatingNav != null)
-            Positioned(
-              left: 20,
-              right: 20,
-              bottom: 24 + bottomInset,
-              child: floatingNav!,
-            ),
+          if (floatingAction != null) Positioned(left: 20, right: 20, bottom: 24 + bottomInset, child: floatingAction!),
+          if (floatingNav != null) Positioned(left: 20, right: 20, bottom: 24 + bottomInset, child: floatingNav!),
         ],
       ),
     );

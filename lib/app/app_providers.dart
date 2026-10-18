@@ -19,8 +19,7 @@ class ThemeModeController extends _$ThemeModeController {
   }
 
   /// Flips between dark and light based on what is on screen now.
-  Future<void> toggle(Brightness current) =>
-      set(current == Brightness.dark ? ThemeMode.light : ThemeMode.dark);
+  Future<void> toggle(Brightness current) => set(current == Brightness.dark ? ThemeMode.light : ThemeMode.dark);
 }
 
 @Riverpod(keepAlive: true)

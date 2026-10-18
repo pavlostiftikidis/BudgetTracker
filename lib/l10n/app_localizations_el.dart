@@ -88,12 +88,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String daysLeft(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count μέρες ακόμα',
-      one: '1 μέρα ακόμα',
-    );
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count μέρες ακόμα', one: '1 μέρα ακόμα');
     return '$_temp0';
   }
 
@@ -176,12 +171,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String firstStepIncomeSub(String income, int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count κατηγορίες',
-      one: '1 κατηγορία',
-    );
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count κατηγορίες', one: '1 κατηγορία');
     return '$income / μήνα · $_temp0';
   }
 
@@ -259,8 +249,7 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get insightNoIncrease =>
-      'Καμία κατηγορία δεν ξεπέρασε την προηγούμενη περίοδο. Μπράβο!';
+  String get insightNoIncrease => 'Καμία κατηγορία δεν ξεπέρασε την προηγούμενη περίοδο. Μπράβο!';
 
   @override
   String get topCategories => 'Κορυφαίες κατηγορίες';
@@ -311,8 +300,7 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get budgetsEmpty =>
-      'Δεν έχεις ορίσει όρια ακόμα. Πρόσθεσε μηνιαίο όριο σε μια κατηγορία.';
+  String get budgetsEmpty => 'Δεν έχεις ορίσει όρια ακόμα. Πρόσθεσε μηνιαίο όριο σε μια κατηγορία.';
 
   @override
   String get addExpense => 'Έξοδο';
@@ -424,22 +412,12 @@ class AppLocalizationsEl extends AppLocalizations {
   String get deleteDialogTitle => 'Διαγραφή της κίνησης;';
 
   @override
-  String deleteDialogBodyExpense(
-    String name,
-    String amount,
-    String month,
-    String account,
-  ) {
+  String deleteDialogBodyExpense(String name, String amount, String month, String account) {
     return 'Το «$name $amount» θα αφαιρεθεί από τον $month και το υπόλοιπο του λογαριασμού «$account» θα αυξηθεί αντίστοιχα.';
   }
 
   @override
-  String deleteDialogBodyIncome(
-    String name,
-    String amount,
-    String month,
-    String account,
-  ) {
+  String deleteDialogBodyIncome(String name, String amount, String month, String account) {
     return 'Το «$name $amount» θα αφαιρεθεί από τον $month και το υπόλοιπο του λογαριασμού «$account» θα μειωθεί αντίστοιχα.';
   }
 
@@ -464,8 +442,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get filterIncome => 'Έσοδα';
 
   @override
-  String get txnsSwipeHint =>
-      'Σύρε αριστερά μια κίνηση για επεξεργασία ή διαγραφή';
+  String get txnsSwipeHint => 'Σύρε αριστερά μια κίνηση για επεξεργασία ή διαγραφή';
 
   @override
   String get txnsEmpty => 'Δεν βρέθηκαν κινήσεις.';
@@ -502,12 +479,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String recurringActiveCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count ενεργά',
-      one: '1 ενεργό',
-    );
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count ενεργά', one: '1 ενεργό');
     return '$_temp0';
   }
 
@@ -684,8 +656,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get transferSwap => 'Αντιστροφή λογαριασμών';
 
   @override
-  String get transferNeedsTwo =>
-      'Χρειάζεσαι τουλάχιστον δύο λογαριασμούς για μεταφορά.';
+  String get transferNeedsTwo => 'Χρειάζεσαι τουλάχιστον δύο λογαριασμούς για μεταφορά.';
 
   @override
   String get newAccountTitle => 'Νέος λογαριασμός';
@@ -718,8 +689,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get fieldOptional => '(προαιρετικό)';
 
   @override
-  String get accountArchiveConfirm =>
-      'Ο λογαριασμός έχει κινήσεις, οπότε θα αρχειοθετηθεί.';
+  String get accountArchiveConfirm => 'Ο λογαριασμός έχει κινήσεις, οπότε θα αρχειοθετηθεί.';
 
   @override
   String get categoriesTitle => 'Κατηγορίες';
@@ -734,12 +704,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String txnCount(int count) {
-    String _temp0 = intl.Intl.pluralLogic(
-      count,
-      locale: localeName,
-      other: '$count κινήσεις',
-      one: '1 κίνηση',
-    );
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count κινήσεις', one: '1 κίνηση');
     return '$_temp0';
   }
 
@@ -774,8 +739,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get categoryKindIncome => 'Έσοδα';
 
   @override
-  String get categoryArchivedNotice =>
-      'Η κατηγορία έχει κινήσεις, οπότε αρχειοθετήθηκε.';
+  String get categoryArchivedNotice => 'Η κατηγορία έχει κινήσεις, οπότε αρχειοθετήθηκε.';
 
   @override
   String get categoryDeleteOrArchive => 'Διαγραφή κατηγορίας';
@@ -923,8 +887,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get exportSubject => 'Pulse — κινήσεις';
 
   @override
-  String get biometricUnavailable =>
-      'Η συσκευή δεν υποστηρίζει βιομετρικό κλείδωμα.';
+  String get biometricUnavailable => 'Η συσκευή δεν υποστηρίζει βιομετρικό κλείδωμα.';
 
   @override
   String get biometricReason => 'Ξεκλείδωσε για να δεις τα οικονομικά σου';
@@ -952,8 +915,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get onbIncomeTitle => 'Πόσα μπαίνουν κάθε μήνα;';
 
   @override
-  String get onbIncomeSubtitle =>
-      'Με βάση αυτό προτείνουμε όρια και υπολογίζουμε πόσα μπορείς να ξοδεύεις κάθε μέρα.';
+  String get onbIncomeSubtitle => 'Με βάση αυτό προτείνουμε όρια και υπολογίζουμε πόσα μπορείς να ξοδεύεις κάθε μέρα.';
 
   @override
   String get onbIncomeLabel => 'Μηνιαίο καθαρό εισόδημα';
@@ -982,15 +944,13 @@ class AppLocalizationsEl extends AppLocalizations {
   String get paydayGroup => 'Ημέρα πληρωμής';
 
   @override
-  String get onbPaydayHelper =>
-      'Ο «μήνας» στο app θα ξεκινά από αυτή την ημέρα.';
+  String get onbPaydayHelper => 'Ο «μήνας» στο app θα ξεκινά από αυτή την ημέρα.';
 
   @override
   String get onbLimitsTitle => 'Όρισε όρια ανά κατηγορία';
 
   @override
-  String get onbLimitsSubtitle =>
-      'Ξεκίνα με τις προτάσεις μας. Θα μπορείς να τα αλλάξεις όποτε θέλεις.';
+  String get onbLimitsSubtitle => 'Ξεκίνα με τις προτάσεις μας. Θα μπορείς να τα αλλάξεις όποτε θέλεις.';
 
   @override
   String get onbLeftForSavings => 'Μένουν για αποταμίευση';
@@ -999,8 +959,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get onbAccountsTitle => 'Πού κρατάς τα χρήματά σου;';
 
   @override
-  String get onbAccountsSubtitle =>
-      'Διάλεξε τους λογαριασμούς σου, για να βλέπεις το υπόλοιπο του καθενός.';
+  String get onbAccountsSubtitle => 'Διάλεξε τους λογαριασμούς σου, για να βλέπεις το υπόλοιπο του καθενός.';
 
   @override
   String stepperDecrease(String name) {

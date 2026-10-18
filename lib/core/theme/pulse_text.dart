@@ -52,11 +52,7 @@ abstract final class PulseText {
     letterSpacing: -0.2,
   );
 
-  static const title = TextStyle(
-    fontFamily: PulseFonts.sans,
-    fontSize: 15,
-    fontWeight: FontWeight.w700,
-  );
+  static const title = TextStyle(fontFamily: PulseFonts.sans, fontSize: 15, fontWeight: FontWeight.w700);
 
   static const amount = TextStyle(
     fontFamily: PulseFonts.sans,
@@ -65,25 +61,11 @@ abstract final class PulseText {
     fontFeatures: _tabular,
   );
 
-  static const body = TextStyle(
-    fontFamily: PulseFonts.sans,
-    fontSize: 15,
-    fontWeight: FontWeight.w500,
-    height: 1.35,
-  );
+  static const body = TextStyle(fontFamily: PulseFonts.sans, fontSize: 15, fontWeight: FontWeight.w500, height: 1.35);
 
-  static const label = TextStyle(
-    fontFamily: PulseFonts.sans,
-    fontSize: 14,
-    fontWeight: FontWeight.w700,
-  );
+  static const label = TextStyle(fontFamily: PulseFonts.sans, fontSize: 14, fontWeight: FontWeight.w700);
 
-  static const caption = TextStyle(
-    fontFamily: PulseFonts.sans,
-    fontSize: 13,
-    fontWeight: FontWeight.w500,
-    height: 1.3,
-  );
+  static const caption = TextStyle(fontFamily: PulseFonts.sans, fontSize: 13, fontWeight: FontWeight.w500, height: 1.3);
 
   static const small = TextStyle(
     fontFamily: PulseFonts.sans,

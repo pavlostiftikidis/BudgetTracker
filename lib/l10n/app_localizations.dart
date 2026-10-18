@@ -61,8 +61,7 @@ import 'app_localizations_el.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -70,8 +69,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -83,13 +81,12 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[Locale('el')];
@@ -806,23 +803,13 @@ abstract class AppLocalizations {
   ///
   /// In el, this message translates to:
   /// **'Το «{name} {amount}» θα αφαιρεθεί από τον {month} και το υπόλοιπο του λογαριασμού «{account}» θα αυξηθεί αντίστοιχα.'**
-  String deleteDialogBodyExpense(
-    String name,
-    String amount,
-    String month,
-    String account,
-  );
+  String deleteDialogBodyExpense(String name, String amount, String month, String account);
 
   /// No description provided for @deleteDialogBodyIncome.
   ///
   /// In el, this message translates to:
   /// **'Το «{name} {amount}» θα αφαιρεθεί από τον {month} και το υπόλοιπο του λογαριασμού «{account}» θα μειωθεί αντίστοιχα.'**
-  String deleteDialogBodyIncome(
-    String name,
-    String amount,
-    String month,
-    String account,
-  );
+  String deleteDialogBodyIncome(String name, String amount, String month, String account);
 
   /// No description provided for @deleteDialogBodyTransfer.
   ///
@@ -1821,8 +1808,7 @@ abstract class AppLocalizations {
   String placeholderScreen(String name);
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -1831,8 +1817,7 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['el'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['el'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

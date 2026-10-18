@@ -50,7 +50,16 @@ typedef _Item = ({
   String? rule,
 });
 
-_Item _e(int offset, String category, String title, int cents, String account, {int hour = 12, int minute = 0, String? rule}) => (
+_Item _e(
+  int offset,
+  String category,
+  String title,
+  int cents,
+  String account, {
+  int hour = 12,
+  int minute = 0,
+  String? rule,
+}) => (
   offset: offset,
   hour: hour,
   minute: minute,
@@ -173,23 +182,36 @@ Future<void> seedDemoData(AppDatabase db, {required DateTime now}) async {
     await db.settingsDao.save(const AppSettings(monthlyIncomeCents: 215000).toCompanion());
 
     for (final a in const [
-      Account(id: DemoIds.checking, name: 'Τρεχούμενος', type: AccountType.bank, openingBalanceCents: 120000, last4: '4417'),
+      Account(
+        id: DemoIds.checking,
+        name: 'Τρεχούμενος',
+        type: AccountType.bank,
+        openingBalanceCents: 120000,
+        last4: '4417',
+      ),
       Account(
         id: DemoIds.card,
         name: 'Πιστωτική κάρτα',
         type: AccountType.card,
-        colorKey: ColorKey.coral,
+        colorKey: ColorKey.violet,
         isCredit: true,
         creditLimitCents: 200000,
         statementDay: 5,
         sortOrder: 1,
       ),
-      Account(id: DemoIds.cash, name: 'Μετρητά', type: AccountType.cash, colorKey: ColorKey.amber, openingBalanceCents: 8000, sortOrder: 2),
+      Account(
+        id: DemoIds.cash,
+        name: 'Μετρητά',
+        type: AccountType.cash,
+        colorKey: ColorKey.lime,
+        openingBalanceCents: 8000,
+        sortOrder: 2,
+      ),
       Account(
         id: DemoIds.savings,
         name: 'Αποταμίευση',
         type: AccountType.savings,
-        colorKey: ColorKey.lime,
+        colorKey: ColorKey.amber,
         openingBalanceCents: 145000,
         goalCents: 500000,
         sortOrder: 3,
@@ -226,8 +248,14 @@ Future<void> seedDemoData(AppDatabase db, {required DateTime now}) async {
       (DemoIds.otherIncome, 'Άλλο', ColorKey.amber, IconKey.tag),
     ]) {
       await db.categoriesDao.upsert(
-        TxnCategory(id: c.$1, name: c.$2, kind: CategoryKind.income, colorKey: c.$3, iconKey: c.$4, sortOrder: order++)
-            .toCompanion(),
+        TxnCategory(
+          id: c.$1,
+          name: c.$2,
+          kind: CategoryKind.income,
+          colorKey: c.$3,
+          iconKey: c.$4,
+          sortOrder: order++,
+        ).toCompanion(),
       );
     }
 
@@ -240,11 +268,55 @@ Future<void> seedDemoData(AppDatabase db, {required DateTime now}) async {
     }
     final start = DateTime(today.year - 1, today.month);
     for (final r in [
-      (DemoIds.ruleRent, 'Ενοίκιο', TxnKind.expense, 65000, DemoIds.housing, Frequency.monthly, 1, 20, nextMonthly(20), true),
-      (DemoIds.ruleSalary, 'Μισθός', TxnKind.income, 215000, DemoIds.salary, Frequency.monthly, 1, 1, nextMonthly(1), true),
-      (DemoIds.ruleNetflix, 'Netflix', TxnKind.expense, 1399, DemoIds.fun, Frequency.monthly, 1, 22, nextMonthly(22), true),
+      (
+        DemoIds.ruleRent,
+        'Ενοίκιο',
+        TxnKind.expense,
+        65000,
+        DemoIds.housing,
+        Frequency.monthly,
+        1,
+        20,
+        nextMonthly(20),
+        true,
+      ),
+      (
+        DemoIds.ruleSalary,
+        'Μισθός',
+        TxnKind.income,
+        215000,
+        DemoIds.salary,
+        Frequency.monthly,
+        1,
+        1,
+        nextMonthly(1),
+        true,
+      ),
+      (
+        DemoIds.ruleNetflix,
+        'Netflix',
+        TxnKind.expense,
+        1399,
+        DemoIds.fun,
+        Frequency.monthly,
+        1,
+        22,
+        nextMonthly(22),
+        true,
+      ),
       (DemoIds.rulePower, 'ΔΕΗ', TxnKind.expense, 6840, DemoIds.bills, Frequency.monthly, 1, 14, nextMonthly(14), true),
-      (DemoIds.ruleSpotify, 'Spotify', TxnKind.expense, 1099, DemoIds.fun, Frequency.monthly, 1, 11, nextMonthly(11), true),
+      (
+        DemoIds.ruleSpotify,
+        'Spotify',
+        TxnKind.expense,
+        1099,
+        DemoIds.fun,
+        Frequency.monthly,
+        1,
+        11,
+        nextMonthly(11),
+        true,
+      ),
       (
         DemoIds.ruleInsurance,
         'Ασφάλεια αυτοκινήτου',
@@ -257,7 +329,18 @@ Future<void> seedDemoData(AppDatabase db, {required DateTime now}) async {
         insuranceDue,
         true,
       ),
-      (DemoIds.ruleGym, 'Γυμναστήριο', TxnKind.expense, 3500, DemoIds.fun, Frequency.monthly, 1, 5, nextMonthly(5), false),
+      (
+        DemoIds.ruleGym,
+        'Γυμναστήριο',
+        TxnKind.expense,
+        3500,
+        DemoIds.fun,
+        Frequency.monthly,
+        1,
+        5,
+        nextMonthly(5),
+        false,
+      ),
     ]) {
       await db.recurringDao.upsert(
         RecurringRule(
@@ -265,7 +348,9 @@ Future<void> seedDemoData(AppDatabase db, {required DateTime now}) async {
           title: r.$2,
           kind: r.$3,
           amountCents: r.$4,
-          accountId: r.$3 == TxnKind.income ? DemoIds.checking : (r.$1 == DemoIds.ruleNetflix || r.$1 == DemoIds.ruleSpotify ? DemoIds.card : DemoIds.checking),
+          accountId: r.$3 == TxnKind.income
+              ? DemoIds.checking
+              : (r.$1 == DemoIds.ruleNetflix || r.$1 == DemoIds.ruleSpotify ? DemoIds.card : DemoIds.checking),
           categoryId: r.$5,
           frequency: r.$6,
           interval: r.$7,
@@ -338,5 +423,4 @@ Future<void> seedDemoData(AppDatabase db, {required DateTime now}) async {
 
 /// Whether the database has any account yet (the seed only runs on an
 /// empty one).
-Future<bool> databaseIsEmpty(AppDatabase db) async =>
-    (await (db.select(db.accounts)..limit(1)).get()).isEmpty;
+Future<bool> databaseIsEmpty(AppDatabase db) async => (await (db.select(db.accounts)..limit(1)).get()).isEmpty;

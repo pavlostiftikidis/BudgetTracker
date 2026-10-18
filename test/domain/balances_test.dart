@@ -33,10 +33,7 @@ void main() {
   });
 
   test('credit cards go negative and a payoff brings them back', () {
-    var b = computeBalances(accounts, [
-      txn(account: 'card', cents: 4280),
-      txn(account: 'card', cents: 360),
-    ]);
+    var b = computeBalances(accounts, [txn(account: 'card', cents: 4280), txn(account: 'card', cents: 360)]);
     expect(b['card'], const Money(-4640));
     expect(b['card']!.isNegative, isTrue);
 
@@ -50,9 +47,7 @@ void main() {
   });
 
   test('soft-deleted transactions are ignored', () {
-    final b = computeBalances(accounts, [
-      txn(account: 'checking', cents: 5000, deletedAt: t0),
-    ]);
+    final b = computeBalances(accounts, [txn(account: 'checking', cents: 5000, deletedAt: t0)]);
     expect(b['checking'], const Money(120000));
   });
 
