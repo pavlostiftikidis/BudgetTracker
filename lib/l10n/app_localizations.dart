@@ -217,6 +217,24 @@ abstract class AppLocalizations {
   /// **'Αρχειοθέτηση'**
   String get actionArchive;
 
+  /// No description provided for @actionRetry.
+  ///
+  /// In el, this message translates to:
+  /// **'Δοκίμασε ξανά'**
+  String get actionRetry;
+
+  /// No description provided for @errorTitle.
+  ///
+  /// In el, this message translates to:
+  /// **'Κάτι πήγε στραβά'**
+  String get errorTitle;
+
+  /// No description provided for @errorBody.
+  ///
+  /// In el, this message translates to:
+  /// **'Δοκίμασε ξανά. Αν το πρόβλημα επιμένει, επανεκκίνησε την εφαρμογή.'**
+  String get errorBody;
+
   /// No description provided for @deletedToast.
   ///
   /// In el, this message translates to:
@@ -1848,12 +1866,6 @@ abstract class AppLocalizations {
   /// In el, this message translates to:
   /// **'επιλεγμένο'**
   String get selected;
-
-  /// No description provided for @placeholderScreen.
-  ///
-  /// In el, this message translates to:
-  /// **'{name} — σύντομα'**
-  String placeholderScreen(String name);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

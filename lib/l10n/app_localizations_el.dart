@@ -73,6 +73,15 @@ class AppLocalizationsEl extends AppLocalizations {
   String get actionArchive => 'Αρχειοθέτηση';
 
   @override
+  String get actionRetry => 'Δοκίμασε ξανά';
+
+  @override
+  String get errorTitle => 'Κάτι πήγε στραβά';
+
+  @override
+  String get errorBody => 'Δοκίμασε ξανά. Αν το πρόβλημα επιμένει, επανεκκίνησε την εφαρμογή.';
+
+  @override
   String deletedToast(String name) {
     return 'Διαγράφηκε: $name';
   }
@@ -997,9 +1006,4 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get selected => 'επιλεγμένο';
-
-  @override
-  String placeholderScreen(String name) {
-    return '$name — σύντομα';
-  }
 }

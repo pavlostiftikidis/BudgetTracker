@@ -4,6 +4,7 @@ import 'package:pulse/app/app_providers.dart';
 import 'package:pulse/app/router.dart';
 import 'package:pulse/app/startup.dart';
 import 'package:pulse/core/theme/pulse_theme.dart';
+import 'package:pulse/core/widgets/error_view.dart';
 import 'package:pulse/data/providers.dart';
 import 'package:pulse/features/settings/app_lock.dart';
 import 'package:pulse/l10n/app_localizations.dart';
@@ -61,21 +62,16 @@ class _PulseAppState extends ConsumerState<PulseApp> {
   }
 }
 
-class _StartupError extends StatelessWidget {
+class _StartupError extends ConsumerWidget {
   const new({required this.error});
 
   final Object error;
 
   @override
-  Widget build(BuildContext context) {
-    return ColoredBox(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return Material(
       color: Theme.of(context).scaffoldBackgroundColor,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Text('$error', textAlign: TextAlign.center),
-        ),
-      ),
+      child: ErrorView(error: error, onRetry: () => ref.invalidate(appStartupProvider)),
     );
   }
 }

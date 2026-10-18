@@ -11,6 +11,7 @@ import 'package:pulse/core/utils/context_ext.dart';
 import 'package:pulse/core/utils/greek.dart';
 import 'package:pulse/core/widgets/buttons.dart';
 import 'package:pulse/core/widgets/empty_state.dart';
+import 'package:pulse/core/widgets/error_view.dart';
 import 'package:pulse/core/widgets/mono_label.dart';
 import 'package:pulse/core/widgets/pill_segmented_control.dart';
 import 'package:pulse/core/widgets/pulse_scaffold.dart';
@@ -72,7 +73,11 @@ class InsightsScreen extends ConsumerWidget {
     final c = context.colors;
     final l10n = context.l10n;
     final scale = ref.watch(insightsScaleSettingProvider);
-    final data = ref.watch(insightsProvider).value;
+    final async = ref.watch(insightsProvider);
+    final data = async.value;
+    if (data == null && async.hasError) {
+      return ErrorView(error: async.error!, onRetry: () => ref.invalidate(insightsProvider));
+    }
     final categories = {for (final x in ref.watch(allCategoriesProvider).value ?? const <TxnCategory>[]) x.id: x};
 
     return ListView(

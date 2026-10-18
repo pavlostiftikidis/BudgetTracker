@@ -175,9 +175,8 @@ have broken another requirement. Newest decisions are appended per phase.
   is the week of that period's last day.
 - **The period pill** opens a picker of the last 12 periods; Home then shows
   that period (no days left or allowance for past periods).
-- **Avatar initials** come from an optional `displayName` setting (added to
-  the v1 schema, which is still unreleased). Without a name the avatar shows
-  a person icon.
+- **Avatar initials** come from an optional `displayName` setting (schema
+  v2, see phase 7). Without a name the avatar shows a person icon.
 - **Budgets:** the 20-tick bar fills proportionally; ticks 18–20 (≥ 85 %)
   turn amber, or coral once the total is over. Category cards show the
   percentage in the ring, a coral "+€X" badge and coral border when over,
@@ -262,3 +261,31 @@ have broken another requirement. Newest decisions are appended per phase.
   flips the onboarding flag; the router takes the user back to step 1.
 - Settings also offers "Όνομα" (the Home avatar initials) and the licence
   page (fonts are registered there).
+
+## Polish (phase 7)
+
+- **Schema v2 is a real migration.** Adding `settings.display_name` in
+  phase 4, I rewrote the v1 snapshot instead of bumping the version. A build
+  from an earlier phase was already installed on the emulator, so its v1
+  database lacked the column and the app hung on a blank screen at start.
+  It is now `schemaVersion` 2 with a `stepByStep` migration (`addColumn`),
+  the original v1 snapshot restored, and generated tests for the schema
+  shape and data integrity. It was verified by installing over that exact
+  device database. Rule from now on: any schema change after a build has
+  left the machine is a new version.
+- **Failure states:** the startup and the three main screens show an error
+  with "Δοκίμασε ξανά" instead of staying blank; debug builds also print the
+  error. Demo seeding is a provider (`seedDemoEnabledProvider`), so this
+  path is covered by tests.
+- **Layout guarantees** are tested, not assumed: every screen and the main
+  sheets at 360×640 and 390×844, text scale 1.0 and 1.3, with the real
+  fonts, in dark and light.
+- Verified on an Android 16 emulator (API 36): debug APK builds, the
+  database opens, sqlite's native library loads, the demo data seeds, and
+  the main screens render as in the goldens.
+- Not done and worth knowing:
+  - iOS was not built here (Windows host).
+  - Receipt images of transactions that are purged after 7 days are not
+    deleted yet; they are removed on "Επαναφορά δεδομένων".
+  - Lucide ships every weight of its icon font; tree-shaking keeps only the
+    used glyphs in release builds.

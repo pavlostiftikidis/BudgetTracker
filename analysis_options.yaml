@@ -8,7 +8,8 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - lib/l10n/app_localizations*.dart
-    - lib/data/db/schema_versions.dart
+    - lib/data/db/app_database.steps.dart
+    - test/drift/**
   errors:
     # freezed + json_serializable put @JsonKey on constructor parameters.
     invalid_annotation_target: ignore

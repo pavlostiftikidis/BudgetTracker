@@ -10,6 +10,7 @@ import 'package:pulse/core/utils/context_ext.dart';
 import 'package:pulse/core/utils/greek.dart';
 import 'package:pulse/core/widgets/buttons.dart';
 import 'package:pulse/core/widgets/empty_state.dart';
+import 'package:pulse/core/widgets/error_view.dart';
 import 'package:pulse/core/widgets/mono_label.dart';
 import 'package:pulse/core/widgets/progress_ring.dart';
 import 'package:pulse/core/widgets/pulse_scaffold.dart';
@@ -41,8 +42,13 @@ class BudgetsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final c = context.colors;
     final l10n = context.l10n;
-    final summary = ref.watch(currentBudgetProvider).value;
-    if (summary == null) return const SizedBox.shrink();
+    final async = ref.watch(currentBudgetProvider);
+    final summary = async.value;
+    if (summary == null) {
+      return async.hasError
+          ? ErrorView(error: async.error!, onRetry: () => ref.invalidate(currentBudgetProvider))
+          : const SizedBox.shrink();
+    }
     return ListView(
       padding: EdgeInsets.fromLTRB(20, 20, 20, PulseScaffold.bottomClearance(context)),
       children: [

@@ -11,6 +11,7 @@ import 'package:pulse/core/utils/context_ext.dart';
 import 'package:pulse/core/utils/greek.dart';
 import 'package:pulse/core/widgets/buttons.dart';
 import 'package:pulse/core/widgets/empty_state.dart';
+import 'package:pulse/core/widgets/error_view.dart';
 import 'package:pulse/core/widgets/hero_amount.dart';
 import 'package:pulse/core/widgets/icon_tile.dart';
 import 'package:pulse/core/widgets/mono_label.dart';
@@ -30,8 +31,13 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final vm = ref.watch(homeVmProvider).value;
-    if (vm == null) return const SizedBox.shrink();
+    final async = ref.watch(homeVmProvider);
+    final vm = async.value;
+    if (vm == null) {
+      return async.hasError
+          ? ErrorView(error: async.error!, onRetry: () => ref.invalidate(homeVmProvider))
+          : const SizedBox.shrink();
+    }
     final bottom = PulseScaffold.bottomClearance(context);
     return Stack(
       children: [

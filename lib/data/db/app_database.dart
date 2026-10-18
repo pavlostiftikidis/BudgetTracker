@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:pulse/core/period/budget_period.dart';
 import 'package:pulse/core/theme/keys.dart';
+import 'package:pulse/data/db/app_database.steps.dart';
 import 'package:pulse/data/db/daos.dart';
 import 'package:pulse/data/db/tables.dart';
 import 'package:pulse/data/models/enums.dart';
@@ -20,17 +21,21 @@ class AppDatabase extends _$AppDatabase {
 
   /// Bump together with a new `drift_schemas/` snapshot
   /// (`dart run drift_dev make-migrations`) and a step in [migration].
+  /// v1: initial schema. v2: `settings.display_name`.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
     onCreate: (m) => m.createAll(),
-    onUpgrade: (m, from, to) async {
-      // Each released schema version adds one step here, e.g.
-      // `if (from < 2) await m.addColumn(txns, txns.tags);`
-      // and is covered by the generated test in test/drift/.
-    },
+    // One step per released schema version, each covered by the generated
+    // tests in test/drift/.
+    onUpgrade: stepByStep(
+      from1To2: (m, schema) async {
+        // v2: optional display name for the Home avatar.
+        await m.addColumn(schema.settings, schema.settings.displayName);
+      },
+    ),
     beforeOpen: (details) async {
       await customStatement('PRAGMA foreign_keys = ON');
     },

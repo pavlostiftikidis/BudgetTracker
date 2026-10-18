@@ -25,6 +25,9 @@
   "actionSkip": "Παράλειψη",
   "actionDone": "Τέλος",
   "actionArchive": "Αρχειοθέτηση",
+  "actionRetry": "Δοκίμασε ξανά",
+  "errorTitle": "Κάτι πήγε στραβά",
+  "errorBody": "Δοκίμασε ξανά. Αν το πρόβλημα επιμένει, επανεκκίνησε την εφαρμογή.",
 
   "deletedToast": "Διαγράφηκε: {name}",
   "@deletedToast": { "placeholders": { "name": { "type": "String" } } },
@@ -364,8 +367,5 @@
   "@stepperDecrease": { "placeholders": { "name": { "type": "String" } } },
   "stepperIncrease": "Αύξηση ορίου για {name}",
   "@stepperIncrease": { "placeholders": { "name": { "type": "String" } } },
-  "selected": "επιλεγμένο",
-
-  "placeholderScreen": "{name} — σύντομα",
-  "@placeholderScreen": { "placeholders": { "name": { "type": "String" } } }
+  "selected": "επιλεγμένο"
 }

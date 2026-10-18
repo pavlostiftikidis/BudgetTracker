@@ -869,16 +869,6 @@
             "default_dart": "const CustomExpression('\\'EUR\\'')",
             "default_client_dart": null,
             "dsl_features": []
-          },
-          {
-            "name": "display_name",
-            "getter_name": "displayName",
-            "moor_type": "string",
-            "nullable": true,
-            "customConstraints": null,
-            "default_dart": null,
-            "default_client_dart": null,
-            "dsl_features": []
           }
         ],
         "is_virtual": false,
@@ -970,7 +960,7 @@
       "sql": [
         {
           "dialect": "sqlite",
-          "sql": "CREATE TABLE IF NOT EXISTS \"settings\" (\"id\" INTEGER NOT NULL DEFAULT 1, \"monthly_income_cents\" INTEGER NOT NULL DEFAULT 0, \"payday_kind\" TEXT NOT NULL DEFAULT 'first', \"payday_day\" INTEGER NOT NULL DEFAULT 1, \"currency\" TEXT NOT NULL DEFAULT 'EUR', \"display_name\" TEXT NULL, PRIMARY KEY (\"id\"));"
+          "sql": "CREATE TABLE IF NOT EXISTS \"settings\" (\"id\" INTEGER NOT NULL DEFAULT 1, \"monthly_income_cents\" INTEGER NOT NULL DEFAULT 0, \"payday_kind\" TEXT NOT NULL DEFAULT 'first', \"payday_day\" INTEGER NOT NULL DEFAULT 1, \"currency\" TEXT NOT NULL DEFAULT 'EUR', PRIMARY KEY (\"id\"));"
         }
       ]
     },
