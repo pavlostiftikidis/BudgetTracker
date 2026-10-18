@@ -144,3 +144,9 @@ buttons and charts have spoken labels, and text scales up to 1.3.
 
 See [DECISIONS.md](DECISIONS.md) for the choices made where the spec was
 silent or needed interpreting.
+
+## License
+
+Copyright © 2026 pavlostiftikidis. All rights reserved. The source is public
+for viewing only; see [LICENSE](LICENSE). Fonts and packages keep their own
+licences.
