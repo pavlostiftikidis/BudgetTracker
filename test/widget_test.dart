@@ -10,8 +10,10 @@ void main() {
     expect(find.text('Πόσα μπαίνουν κάθε μήνα;'), findsOneWidget);
 
     await tester.tap(find.text('Ξεκίνα'));
-    await tester.pumpAndSettle();
-    expect(find.text('ΥΠΟΛΟΙΠΟ ΜΗΝΑ'), findsOneWidget);
+    await settle(tester);
+    // Nothing recorded yet: Home shows its empty state.
+    expect(find.text('ΔΙΑΘΕΣΙΜΑ ΓΙΑ ΝΑ ΞΟΔΕΨΕΙΣ'), findsOneWidget);
+    expect(find.text('Πρώτα βήματα'), findsOneWidget);
   });
 
   testWidgets('theme toggle flips dark → light and persists', (tester) async {
@@ -20,7 +22,7 @@ void main() {
     expect(tester.appBrightness, Brightness.dark);
 
     await tester.tap(find.bySemanticsLabel('Φωτεινό θέμα'));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(tester.appBrightness, Brightness.light);
     expect(prefs.themeMode, ThemeMode.light);
   });
@@ -29,11 +31,11 @@ void main() {
     await pumpPulseApp(tester, prefs: MemoryAppPrefs(onboardingDone: true));
 
     await tester.tap(find.bySemanticsLabel('Αναλύσεις'));
-    await tester.pumpAndSettle();
+    await settle(tester);
     expect(find.text('Αναλύσεις'), findsWidgets);
 
     await tester.tap(find.bySemanticsLabel('Budgets'));
-    await tester.pumpAndSettle();
-    expect(find.text('Budgets — σύντομα'), findsOneWidget);
+    await settle(tester);
+    expect(find.textContaining('Δεν έχεις ορίσει όρια ακόμα'), findsOneWidget);
   });
 }

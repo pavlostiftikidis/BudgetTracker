@@ -200,6 +200,7 @@ class _EditTransactionScreenState extends ConsumerState<EditTransactionScreen> {
     Widget row(String label, String value, VoidCallback onTap, {Color? dot}) => Semantics(
       button: true,
       label: '$label: $value',
+      container: true,
       excludeSemantics: true,
       child: InkWell(
         onTap: onTap,
@@ -262,6 +263,7 @@ class _EditTransactionScreenState extends ConsumerState<EditTransactionScreen> {
                   child: Semantics(
                     button: true,
                     label: '${l10n.editAmountTap}: ${view.amountText}',
+                    container: true,
                     excludeSemantics: true,
                     child: InkWell(
                       borderRadius: BorderRadius.circular(12),
@@ -440,6 +442,7 @@ class _EditTransactionScreenState extends ConsumerState<EditTransactionScreen> {
                 Semantics(
                   button: true,
                   label: l10n.editDeleteTxn,
+                  container: true,
                   excludeSemantics: true,
                   child: Material(
                     color: Colors.transparent,

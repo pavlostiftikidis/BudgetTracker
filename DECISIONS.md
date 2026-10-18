@@ -151,3 +151,49 @@ have broken another requirement. Newest decisions are appended per phase.
   and matches title, category, account and note.
 - Widget tests run with "reduce motion" on (the blinking caret is static),
   which also covers that accessibility path.
+
+## Home, Budgets, Categories (phase 4)
+
+- **"ΥΠΟΛΟΙΠΟ ΜΗΝΑ"** is the spec's "available" (Σ limits − budgeted
+  spending), so it matches Budgets exactly. When no category has a limit yet
+  it falls back to income − all spending ("από €income"), so the hero is
+  never meaningless.
+- **"−18% vs Σεπ"** compares spending **like-for-like**: the first N days
+  of this period against the first N days of the previous one (N = days
+  elapsed). A plain month-vs-month comparison would always look like a drop
+  early in the month. Lower spending gets the lime badge, higher the coral
+  one, and the sign is always printed, so colour is not the only signal.
+- **"Σήμερα μπορείς"** shows whole euros rounded *down*, so it never
+  promises more than is left (€129 over 14 days → €9.21 → "€9").
+- **Spending split:** the top five expense categories plus "Άλλα" (the rest
+  and uncategorised spending), including categories without a limit (e.g.
+  rent). Transfers never count.
+- **Savings card:** the balance of savings-type accounts, with a sparkline of
+  that balance at the end of each of the last six periods. Without a savings
+  account it shows the period's net (income − expenses).
+- **Week:** Monday–Sunday around today. When looking at a past period, it
+  is the week of that period's last day.
+- **The period pill** opens a picker of the last 12 periods; Home then shows
+  that period (no days left or allowance for past periods).
+- **Avatar initials** come from an optional `displayName` setting (added to
+  the v1 schema, which is still unreleased). Without a name the avatar shows
+  a person icon.
+- **Budgets:** the 20-tick bar fills proportionally; ticks 18–20 (≥ 85 %)
+  turn amber, or coral once the total is over. Category cards show the
+  percentage in the ring, a coral "+€X" badge and coral border when over,
+  and a warning icon when at 85–100 %, so state is never colour-only. A grid
+  button in the header opens Κατηγορίες.
+- **Categories:** drag handles only (the rows stay tappable for editing),
+  with the order saved across both kinds. The sheet's preview tile updates
+  live. Deleting a category that has transactions or a rule archives it and
+  says so.
+- **Bottom sheets open on the root navigator**, so they are drawn above the
+  floating nav. A widget test caught the nav covering the sheet's main
+  button. Tests now fail on any tap that would hit a different widget
+  (`hitTestWarningShouldBeFatal`).
+- `Semantics` wrappers that replace their children's semantics are
+  `container: true`, so each card reads as its own node instead of merging
+  with its neighbours.
+- **Goldens** (Home dark/light/empty, Budgets dark/light, Transactions,
+  Accounts, Add) use the real fonts and are generated on Windows; regenerate
+  with `flutter test --update-goldens --tags golden`.

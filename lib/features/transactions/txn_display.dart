@@ -114,12 +114,15 @@ String dayLabel(DateTime day, DateTime today, AppLocalizations l10n) {
 
 /// Initial tile + title/subtitle + amount, as used in every list.
 class TxnRowContent extends StatelessWidget {
-  const new({required this.view, this.withTime = false, this.useIcon = false, super.key});
+  const new({required this.view, this.withTime = false, this.useIcon = false, this.subtitleOverride, super.key});
 
   final TxnView view;
 
   /// Subtitle shows the time instead of the account (Home).
   final bool withTime;
+
+  /// Replaces the computed subtitle.
+  final String? subtitleOverride;
 
   /// Category icon instead of the initial.
   final bool useIcon;
@@ -142,7 +145,7 @@ class TxnRowContent extends StatelessWidget {
               Text(view.title, maxLines: 1, overflow: TextOverflow.ellipsis, style: PulseText.title),
               const SizedBox(height: 2),
               Text(
-                withTime ? view.subtitleWithTime : view.subtitle,
+                subtitleOverride ?? (withTime ? view.subtitleWithTime : view.subtitle),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: PulseText.caption.copyWith(fontSize: 12, color: c.muted),

@@ -20,6 +20,7 @@ class CategoryChip extends StatelessWidget {
       button: true,
       selected: selected,
       inMutuallyExclusiveGroup: true,
+      container: true,
       excludeSemantics: true,
       label: label,
       child: Material(

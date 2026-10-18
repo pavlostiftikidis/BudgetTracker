@@ -183,6 +183,7 @@ _AppSettings _$AppSettingsFromJson(Map<String, dynamic> json) => _AppSettings(
   paydayKind: $enumDecodeNullable(_$PaydayKindEnumMap, json['paydayKind']) ?? PaydayKind.first,
   paydayDay: (json['paydayDay'] as num?)?.toInt() ?? 1,
   currency: json['currency'] as String? ?? 'EUR',
+  displayName: json['displayName'] as String?,
 );
 
 Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) => <String, dynamic>{
@@ -190,6 +191,7 @@ Map<String, dynamic> _$AppSettingsToJson(_AppSettings instance) => <String, dyna
   'paydayKind': _$PaydayKindEnumMap[instance.paydayKind]!,
   'paydayDay': instance.paydayDay,
   'currency': instance.currency,
+  'displayName': instance.displayName,
 };
 
 const _$PaydayKindEnumMap = {

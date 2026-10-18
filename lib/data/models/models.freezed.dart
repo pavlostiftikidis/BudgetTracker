@@ -1265,7 +1265,8 @@ as bool,
 /// @nodoc
 mixin _$AppSettings {
 
- int get monthlyIncomeCents; PaydayKind get paydayKind; int get paydayDay; String get currency;
+ int get monthlyIncomeCents; PaydayKind get paydayKind; int get paydayDay; String get currency;/// Shown as initials in the Home avatar.
+ String? get displayName;
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1279,20 +1280,20 @@ $AppSettingsCopyWith<AppSettings> get copyWith => _$AppSettingsCopyWithImpl<AppS
 @override
 bool operator ==(Object other) {
   final _this = this as AppSettings;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.monthlyIncomeCents, _this.monthlyIncomeCents) || other.monthlyIncomeCents == _this.monthlyIncomeCents)&&(identical(other.paydayKind, _this.paydayKind) || other.paydayKind == _this.paydayKind)&&(identical(other.paydayDay, _this.paydayDay) || other.paydayDay == _this.paydayDay)&&(identical(other.currency, _this.currency) || other.currency == _this.currency));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AppSettings&&(identical(other.monthlyIncomeCents, _this.monthlyIncomeCents) || other.monthlyIncomeCents == _this.monthlyIncomeCents)&&(identical(other.paydayKind, _this.paydayKind) || other.paydayKind == _this.paydayKind)&&(identical(other.paydayDay, _this.paydayDay) || other.paydayDay == _this.paydayDay)&&(identical(other.currency, _this.currency) || other.currency == _this.currency)&&(identical(other.displayName, _this.displayName) || other.displayName == _this.displayName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as AppSettings;
-  return Object.hash(runtimeType,_this.monthlyIncomeCents,_this.paydayKind,_this.paydayDay,_this.currency);
+  return Object.hash(runtimeType,_this.monthlyIncomeCents,_this.paydayKind,_this.paydayDay,_this.currency,_this.displayName);
 }
 
 @override
 String toString() {
   final _this = this as AppSettings;
-  return 'AppSettings(monthlyIncomeCents: ${_this.monthlyIncomeCents}, paydayKind: ${_this.paydayKind}, paydayDay: ${_this.paydayDay}, currency: ${_this.currency})';
+  return 'AppSettings(monthlyIncomeCents: ${_this.monthlyIncomeCents}, paydayKind: ${_this.paydayKind}, paydayDay: ${_this.paydayDay}, currency: ${_this.currency}, displayName: ${_this.displayName})';
 }
 
 
@@ -1303,7 +1304,7 @@ abstract mixin class $AppSettingsCopyWith<$Res>  {
   factory $AppSettingsCopyWith(AppSettings value, $Res Function(AppSettings) _then) = _$AppSettingsCopyWithImpl;
 @useResult
 $Res call({
- int monthlyIncomeCents, PaydayKind paydayKind, int paydayDay, String currency
+ int monthlyIncomeCents, PaydayKind paydayKind, int paydayDay, String currency, String? displayName
 });
 
 
@@ -1320,13 +1321,14 @@ class _$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? monthlyIncomeCents = null,Object? paydayKind = null,Object? paydayDay = null,Object? currency = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? monthlyIncomeCents = null,Object? paydayKind = null,Object? paydayDay = null,Object? currency = null,Object? displayName = freezed,}) {
   return _then(AppSettings(
 monthlyIncomeCents: null == monthlyIncomeCents ? _self.monthlyIncomeCents : monthlyIncomeCents // ignore: cast_nullable_to_non_nullable
 as int,paydayKind: null == paydayKind ? _self.paydayKind : paydayKind // ignore: cast_nullable_to_non_nullable
 as PaydayKind,paydayDay: null == paydayDay ? _self.paydayDay : paydayDay // ignore: cast_nullable_to_non_nullable
 as int,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as String,
+as String,displayName: freezed == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -1411,10 +1413,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int monthlyIncomeCents,  PaydayKind paydayKind,  int paydayDay,  String currency)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int monthlyIncomeCents,  PaydayKind paydayKind,  int paydayDay,  String currency,  String? displayName)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.currency);case _:
+return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.currency,_that.displayName);case _:
   return orElse();
 
 }
@@ -1432,10 +1434,10 @@ return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int monthlyIncomeCents,  PaydayKind paydayKind,  int paydayDay,  String currency)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int monthlyIncomeCents,  PaydayKind paydayKind,  int paydayDay,  String currency,  String? displayName)  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings():
-return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.currency);case _:
+return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.currency,_that.displayName);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1452,10 +1454,10 @@ return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int monthlyIncomeCents,  PaydayKind paydayKind,  int paydayDay,  String currency)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int monthlyIncomeCents,  PaydayKind paydayKind,  int paydayDay,  String currency,  String? displayName)?  $default,) {final _that = this;
 switch (_that) {
 case _AppSettings() when $default != null:
-return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.currency);case _:
+return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.currency,_that.displayName);case _:
   return null;
 
 }
@@ -1467,13 +1469,15 @@ return $default(_that.monthlyIncomeCents,_that.paydayKind,_that.paydayDay,_that.
 @JsonSerializable()
 
 class _AppSettings extends AppSettings {
-  const _AppSettings({this.monthlyIncomeCents = 0, this.paydayKind = PaydayKind.first, this.paydayDay = 1, this.currency = 'EUR'}): super._();
+  const _AppSettings({this.monthlyIncomeCents = 0, this.paydayKind = PaydayKind.first, this.paydayDay = 1, this.currency = 'EUR', this.displayName}): super._();
   factory _AppSettings.fromJson(Map<String, dynamic> json) => _$AppSettingsFromJson(json);
 
 @override@JsonKey() final  int monthlyIncomeCents;
 @override@JsonKey() final  PaydayKind paydayKind;
 @override@JsonKey() final  int paydayDay;
 @override@JsonKey() final  String currency;
+/// Shown as initials in the Home avatar.
+@override final  String? displayName;
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
@@ -1488,18 +1492,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.monthlyIncomeCents, monthlyIncomeCents) || other.monthlyIncomeCents == monthlyIncomeCents)&&(identical(other.paydayKind, paydayKind) || other.paydayKind == paydayKind)&&(identical(other.paydayDay, paydayDay) || other.paydayDay == paydayDay)&&(identical(other.currency, currency) || other.currency == currency));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _AppSettings&&(identical(other.monthlyIncomeCents, monthlyIncomeCents) || other.monthlyIncomeCents == monthlyIncomeCents)&&(identical(other.paydayKind, paydayKind) || other.paydayKind == paydayKind)&&(identical(other.paydayDay, paydayDay) || other.paydayDay == paydayDay)&&(identical(other.currency, currency) || other.currency == currency)&&(identical(other.displayName, displayName) || other.displayName == displayName));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,monthlyIncomeCents,paydayKind,paydayDay,currency);
+    return Object.hash(runtimeType,monthlyIncomeCents,paydayKind,paydayDay,currency,displayName);
 }
 
 @override
 String toString() {
-    return 'AppSettings(monthlyIncomeCents: $monthlyIncomeCents, paydayKind: $paydayKind, paydayDay: $paydayDay, currency: $currency)';
+    return 'AppSettings(monthlyIncomeCents: $monthlyIncomeCents, paydayKind: $paydayKind, paydayDay: $paydayDay, currency: $currency, displayName: $displayName)';
 }
 
 
@@ -1510,7 +1514,7 @@ abstract mixin class _$AppSettingsCopyWith<$Res> implements $AppSettingsCopyWith
   factory _$AppSettingsCopyWith(_AppSettings value, $Res Function(_AppSettings) _then) = __$AppSettingsCopyWithImpl;
 @override @useResult
 $Res call({
- int monthlyIncomeCents, PaydayKind paydayKind, int paydayDay, String currency
+ int monthlyIncomeCents, PaydayKind paydayKind, int paydayDay, String currency, String? displayName
 });
 
 
@@ -1527,13 +1531,14 @@ class __$AppSettingsCopyWithImpl<$Res>
 
 /// Create a copy of AppSettings
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? monthlyIncomeCents = null,Object? paydayKind = null,Object? paydayDay = null,Object? currency = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? monthlyIncomeCents = null,Object? paydayKind = null,Object? paydayDay = null,Object? currency = null,Object? displayName = freezed,}) {
   return _then(_AppSettings(
 monthlyIncomeCents: null == monthlyIncomeCents ? _self.monthlyIncomeCents : monthlyIncomeCents // ignore: cast_nullable_to_non_nullable
 as int,paydayKind: null == paydayKind ? _self.paydayKind : paydayKind // ignore: cast_nullable_to_non_nullable
 as PaydayKind,paydayDay: null == paydayDay ? _self.paydayDay : paydayDay // ignore: cast_nullable_to_non_nullable
 as int,currency: null == currency ? _self.currency : currency // ignore: cast_nullable_to_non_nullable
-as String,
+as String,displayName: freezed == displayName ? _self.displayName : displayName // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

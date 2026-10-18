@@ -10,6 +10,8 @@ Future<T?> showPulseSheet<T>(BuildContext context, {required WidgetBuilder build
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
+    // Above the floating nav, which sits over the shell's branch navigators.
+    useRootNavigator: true,
     sheetAnimationStyle: context.reduceMotion
         ? AnimationStyle.noAnimation
         : const AnimationStyle(duration: Duration(milliseconds: 240), reverseDuration: Duration(milliseconds: 200)),

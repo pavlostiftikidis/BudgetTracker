@@ -77,7 +77,7 @@ class PulseColors extends ThemeExtension<PulseColors> {
     amberSoft: Color(0xFFFBEFD2),
     nav: Color(0xF2FFFFFF),
     rest: Color(0xFFC9CBC5),
-    shadow: Color(0x1F000000),
+    shadow: Color(0x14000000),
   );
 
   final Brightness brightness;

@@ -22,6 +22,7 @@ class PulseSwitch extends StatelessWidget {
       toggled: value,
       enabled: onChanged != null,
       label: semanticLabel,
+      container: true,
       excludeSemantics: true,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,

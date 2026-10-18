@@ -625,6 +625,78 @@ final class TxnsInRangeFamily extends $Family with $FunctionalFamilyOverride<Str
   String toString() => r'txnsInRangeProvider';
 }
 
+/// The [limit] most recent live transactions.
+
+@ProviderFor(recentTxns)
+final recentTxnsProvider = RecentTxnsFamily._();
+
+/// The [limit] most recent live transactions.
+
+final class RecentTxnsProvider extends $FunctionalProvider<AsyncValue<List<Txn>>, List<Txn>, Stream<List<Txn>>>
+    with $FutureModifier<List<Txn>>, $StreamProvider<List<Txn>> {
+  /// The [limit] most recent live transactions.
+  RecentTxnsProvider._({required RecentTxnsFamily super.from, required int super.argument})
+    : super(
+        retry: null,
+        name: r'recentTxnsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$recentTxnsHash();
+
+  @override
+  String toString() {
+    return r'recentTxnsProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $StreamProviderElement<List<Txn>> $createElement($ProviderPointer pointer) => $StreamProviderElement(pointer);
+
+  @override
+  Stream<List<Txn>> create(Ref ref) {
+    final argument = this.argument as int;
+    return recentTxns(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is RecentTxnsProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$recentTxnsHash() => r'7c987c0a1bb23e7fb08f05b7441f4ca4d12ad047';
+
+/// The [limit] most recent live transactions.
+
+final class RecentTxnsFamily extends $Family with $FunctionalFamilyOverride<Stream<List<Txn>>, int> {
+  RecentTxnsFamily._()
+    : super(
+        retry: null,
+        name: r'recentTxnsProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  /// The [limit] most recent live transactions.
+
+  RecentTxnsProvider call(int limit) => RecentTxnsProvider._(argument: limit, from: this);
+
+  @override
+  String toString() => r'recentTxnsProvider';
+}
+
 @ProviderFor(txnById)
 final txnByIdProvider = TxnByIdFamily._();
 

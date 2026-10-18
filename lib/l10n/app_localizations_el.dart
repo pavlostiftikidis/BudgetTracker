@@ -802,6 +802,18 @@ class AppLocalizationsEl extends AppLocalizations {
   String get iconShirt => 'Ρούχα';
 
   @override
+  String get iconBolt => 'Ρεύμα';
+
+  @override
+  String get iconSalary => 'Χαρτοφύλακας';
+
+  @override
+  String get iconLaptop => 'Υπολογιστής';
+
+  @override
+  String get iconTag => 'Ετικέτα';
+
+  @override
   String get catGroceries => 'Σούπερ μάρκετ';
 
   @override

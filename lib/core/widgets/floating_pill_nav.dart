@@ -37,7 +37,7 @@ class FloatingPillNav extends StatelessWidget {
           color: c.nav,
           borderRadius: BorderRadius.circular(34),
           border: Border.all(color: c.line),
-          boxShadow: [BoxShadow(color: c.shadow, blurRadius: 32, offset: const Offset(0, 12))],
+          boxShadow: [BoxShadow(color: c.shadow, blurRadius: 24, offset: const Offset(0, 8))],
         ),
         child: Row(
           children: [
@@ -73,6 +73,7 @@ class _NavTab extends StatelessWidget {
       button: true,
       selected: active,
       label: item.label,
+      container: true,
       excludeSemantics: true,
       child: Material(
         type: MaterialType.transparency,
@@ -127,6 +128,7 @@ class _AddButton extends StatelessWidget {
     return Semantics(
       button: true,
       label: label,
+      container: true,
       excludeSemantics: true,
       child: Tooltip(
         message: label,

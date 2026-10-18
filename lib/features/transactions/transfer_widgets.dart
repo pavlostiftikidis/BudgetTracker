@@ -59,6 +59,7 @@ class TransferRows extends ConsumerWidget {
       return Semantics(
         button: true,
         label: '$label ${a?.name ?? ''}',
+        container: true,
         excludeSemantics: true,
         child: Material(
           color: c.surface2,
@@ -118,6 +119,7 @@ class TransferRows extends ConsumerWidget {
             child: Semantics(
               button: true,
               label: l10n.transferSwap,
+              container: true,
               excludeSemantics: true,
               child: Material(
                 color: c.text,

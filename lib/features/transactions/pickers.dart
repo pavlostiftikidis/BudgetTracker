@@ -178,6 +178,7 @@ class _AmountSheetState extends State<_AmountSheet> {
             Semantics(
               liveRegion: true,
               label: context.l10n.amountSemantics(_input.value.format()),
+              container: true,
               excludeSemantics: true,
               child: FittedBox(child: Text('€${_input.display}', style: PulseText.amountXL.copyWith(fontSize: 48))),
             ),

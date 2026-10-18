@@ -151,6 +151,9 @@ abstract class AppSettings with _$AppSettings {
     @Default(PaydayKind.first) PaydayKind paydayKind,
     @Default(1) int paydayDay,
     @Default('EUR') String currency,
+
+    /// Shown as initials in the Home avatar.
+    String? displayName,
   }) = _AppSettings;
   const new _();
 

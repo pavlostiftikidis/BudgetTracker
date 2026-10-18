@@ -153,6 +153,7 @@ extension SettingsRowX on SettingsRow? {
       paydayKind: r.paydayKind,
       paydayDay: r.paydayDay,
       currency: r.currency,
+      displayName: r.displayName,
     );
   }
 }
@@ -164,5 +165,6 @@ extension AppSettingsX on AppSettings {
     paydayKind: Value(paydayKind),
     paydayDay: Value(paydayDay),
     currency: Value(currency),
+    displayName: Value(displayName),
   );
 }

@@ -295,6 +295,10 @@
   "iconPlane": "Ταξίδι",
   "iconBook": "Βιβλίο",
   "iconShirt": "Ρούχα",
+  "iconBolt": "Ρεύμα",
+  "iconSalary": "Χαρτοφύλακας",
+  "iconLaptop": "Υπολογιστής",
+  "iconTag": "Ετικέτα",
 
   "catGroceries": "Σούπερ μάρκετ",
   "catDining": "Εστίαση",

@@ -2605,8 +2605,17 @@ class $SettingsEntriesTable extends SettingsEntries with TableInfo<$SettingsEntr
     requiredDuringInsert: false,
     defaultValue: const Constant('EUR'),
   );
+  static const VerificationMeta _displayNameMeta = const VerificationMeta('displayName');
   @override
-  List<GeneratedColumn> get $columns => [id, monthlyIncomeCents, paydayKind, paydayDay, currency];
+  late final GeneratedColumn<String> displayName = GeneratedColumn<String>(
+    'display_name',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, monthlyIncomeCents, paydayKind, paydayDay, currency, displayName];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -2631,6 +2640,9 @@ class $SettingsEntriesTable extends SettingsEntries with TableInfo<$SettingsEntr
     if (data.containsKey('currency')) {
       context.handle(_currencyMeta, currency.isAcceptableOrUnknown(data['currency']!, _currencyMeta));
     }
+    if (data.containsKey('display_name')) {
+      context.handle(_displayNameMeta, displayName.isAcceptableOrUnknown(data['display_name']!, _displayNameMeta));
+    }
     return context;
   }
 
@@ -2650,6 +2662,7 @@ class $SettingsEntriesTable extends SettingsEntries with TableInfo<$SettingsEntr
       ),
       paydayDay: attachedDatabase.typeMapping.read(DriftSqlType.int, data['${effectivePrefix}payday_day'])!,
       currency: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}currency'])!,
+      displayName: attachedDatabase.typeMapping.read(DriftSqlType.string, data['${effectivePrefix}display_name']),
     );
   }
 
@@ -2669,12 +2682,14 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
   final PaydayKind paydayKind;
   final int paydayDay;
   final String currency;
+  final String? displayName;
   const SettingsRow({
     required this.id,
     required this.monthlyIncomeCents,
     required this.paydayKind,
     required this.paydayDay,
     required this.currency,
+    this.displayName,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -2686,6 +2701,9 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
     }
     map['payday_day'] = Variable<int>(paydayDay);
     map['currency'] = Variable<String>(currency);
+    if (!nullToAbsent || displayName != null) {
+      map['display_name'] = Variable<String>(displayName);
+    }
     return map;
   }
 
@@ -2696,6 +2714,7 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
       paydayKind: Value(paydayKind),
       paydayDay: Value(paydayDay),
       currency: Value(currency),
+      displayName: displayName == null && nullToAbsent ? const Value.absent() : Value(displayName),
     );
   }
 
@@ -2707,6 +2726,7 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
       paydayKind: $SettingsEntriesTable.$converterpaydayKind.fromJson(serializer.fromJson<String>(json['paydayKind'])),
       paydayDay: serializer.fromJson<int>(json['paydayDay']),
       currency: serializer.fromJson<String>(json['currency']),
+      displayName: serializer.fromJson<String?>(json['displayName']),
     );
   }
   @override
@@ -2718,17 +2738,25 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
       'paydayKind': serializer.toJson<String>($SettingsEntriesTable.$converterpaydayKind.toJson(paydayKind)),
       'paydayDay': serializer.toJson<int>(paydayDay),
       'currency': serializer.toJson<String>(currency),
+      'displayName': serializer.toJson<String?>(displayName),
     };
   }
 
-  SettingsRow copyWith({int? id, int? monthlyIncomeCents, PaydayKind? paydayKind, int? paydayDay, String? currency}) =>
-      SettingsRow(
-        id: id ?? this.id,
-        monthlyIncomeCents: monthlyIncomeCents ?? this.monthlyIncomeCents,
-        paydayKind: paydayKind ?? this.paydayKind,
-        paydayDay: paydayDay ?? this.paydayDay,
-        currency: currency ?? this.currency,
-      );
+  SettingsRow copyWith({
+    int? id,
+    int? monthlyIncomeCents,
+    PaydayKind? paydayKind,
+    int? paydayDay,
+    String? currency,
+    Value<String?> displayName = const Value.absent(),
+  }) => SettingsRow(
+    id: id ?? this.id,
+    monthlyIncomeCents: monthlyIncomeCents ?? this.monthlyIncomeCents,
+    paydayKind: paydayKind ?? this.paydayKind,
+    paydayDay: paydayDay ?? this.paydayDay,
+    currency: currency ?? this.currency,
+    displayName: displayName.present ? displayName.value : this.displayName,
+  );
   SettingsRow copyWithCompanion(SettingsEntriesCompanion data) {
     return SettingsRow(
       id: data.id.present ? data.id.value : this.id,
@@ -2736,6 +2764,7 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
       paydayKind: data.paydayKind.present ? data.paydayKind.value : this.paydayKind,
       paydayDay: data.paydayDay.present ? data.paydayDay.value : this.paydayDay,
       currency: data.currency.present ? data.currency.value : this.currency,
+      displayName: data.displayName.present ? data.displayName.value : this.displayName,
     );
   }
 
@@ -2746,13 +2775,14 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
           ..write('monthlyIncomeCents: $monthlyIncomeCents, ')
           ..write('paydayKind: $paydayKind, ')
           ..write('paydayDay: $paydayDay, ')
-          ..write('currency: $currency')
+          ..write('currency: $currency, ')
+          ..write('displayName: $displayName')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, monthlyIncomeCents, paydayKind, paydayDay, currency);
+  int get hashCode => Object.hash(id, monthlyIncomeCents, paydayKind, paydayDay, currency, displayName);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -2761,7 +2791,8 @@ class SettingsRow extends DataClass implements Insertable<SettingsRow> {
           other.monthlyIncomeCents == this.monthlyIncomeCents &&
           other.paydayKind == this.paydayKind &&
           other.paydayDay == this.paydayDay &&
-          other.currency == this.currency);
+          other.currency == this.currency &&
+          other.displayName == this.displayName);
 }
 
 class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
@@ -2770,12 +2801,14 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
   final Value<PaydayKind> paydayKind;
   final Value<int> paydayDay;
   final Value<String> currency;
+  final Value<String?> displayName;
   const SettingsEntriesCompanion({
     this.id = const Value.absent(),
     this.monthlyIncomeCents = const Value.absent(),
     this.paydayKind = const Value.absent(),
     this.paydayDay = const Value.absent(),
     this.currency = const Value.absent(),
+    this.displayName = const Value.absent(),
   });
   SettingsEntriesCompanion.insert({
     this.id = const Value.absent(),
@@ -2783,6 +2816,7 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
     this.paydayKind = const Value.absent(),
     this.paydayDay = const Value.absent(),
     this.currency = const Value.absent(),
+    this.displayName = const Value.absent(),
   });
   static Insertable<SettingsRow> custom({
     Expression<int>? id,
@@ -2790,6 +2824,7 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
     Expression<String>? paydayKind,
     Expression<int>? paydayDay,
     Expression<String>? currency,
+    Expression<String>? displayName,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -2797,6 +2832,7 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
       if (paydayKind != null) 'payday_kind': paydayKind,
       if (paydayDay != null) 'payday_day': paydayDay,
       if (currency != null) 'currency': currency,
+      if (displayName != null) 'display_name': displayName,
     });
   }
 
@@ -2806,6 +2842,7 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
     Value<PaydayKind>? paydayKind,
     Value<int>? paydayDay,
     Value<String>? currency,
+    Value<String?>? displayName,
   }) {
     return SettingsEntriesCompanion(
       id: id ?? this.id,
@@ -2813,6 +2850,7 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
       paydayKind: paydayKind ?? this.paydayKind,
       paydayDay: paydayDay ?? this.paydayDay,
       currency: currency ?? this.currency,
+      displayName: displayName ?? this.displayName,
     );
   }
 
@@ -2834,6 +2872,9 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
     if (currency.present) {
       map['currency'] = Variable<String>(currency.value);
     }
+    if (displayName.present) {
+      map['display_name'] = Variable<String>(displayName.value);
+    }
     return map;
   }
 
@@ -2844,7 +2885,8 @@ class SettingsEntriesCompanion extends UpdateCompanion<SettingsRow> {
           ..write('monthlyIncomeCents: $monthlyIncomeCents, ')
           ..write('paydayKind: $paydayKind, ')
           ..write('paydayDay: $paydayDay, ')
-          ..write('currency: $currency')
+          ..write('currency: $currency, ')
+          ..write('displayName: $displayName')
           ..write(')'))
         .toString();
   }

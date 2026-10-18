@@ -108,6 +108,7 @@ class SettingsEntries extends Table {
   TextColumn get paydayKind => textEnum<PaydayKind>().withDefault(Constant(PaydayKind.first.name))();
   IntColumn get paydayDay => integer().withDefault(const Constant(1))();
   TextColumn get currency => text().withDefault(const Constant('EUR'))();
+  TextColumn get displayName => text().nullable()();
 
   @override
   Set<Column<Object>> get primaryKey => {id};

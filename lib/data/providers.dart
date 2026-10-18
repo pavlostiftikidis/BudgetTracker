@@ -75,6 +75,10 @@ Stream<List<Txn>> allTxns(Ref ref) => ref.watch(txnRepositoryProvider).watchTxns
 @riverpod
 Stream<List<Txn>> txnsInRange(Ref ref, DateRange range) => ref.watch(txnRepositoryProvider).watchTxns(range: range);
 
+/// The [limit] most recent live transactions.
+@riverpod
+Stream<List<Txn>> recentTxns(Ref ref, int limit) => ref.watch(txnRepositoryProvider).watchRecent(limit);
+
 @riverpod
 Stream<Txn?> txnById(Ref ref, String id) => ref.watch(txnRepositoryProvider).watchById(id);
 

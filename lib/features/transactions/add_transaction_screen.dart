@@ -326,6 +326,7 @@ class _AmountDisplayState extends State<_AmountDisplay> with SingleTickerProvide
     return Semantics(
       liveRegion: true,
       label: context.l10n.amountSemantics(widget.amount.value.format()),
+      container: true,
       excludeSemantics: true,
       child: SizedBox(
         height: 96,
@@ -368,6 +369,7 @@ class _QuickButton extends StatelessWidget {
     return Semantics(
       button: true,
       label: label,
+      container: true,
       excludeSemantics: true,
       child: Material(
         color: c.surface,

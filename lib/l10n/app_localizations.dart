@@ -1477,6 +1477,30 @@ abstract class AppLocalizations {
   /// **'Ρούχα'**
   String get iconShirt;
 
+  /// No description provided for @iconBolt.
+  ///
+  /// In el, this message translates to:
+  /// **'Ρεύμα'**
+  String get iconBolt;
+
+  /// No description provided for @iconSalary.
+  ///
+  /// In el, this message translates to:
+  /// **'Χαρτοφύλακας'**
+  String get iconSalary;
+
+  /// No description provided for @iconLaptop.
+  ///
+  /// In el, this message translates to:
+  /// **'Υπολογιστής'**
+  String get iconLaptop;
+
+  /// No description provided for @iconTag.
+  ///
+  /// In el, this message translates to:
+  /// **'Ετικέτα'**
+  String get iconTag;
+
   /// No description provided for @catGroceries.
   ///
   /// In el, this message translates to:

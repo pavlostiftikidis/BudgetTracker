@@ -102,6 +102,7 @@ class _Key extends StatelessWidget {
     return Semantics(
       button: true,
       label: semanticLabel,
+      container: true,
       excludeSemantics: true,
       child: Material(
         color: c.surface,

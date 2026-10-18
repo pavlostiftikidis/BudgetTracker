@@ -32,6 +32,7 @@ class CircleIconButton extends StatelessWidget {
       button: true,
       enabled: onPressed != null,
       label: semanticLabel,
+      container: true,
       excludeSemantics: true,
       child: Tooltip(
         message: semanticLabel,

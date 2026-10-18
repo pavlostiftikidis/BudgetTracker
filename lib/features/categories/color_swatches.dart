@@ -39,6 +39,7 @@ class ColorSwatches extends StatelessWidget {
               checked: k == selected,
               button: true,
               label: colorName(k, l10n),
+              container: true,
               excludeSemantics: true,
               child: InkResponse(
                 onTap: () => onChanged(k),

@@ -45,6 +45,7 @@ class AccountsScreen extends ConsumerWidget {
                 const SizedBox(height: 6),
                 Semantics(
                   label: '${l10n.accountsTotalLabel}: ${total.format()}',
+                  container: true,
                   excludeSemantics: true,
                   child: FittedBox(
                     alignment: Alignment.centerLeft,
@@ -117,6 +118,7 @@ class _AccountCard extends StatelessWidget {
     return Semantics(
       button: true,
       label: [account.name, subtitle, balance.format(), if (negative) l10n.accountNegativeSemantics].join(', '),
+      container: true,
       excludeSemantics: true,
       child: SurfaceCard(
         radius: Radii.cardSm,
