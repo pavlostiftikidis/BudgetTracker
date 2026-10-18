@@ -197,3 +197,33 @@ have broken another requirement. Newest decisions are appended per phase.
 - **Goldens** (Home dark/light/empty, Budgets dark/light, Transactions,
   Accounts, Add) use the real fonts and are generated on Windows; regenerate
   with `flutter test --update-goldens --tags golden`.
+
+## Recurring and Insights (phase 5)
+
+- **Resuming a paused rule skips** the occurrences that fell due while it
+  was paused: its next due date moves to the first occurrence on or after
+  today. Otherwise re-enabling a gym membership after three months would
+  back-fill three charges, which contradicts "paused rules are skipped".
+- **"ΠΑΓΙΑ / ΜΗΝΑ"** sums the monthly-equivalent cost of *active expense*
+  rules. Income rules (salary) are listed with a "+" amount but not added.
+  "% του εισοδήματος" uses the income from settings and is hidden when no
+  income is set.
+- **Next due:** within 7 days it reads "σήμερα / αύριο / σε N μέρες" in
+  `accentInk`, otherwise as a date ("14 Νοε"). Paused rows are at 55 %
+  opacity and read "Σε παύση". Active rules are listed first, by next due
+  date.
+- **7-day strip:** dots use the rule's category colour, up to three per
+  day. Each day has a spoken label ("Τρίτη 20 Οκτωβρίου: Ενοίκιο").
+- A rule saved with a first date of today or earlier becomes a transaction
+  right away (materialisation runs after saving).
+- **Insights buckets:** "Μήνας" = budget periods (so payday on the 15th
+  shows 15→14 bars), "Εβδομάδα" = Monday–Sunday weeks, "Έτος" = calendar
+  years. Six bars each, the current one in the accent.
+- **Change and the insight card are like-for-like**, as on Home: the first N
+  days of the current bucket against the first N days of the previous one.
+  The card names the category with the biggest increase (ignoring
+  categories under €10, so "+300%" on a €2 coffee never becomes the
+  headline) and adds the weekday with the most spending over the six
+  buckets ("γίνονται την Παρασκευή", with the correct article). When
+  nothing increased, a lime "well done" card is shown instead.
+- **Bar values** use a compact form above €1.000 ("€1,8k").

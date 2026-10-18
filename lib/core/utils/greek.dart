@@ -77,6 +77,22 @@ String dayOrdinal(int day) => day == 20 || day == 30 ? '$dayή' : '$dayη';
 /// "Παρασκευή".
 String weekdayName(DateTime d) => _symbols.STANDALONEWEEKDAYS[_weekdayIndex(d)];
 
+/// Name of an ISO weekday (1 = Δευτέρα … 7 = Κυριακή).
+String weekdayNameOf(int isoWeekday) => weekdayName(DateTime(2024, 1, isoWeekday));
+
+/// "τη Δευτέρα", "την Παρασκευή", "το Σάββατο" — the accusative with its
+/// article, as in "γίνονται την Παρασκευή". The final ν of "την" stays before
+/// vowels and κ, π, τ (and their clusters), per standard spelling.
+String weekdayWithArticle(int isoWeekday) => const [
+  'τη Δευτέρα',
+  'την Τρίτη',
+  'την Τετάρτη',
+  'την Πέμπτη',
+  'την Παρασκευή',
+  'το Σάββατο',
+  'την Κυριακή',
+][isoWeekday - 1];
+
 /// "Παρ" → shown upper-cased in strips ("ΠΑΡ").
 String weekdayShort(DateTime d) => _symbols.STANDALONESHORTWEEKDAYS[_weekdayIndex(d)];
 

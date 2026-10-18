@@ -39,6 +39,20 @@ void main() {
     });
   }
 
+  testWidgets('insights dark', (tester) async {
+    final container = await boot(tester, ThemeMode.dark);
+    container.read(routerProvider).go(Routes.insights);
+    await settle(tester);
+    await expectLater(find.byType(MaterialApp), matchesGoldenFile('insights_dark.png'));
+  });
+
+  testWidgets('recurring light', (tester) async {
+    final container = await boot(tester, ThemeMode.light);
+    unawaited(container.read(routerProvider).push(Routes.recurring));
+    await settle(tester);
+    await expectLater(find.byType(MaterialApp), matchesGoldenFile('recurring_light.png'));
+  });
+
   testWidgets('home empty state', (tester) async {
     await boot(tester, ThemeMode.dark, seed: false);
     await expectLater(find.byType(MaterialApp), matchesGoldenFile('home_empty_dark.png'));

@@ -148,6 +148,14 @@ void main() {
       expect((await recurring.byId('gym'))!.nextDueDate, DateTime(2026, 9, 5));
     });
 
+    test('resuming a paused rule skips what fell due while paused', () async {
+      await seedAccounts();
+      await recurring.save(rule(id: 'gym', account: 'checking', nextDue: DateTime(2026, 7, 5), active: false));
+      await recurring.setActive('gym', active: true);
+      expect((await recurring.byId('gym'))!.nextDueDate, DateTime(2026, 11, 5));
+      expect(await recurring.materializeDue(), 0);
+    });
+
     test('every N months', () async {
       await seedAccounts();
       await recurring.save(

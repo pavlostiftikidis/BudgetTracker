@@ -40,7 +40,7 @@ final class HomePeriodOffsetProvider extends $NotifierProvider<HomePeriodOffset,
   }
 }
 
-String _$homePeriodOffsetHash() => r'df9dc45886f46499362177a7b2c861ac076b7fc2';
+String _$homePeriodOffsetHash() => r'0738c14c7752b0414245f9b743cd3fe60a37ce84';
 
 /// Which period Home shows: 0 = current, 1 = previous, …
 

@@ -41,9 +41,27 @@ class DriftRecurringRepository implements RecurringRepository {
   @override
   Future<void> save(RecurringRule rule) => _db.recurringDao.upsert(rule.toCompanion());
 
+  /// Resuming skips the occurrences that fell due while paused: the next
+  /// due date moves to the first occurrence on or after today.
   @override
-  Future<void> setActive(String id, {required bool active}) =>
-      _db.recurringDao.patch(id, RecurringRulesCompanion(active: Value(active), updatedAt: Value(_clock.now())));
+  Future<void> setActive(String id, {required bool active}) => _db.transaction(() async {
+    final row = await _db.recurringDao.byId(id);
+    if (row == null) return;
+    final now = _clock.now();
+    var next = row.nextDueDate;
+    if (active) {
+      final rule = row.toModel();
+      final today = dateOnly(now);
+      var guard = 0;
+      while (next.isBefore(today) && guard++ < RecurringSchedule.maxOccurrencesPerRun) {
+        next = RecurringSchedule.advance(rule, next);
+      }
+    }
+    await _db.recurringDao.patch(
+      id,
+      RecurringRulesCompanion(active: Value(active), nextDueDate: Value(next), updatedAt: Value(now)),
+    );
+  });
 
   @override
   Future<void> delete(String id) => _db.recurringDao.deleteById(id);
