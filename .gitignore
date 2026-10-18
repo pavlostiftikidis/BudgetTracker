@@ -46,3 +46,16 @@ app.*.map.json
 
 # Widget Preview related
 .widget_preview/
+
+# Signing keys and secrets: never commit. They live in Codemagic's encrypted
+# settings or only on the machine that signs.
+*.jks
+*.keystore
+key.properties
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+*.provisionprofile
+.env
+.env.*
