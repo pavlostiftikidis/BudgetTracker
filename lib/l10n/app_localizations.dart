@@ -1699,6 +1699,30 @@ abstract class AppLocalizations {
   /// **'Εισόδημα και ημέρα πληρωμής'**
   String get incomeSheetTitle;
 
+  /// No description provided for @settingsName.
+  ///
+  /// In el, this message translates to:
+  /// **'Όνομα'**
+  String get settingsName;
+
+  /// No description provided for @settingsNameHint.
+  ///
+  /// In el, this message translates to:
+  /// **'Πώς να σε λέμε;'**
+  String get settingsNameHint;
+
+  /// No description provided for @settingsLicenses.
+  ///
+  /// In el, this message translates to:
+  /// **'Άδειες λογισμικού'**
+  String get settingsLicenses;
+
+  /// No description provided for @settingsLockOn.
+  ///
+  /// In el, this message translates to:
+  /// **'Ζητείται Face ID ή δακτυλικό αποτύπωμα στο άνοιγμα.'**
+  String get settingsLockOn;
+
   /// No description provided for @onbStep.
   ///
   /// In el, this message translates to:

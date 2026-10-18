@@ -914,6 +914,18 @@ class AppLocalizationsEl extends AppLocalizations {
   String get incomeSheetTitle => 'Εισόδημα και ημέρα πληρωμής';
 
   @override
+  String get settingsName => 'Όνομα';
+
+  @override
+  String get settingsNameHint => 'Πώς να σε λέμε;';
+
+  @override
+  String get settingsLicenses => 'Άδειες λογισμικού';
+
+  @override
+  String get settingsLockOn => 'Ζητείται Face ID ή δακτυλικό αποτύπωμα στο άνοιγμα.';
+
+  @override
   String onbStep(int step, int total) {
     return 'ΒΗΜΑ $step ΑΠΟ $total';
   }

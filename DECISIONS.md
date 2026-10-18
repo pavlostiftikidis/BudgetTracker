@@ -227,3 +227,38 @@ have broken another requirement. Newest decisions are appended per phase.
   buckets ("γίνονται την Παρασκευή", with the correct article). When
   nothing increased, a lime "well done" card is shown instead.
 - **Bar values** use a compact form above €1.000 ("€1,8k").
+
+## Onboarding, Settings, lock, export (phase 6)
+
+- **Onboarding income** is whole euros, grouped as you type ("2.150").
+  "Άλλη" payday opens a 1–31 day grid; days past a month's end fall on its
+  last day (see `Payday`).
+- **"Παράλειψη" completes onboarding with the defaults** on screen (income
+  €2.150, payday the 1st, the five suggested limits, Τρεχούμενος + Κάρτα),
+  so a skipped setup still leaves a working app. Completing is idempotent:
+  nothing that already exists is duplicated.
+- Besides the five suggested expense categories, onboarding creates the
+  income categories the Add screen offers (Μισθός, Freelance, Δώρο, Άλλο),
+  without limits. Accounts are created with the mockup colours and €0
+  opening balances. The "Υπόλοιπα λογαριασμών" first step prompts the user
+  to set real balances.
+- The limit steppers send an action ("+€10 on Εστίαση") that the parent
+  applies to its *current* state, so quick repeated taps are never lost.
+  A widget test caught the stale-closure version.
+- **Biometric lock:** the flag lives in `flutter_secure_storage`. Turning it
+  on requires a successful authentication first (so nobody locks themselves
+  out); without biometrics the switch stays off and says why. The app
+  re-locks only after **30 s in the background**, so the photo picker or the
+  share sheet does not trigger a new prompt. The lock screen prompts
+  automatically and keeps an "Ξεκλείδωμα" button for retries. While the flag
+  is loading only the background is drawn, so content never flashes.
+  Android uses `FlutterFragmentActivity` + `USE_BIOMETRIC`; iOS has
+  `NSFaceIDUsageDescription`.
+- **CSV export** is built for Greek spreadsheets: UTF-8 with BOM, `;`
+  separator, CRLF, `yyyy-MM-dd HH:mm` dates, amounts with a plain `-` and a
+  decimal comma ("-42,80") so they import as numbers. Deleted rows are left
+  out; rows are oldest first. It is shared through the system share sheet.
+- **Reset** wipes the database, the stored receipts and the lock flag, then
+  flips the onboarding flag; the router takes the user back to step 1.
+- Settings also offers "Όνομα" (the Home avatar initials) and the licence
+  page (fonts are registered there).

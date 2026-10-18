@@ -28,3 +28,18 @@ Future<void> deleteReceipt(String? path) async {
   final f = File(path);
   if (f.existsSync()) await f.delete();
 }
+
+/// Removes every stored receipt (Ρυθμίσεις › Επαναφορά δεδομένων).
+abstract interface class ReceiptStorage {
+  Future<void> deleteAll();
+}
+
+class DocumentsReceiptStorage implements ReceiptStorage {
+  const new();
+
+  @override
+  Future<void> deleteAll() async {
+    final dir = Directory(p.join((await getApplicationDocumentsDirectory()).path, 'receipts'));
+    if (dir.existsSync()) await dir.delete(recursive: true);
+  }
+}

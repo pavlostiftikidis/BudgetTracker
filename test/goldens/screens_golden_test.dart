@@ -53,6 +53,25 @@ void main() {
     await expectLater(find.byType(MaterialApp), matchesGoldenFile('recurring_light.png'));
   });
 
+  testWidgets('onboarding step 2 dark', (tester) async {
+    await pumpPulseApp(tester, prefs: MemoryAppPrefs());
+    await tester.tap(find.byKey(const ValueKey('onboarding-next')));
+    await settle(tester);
+    await expectLater(find.byType(MaterialApp), matchesGoldenFile('onboarding_limits_dark.png'));
+  });
+
+  testWidgets('onboarding step 1 light', (tester) async {
+    await pumpPulseApp(tester, prefs: MemoryAppPrefs(themeMode: ThemeMode.light));
+    await expectLater(find.byType(MaterialApp), matchesGoldenFile('onboarding_income_light.png'));
+  });
+
+  testWidgets('settings dark', (tester) async {
+    final container = await boot(tester, ThemeMode.dark);
+    unawaited(container.read(routerProvider).push(Routes.settings));
+    await settle(tester);
+    await expectLater(find.byType(MaterialApp), matchesGoldenFile('settings_dark.png'));
+  });
+
   testWidgets('home empty state', (tester) async {
     await boot(tester, ThemeMode.dark, seed: false);
     await expectLater(find.byType(MaterialApp), matchesGoldenFile('home_empty_dark.png'));

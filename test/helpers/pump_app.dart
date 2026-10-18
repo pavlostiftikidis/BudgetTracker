@@ -8,7 +8,11 @@ import 'package:pulse/app/bootstrap.dart';
 import 'package:pulse/core/utils/clock.dart';
 import 'package:pulse/data/db/app_database.dart';
 import 'package:pulse/data/prefs/app_prefs.dart';
+import 'package:pulse/data/prefs/secure_flags.dart';
 import 'package:pulse/data/providers.dart';
+import 'package:pulse/features/settings/app_lock.dart';
+import 'package:pulse/features/settings/settings_screen.dart';
+import 'package:pulse/features/transactions/receipt_store.dart';
 
 import 'fixtures.dart';
 
@@ -19,6 +23,8 @@ Future<ProviderContainer> pumpPulseApp(
   AppPrefs? prefs,
   AppDatabase? db,
   Clock? clock,
+  SecureFlags? secureFlags,
+  BiometricAuth? auth,
   Future<void> Function(AppDatabase db)? seed,
   List<Override> overrides = const [],
   Size size = const Size(390, 844),
@@ -49,6 +55,9 @@ Future<ProviderContainer> pumpPulseApp(
       appPrefsProvider.overrideWithValue(prefs ?? MemoryAppPrefs()),
       appDatabaseProvider.overrideWithValue(database),
       clockProvider.overrideWithValue(clock ?? FixedClock(t0)),
+      secureFlagsProvider.overrideWithValue(secureFlags ?? MemorySecureFlags()),
+      biometricAuthProvider.overrideWithValue(auth ?? FakeBiometricAuth()),
+      receiptStorageProvider.overrideWithValue(_NoReceipts()),
       ...overrides,
     ],
     retry: (_, _) => null,
@@ -74,4 +83,27 @@ Future<void> settle(WidgetTester tester) async {
 extension PumpX on WidgetTester {
   /// Brightness of the theme currently applied under [MaterialApp].
   Brightness get appBrightness => Theme.of(element(find.byType(Scaffold).first)).brightness;
+}
+
+/// Scripted biometric prompt.
+class FakeBiometricAuth implements BiometricAuth {
+  new({this.available = true, this.succeed = true});
+
+  bool available;
+  bool succeed;
+  int prompts = 0;
+
+  @override
+  Future<bool> isAvailable() async => available;
+
+  @override
+  Future<bool> authenticate(String reason) async {
+    prompts++;
+    return succeed;
+  }
+}
+
+class _NoReceipts implements ReceiptStorage {
+  @override
+  Future<void> deleteAll() async {}
 }

@@ -334,6 +334,10 @@
   "lockTitle": "Το Pulse είναι κλειδωμένο",
   "lockUnlock": "Ξεκλείδωμα",
   "incomeSheetTitle": "Εισόδημα και ημέρα πληρωμής",
+  "settingsName": "Όνομα",
+  "settingsNameHint": "Πώς να σε λέμε;",
+  "settingsLicenses": "Άδειες λογισμικού",
+  "settingsLockOn": "Ζητείται Face ID ή δακτυλικό αποτύπωμα στο άνοιγμα.",
 
   "onbStep": "ΒΗΜΑ {step} ΑΠΟ {total}",
   "@onbStep": { "placeholders": { "step": { "type": "int" }, "total": { "type": "int" } } },

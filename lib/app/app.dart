@@ -5,6 +5,7 @@ import 'package:pulse/app/router.dart';
 import 'package:pulse/app/startup.dart';
 import 'package:pulse/core/theme/pulse_theme.dart';
 import 'package:pulse/data/providers.dart';
+import 'package:pulse/features/settings/app_lock.dart';
 import 'package:pulse/l10n/app_localizations.dart';
 
 class PulseApp extends ConsumerStatefulWidget {
@@ -51,7 +52,7 @@ class _PulseAppState extends ConsumerState<PulseApp> {
       builder: (context, child) => MediaQuery.withClampedTextScaling(
         maxScaleFactor: 1.3,
         child: switch (ready) {
-          AsyncData() => child ?? const SizedBox.shrink(),
+          AsyncData() => AppLockGate(child: child ?? const SizedBox.shrink()),
           AsyncError(:final error) => _StartupError(error: error),
           _ => ColoredBox(color: Theme.of(context).scaffoldBackgroundColor),
         },

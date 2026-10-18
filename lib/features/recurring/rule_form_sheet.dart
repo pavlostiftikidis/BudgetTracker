@@ -283,6 +283,7 @@ class _RuleFormState extends ConsumerState<_RuleForm> {
                   Semantics(
                     button: true,
                     label: l10n.recurringDelete,
+                    container: true,
                     excludeSemantics: true,
                     child: Material(
                       color: Colors.transparent,

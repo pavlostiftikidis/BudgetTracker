@@ -9,7 +9,7 @@ void main() {
     await pumpPulseApp(tester);
     expect(find.text('Πόσα μπαίνουν κάθε μήνα;'), findsOneWidget);
 
-    await tester.tap(find.text('Ξεκίνα'));
+    await tester.tap(find.text('Παράλειψη'));
     await settle(tester);
     // Nothing recorded yet: Home shows its empty state.
     expect(find.text('ΔΙΑΘΕΣΙΜΑ ΓΙΑ ΝΑ ΞΟΔΕΨΕΙΣ'), findsOneWidget);
