@@ -39,17 +39,19 @@ class FloatingPillNav extends StatelessWidget {
           border: Border.all(color: c.line),
           boxShadow: [BoxShadow(color: c.shadow, blurRadius: 24, offset: const Offset(0, 8))],
         ),
+        // Equal gaps between all items, as in the mockup (space-between).
+        // Only the active pill may shrink (its label ellipsises) so the bar
+        // still fits on narrow screens with large text.
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            for (var i = 0; i < items.length; i++) ...[
-              Flexible(
-                flex: i == currentIndex ? 3 : 1,
-                child: Align(
-                  alignment: i == currentIndex ? AlignmentDirectional.centerStart : Alignment.center,
-                  child: _NavTab(item: items[i], active: i == currentIndex, onTap: () => onSelect(i)),
-                ),
-              ),
-            ],
+            for (var i = 0; i < items.length; i++)
+              if (i == currentIndex)
+                Flexible(
+                  child: _NavTab(item: items[i], active: true, onTap: () => onSelect(i)),
+                )
+              else
+                _NavTab(item: items[i], active: false, onTap: () => onSelect(i)),
             _AddButton(onTap: onAdd, label: context.l10n.navAdd),
           ],
         ),
