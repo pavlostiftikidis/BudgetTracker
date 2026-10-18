@@ -83,6 +83,9 @@ void main() {
 
     testWidgets('empty home and onboarding fit at $tag', (tester) async {
       final (c, _) = await boot(tester, onboarded: false, seed: false);
+      expect(tester.takeException(), isNull, reason: 'welcome page at $tag');
+      await tester.tap(find.byKey(const ValueKey('onboarding-welcome-start')));
+      await settle(tester);
       expect(tester.takeException(), isNull);
       for (var i = 0; i < 2; i++) {
         await tester.tap(find.byKey(const ValueKey('onboarding-next')));

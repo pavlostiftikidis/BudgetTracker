@@ -22,6 +22,8 @@ void main() {
   testWidgets('onboarding: income, payday, limits and accounts are saved', (tester) async {
     final prefs = MemoryAppPrefs();
     await pumpPulseApp(tester, db: db, prefs: prefs);
+    await tester.tap(find.byKey(const ValueKey('onboarding-welcome-start')));
+    await settle(tester);
     expect(find.text('ΒΗΜΑ 1 ΑΠΟ 3'), findsOneWidget);
 
     await tester.enterText(find.byType(TextField), '3000');
@@ -63,6 +65,8 @@ void main() {
 
   testWidgets('skipping onboarding still leaves a usable app', (tester) async {
     await pumpPulseApp(tester, db: db);
+    await tester.tap(find.byKey(const ValueKey('onboarding-welcome-start')));
+    await settle(tester);
     await tester.tap(find.text('Παράλειψη'));
     await settle(tester);
     expect(find.text('Πρώτα βήματα'), findsOneWidget);
@@ -161,7 +165,7 @@ void main() {
     await settle(tester);
 
     expect(prefs.onboardingDone, isFalse);
-    expect(find.text('ΒΗΜΑ 1 ΑΠΟ 3'), findsOneWidget);
+    expect(find.byKey(const ValueKey('onboarding-welcome-start')), findsOneWidget);
     expect(await tester.runAsync(() => db.select(db.txns).get()), isEmpty);
     expect(await tester.runAsync(() => db.select(db.accounts).get()), isEmpty);
   });

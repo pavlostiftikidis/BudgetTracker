@@ -992,6 +992,16 @@ class AppLocalizationsEl extends AppLocalizations {
   String get onbAccountsSubtitle => 'Διάλεξε τους λογαριασμούς σου, για να βλέπεις το υπόλοιπο του καθενός.';
 
   @override
+  String get onbWelcomeTitle => 'Μάθε κάθε μέρα πόσα μπορείς να ξοδέψεις.';
+
+  @override
+  String get onbWelcomeBody =>
+      'Βάζεις εισόδημα και όρια, καταγράφεις τα έξοδα, και το Pulse σου λέει πόσα μένουν για σήμερα.';
+
+  @override
+  String get onbWelcomePrivacy => 'Τα δεδομένα μένουν στο κινητό σου. Χωρίς λογαριασμό.';
+
+  @override
   String stepperDecrease(String name) {
     return 'Μείωση ορίου για $name';
   }

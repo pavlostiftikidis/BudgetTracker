@@ -5,8 +5,13 @@ import 'package:pulse/data/prefs/app_prefs.dart';
 import 'helpers/pump_app.dart';
 
 void main() {
-  testWidgets('first launch shows onboarding, finishing it lands on Home', (tester) async {
+  testWidgets('first launch shows the welcome page, then onboarding, then Home', (tester) async {
     await pumpPulseApp(tester);
+    expect(find.text('Μάθε κάθε μέρα πόσα μπορείς να ξοδέψεις.'), findsOneWidget);
+    expect(find.text('Παράλειψη'), findsNothing);
+
+    await tester.tap(find.byKey(const ValueKey('onboarding-welcome-start')));
+    await settle(tester);
     expect(find.text('Πόσα μπαίνουν κάθε μήνα;'), findsOneWidget);
 
     await tester.tap(find.text('Παράλειψη'));

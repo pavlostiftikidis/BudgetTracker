@@ -1843,6 +1843,24 @@ abstract class AppLocalizations {
   /// **'Διάλεξε τους λογαριασμούς σου, για να βλέπεις το υπόλοιπο του καθενός.'**
   String get onbAccountsSubtitle;
 
+  /// No description provided for @onbWelcomeTitle.
+  ///
+  /// In el, this message translates to:
+  /// **'Μάθε κάθε μέρα πόσα μπορείς να ξοδέψεις.'**
+  String get onbWelcomeTitle;
+
+  /// No description provided for @onbWelcomeBody.
+  ///
+  /// In el, this message translates to:
+  /// **'Βάζεις εισόδημα και όρια, καταγράφεις τα έξοδα, και το Pulse σου λέει πόσα μένουν για σήμερα.'**
+  String get onbWelcomeBody;
+
+  /// No description provided for @onbWelcomePrivacy.
+  ///
+  /// In el, this message translates to:
+  /// **'Τα δεδομένα μένουν στο κινητό σου. Χωρίς λογαριασμό.'**
+  String get onbWelcomePrivacy;
+
   /// No description provided for @stepperDecrease.
   ///
   /// In el, this message translates to:

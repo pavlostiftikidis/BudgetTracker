@@ -19,6 +19,7 @@ import 'package:pulse/data/providers.dart';
 import 'package:pulse/features/accounts/account_display.dart';
 import 'package:pulse/features/onboarding/income_widgets.dart';
 import 'package:pulse/features/onboarding/onboarding_actions.dart';
+import 'package:pulse/features/onboarding/welcome_page.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const new({super.key});
@@ -29,6 +30,7 @@ class OnboardingScreen extends ConsumerStatefulWidget {
 
 class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   static const _steps = 3;
+  bool _welcome = true;
   int _step = 0;
   OnboardingDraft _draft = const OnboardingDraft();
   late final _income = TextEditingController(text: _draft.income.formatPlain(showCents: false));
@@ -66,6 +68,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (_welcome) return WelcomePage(onStart: () => setState(() => _welcome = false));
     final c = context.colors;
     final l10n = context.l10n;
     final (title, subtitle) = switch (_step) {
