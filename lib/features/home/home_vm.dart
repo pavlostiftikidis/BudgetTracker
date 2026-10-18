@@ -49,7 +49,8 @@ final class HomeVm {
     required this.summary,
     required this.hasBudgets,
     required this.available,
-    required this.budgetTotal,
+    required this.spent,
+    required this.income,
     required this.daysLeft,
     required this.dailyAllowance,
     required this.changePercent,
@@ -71,12 +72,16 @@ final class HomeVm {
   final BudgetSummary summary;
   final bool hasBudgets;
 
-  /// "ΥΠΟΛΟΙΠΟ ΜΗΝΑ": Σ limits − budgeted spending, or income − all
-  /// spending when no category has a limit.
+  /// Σ limits − budgeted spending, or income − all spending when no
+  /// category has a limit; drives the daily allowance.
   final Money available;
 
-  /// "από €X".
-  final Money budgetTotal;
+  /// "ΞΟΔΕΥΤΗΚΑΝ": all of the period's spending.
+  final Money spent;
+
+  /// "από €X": income recorded in the period, or the monthly income from
+  /// settings while none is recorded yet.
+  final Money income;
   final int daysLeft;
   final Money dailyAllowance;
 
@@ -145,7 +150,8 @@ HomeVm buildHomeVm({
   final periodExpenses = expensesBetween(period.start, period.end);
   final hasBudgets = summary.hasBudgets;
   final available = hasBudgets ? summary.available : settings.monthlyIncome - periodExpenses;
-  final budgetTotal = hasBudgets ? summary.totalLimit : settings.monthlyIncome;
+  final recordedIncome = totalOf(live, TxnKind.income, within: period.contains);
+  final income = recordedIncome.isPositive ? recordedIncome : settings.monthlyIncome;
   final daysLeft = isCurrent ? period.daysLeft(now) : 0;
 
   // Spending split: top five categories + "Άλλα".
@@ -218,7 +224,8 @@ HomeVm buildHomeVm({
     summary: summary,
     hasBudgets: hasBudgets,
     available: available,
-    budgetTotal: budgetTotal,
+    spent: periodExpenses,
+    income: income,
     daysLeft: daysLeft,
     dailyAllowance: isCurrent ? computeDailyAllowance(available, daysLeft) : Money.zero,
     changePercent: percentChange(spentSoFar, previousSoFar),

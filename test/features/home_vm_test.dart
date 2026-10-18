@@ -42,8 +42,9 @@ void main() {
 
     tearDownAll(() => db.close());
 
-    test('hero = Σ limits − budgeted spending', () {
-      expect(vm.budgetTotal, const Money(98000));
+    test('hero = all spending out of the income recorded this period', () {
+      expect(vm.income, const Money(215000));
+      expect(vm.spent, const Money(85100));
       expect(vm.available, const Money(12900));
       expect(vm.daysLeft, 14);
       expect(vm.dailyAllowance, const Money(921));
@@ -95,19 +96,37 @@ void main() {
       now: t0,
     );
 
-    test('without limits the hero is income − spending', () {
+    test('without recorded income the hero is out of the monthly income', () {
       final vm = build(txns: [txn(account: 'a', cents: 5000)]);
       expect(vm.hasBudgets, isFalse);
+      expect(vm.spent, const Money(5000));
       expect(vm.available, const Money(195000));
-      expect(vm.budgetTotal, const Money(200000));
+      expect(vm.income, const Money(200000));
     });
 
-    test('over budget: hero negative, allowance €0', () {
+    test('recorded income replaces the monthly income and counts every expense', () {
+      final cat = category(id: 'g', limit: 10000);
+      final vm = build(
+        cats: [cat],
+        txns: [
+          txn(account: 'a', kind: TxnKind.income, cents: 180000),
+          txn(account: 'a', kind: TxnKind.income, cents: 30000),
+          txn(account: 'a', category: 'g', cents: 4000),
+          txn(account: 'a', cents: 6000),
+        ],
+      );
+      expect(vm.income, const Money(210000));
+      expect(vm.spent, const Money(10000));
+      expect(vm.available, const Money(6000), reason: 'the allowance still follows the limits');
+    });
+
+    test('over budget: available negative, allowance €0', () {
       final cat = category(id: 'g', limit: 10000);
       final vm = build(
         cats: [cat],
         txns: [txn(account: 'a', category: 'g', cents: 15000)],
       );
+      expect(vm.spent, const Money(15000));
       expect(vm.available, const Money(-5000));
       expect(vm.dailyAllowance, Money.zero);
     });

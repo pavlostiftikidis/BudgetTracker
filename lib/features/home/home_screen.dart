@@ -63,9 +63,9 @@ class HomeScreen extends ConsumerWidget {
     return [
       _Header(vm: vm),
       const SizedBox(height: 22),
-      MonoLabel(l10n.homeBalanceLabel),
+      MonoLabel(l10n.homeSpentLabel),
       const SizedBox(height: 6),
-      HeroAmount(amount: vm.available, color: vm.available.isNegative ? c.coralInk : null),
+      HeroAmount(amount: vm.spent, color: vm.spent > vm.income ? c.coralInk : null),
       const SizedBox(height: 8),
       Wrap(
         spacing: 8,
@@ -86,7 +86,7 @@ class HomeScreen extends ConsumerWidget {
             ),
           Text(
             [
-              l10n.ofAmount(vm.budgetTotal.format(showCents: false)),
+              l10n.ofAmount(vm.income.format(showCents: false)),
               if (vm.isCurrent) l10n.daysLeft(vm.daysLeft),
             ].join(' · '),
             style: PulseText.label.copyWith(fontWeight: FontWeight.w500, color: c.muted),
@@ -136,16 +136,18 @@ class HomeScreen extends ConsumerWidget {
     final c = context.colors;
     final l10n = context.l10n;
     final steps = vm.firstSteps;
-    final hero = vm.hasBudgets ? vm.summary.totalLimit : vm.monthlyIncome;
     return [
       _Header(vm: vm, welcome: true),
       const SizedBox(height: 22),
-      MonoLabel(l10n.homeAvailableToSpend),
+      MonoLabel(l10n.homeSpentLabel),
       const SizedBox(height: 6),
-      HeroAmount(amount: hero, showCents: false),
+      const HeroAmount(amount: Money.zero, showCents: false),
       const SizedBox(height: 6),
       Text(
-        l10n.homeWholeMonthAhead(monthName(vm.period.labelMonth)),
+        [
+          if (vm.income.isPositive) l10n.ofAmount(vm.income.format(showCents: false)),
+          l10n.homeWholeMonthAhead(monthName(vm.period.labelMonth)),
+        ].join(' · '),
         style: PulseText.label.copyWith(fontWeight: FontWeight.w500, color: c.muted),
       ),
       const SizedBox(height: 22),

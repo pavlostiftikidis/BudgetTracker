@@ -49,7 +49,7 @@ void main() {
     await settle(tester);
 
     expect(prefs.onboardingDone, isTrue);
-    expect(find.text('ΔΙΑΘΕΣΙΜΑ ΓΙΑ ΝΑ ΞΟΔΕΨΕΙΣ'), findsOneWidget);
+    expect(find.text('ΞΟΔΕΥΤΗΚΑΝ'), findsOneWidget);
 
     final settings = (await tester.runAsync(db.settingsDao.get))!;
     expect(settings.monthlyIncomeCents, 300000);

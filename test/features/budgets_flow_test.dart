@@ -24,7 +24,7 @@ void main() {
 
   testWidgets('adding an expense updates the Home hero and allowance', (tester) async {
     await boot(tester);
-    expect(find.bySemanticsLabel('€129,00'), findsOneWidget);
+    expect(find.bySemanticsLabel('€851,00'), findsOneWidget);
     expect(find.bySemanticsLabel('Σήμερα μπορείς €9'), findsOneWidget);
 
     await tester.tap(find.byKey(const ValueKey('nav-add')));
@@ -37,7 +37,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('add-save')));
     await settle(tester);
 
-    expect(find.bySemanticsLabel('€109,00'), findsOneWidget);
+    expect(find.bySemanticsLabel('€871,00'), findsOneWidget);
     expect(find.bySemanticsLabel('Σήμερα μπορείς €7'), findsOneWidget);
   });
 

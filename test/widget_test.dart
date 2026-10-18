@@ -12,7 +12,7 @@ void main() {
     await tester.tap(find.text('Παράλειψη'));
     await settle(tester);
     // Nothing recorded yet: Home shows its empty state.
-    expect(find.text('ΔΙΑΘΕΣΙΜΑ ΓΙΑ ΝΑ ΞΟΔΕΨΕΙΣ'), findsOneWidget);
+    expect(find.text('ΞΟΔΕΥΤΗΚΑΝ'), findsOneWidget);
     expect(find.text('Πρώτα βήματα'), findsOneWidget);
   });
 

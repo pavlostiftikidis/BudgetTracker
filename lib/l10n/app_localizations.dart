@@ -277,11 +277,11 @@ abstract class AppLocalizations {
   /// **'από {amount}'**
   String ofAmount(String amount);
 
-  /// No description provided for @homeBalanceLabel.
+  /// No description provided for @homeSpentLabel.
   ///
   /// In el, this message translates to:
-  /// **'ΥΠΟΛΟΙΠΟ ΜΗΝΑ'**
-  String get homeBalanceLabel;
+  /// **'ΞΟΔΕΥΤΗΚΑΝ'**
+  String get homeSpentLabel;
 
   /// No description provided for @homeTodayCanSpend.
   ///
@@ -354,12 +354,6 @@ abstract class AppLocalizations {
   /// In el, this message translates to:
   /// **'Καλώς ήρθες'**
   String get homeWelcome;
-
-  /// No description provided for @homeAvailableToSpend.
-  ///
-  /// In el, this message translates to:
-  /// **'ΔΙΑΘΕΣΙΜΑ ΓΙΑ ΝΑ ΞΟΔΕΨΕΙΣ'**
-  String get homeAvailableToSpend;
 
   /// No description provided for @homeWholeMonthAhead.
   ///

@@ -45,7 +45,7 @@
   "ofAmount": "από {amount}",
   "@ofAmount": { "placeholders": { "amount": { "type": "String" } } },
 
-  "homeBalanceLabel": "ΥΠΟΛΟΙΠΟ ΜΗΝΑ",
+  "homeSpentLabel": "ΞΟΔΕΥΤΗΚΑΝ",
   "homeTodayCanSpend": "Σήμερα μπορείς",
   "homeSavings": "Αποταμίευση",
   "homeThisWeek": "Αυτή την εβδομάδα",
@@ -62,7 +62,6 @@
   "noSpendingYet": "Χωρίς έξοδα ακόμα",
 
   "homeWelcome": "Καλώς ήρθες",
-  "homeAvailableToSpend": "ΔΙΑΘΕΣΙΜΑ ΓΙΑ ΝΑ ΞΟΔΕΨΕΙΣ",
   "homeWholeMonthAhead": "Ολόκληρος ο {month} μπροστά σου.",
   "@homeWholeMonthAhead": { "placeholders": { "month": { "type": "String" } } },
   "homeEmptyHint": "Εδώ θα βλέπεις πού πηγαίνουν τα χρήματά σου.",

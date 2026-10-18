@@ -112,7 +112,7 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get homeBalanceLabel => 'ΥΠΟΛΟΙΠΟ ΜΗΝΑ';
+  String get homeSpentLabel => 'ΞΟΔΕΥΤΗΚΑΝ';
 
   @override
   String get homeTodayCanSpend => 'Σήμερα μπορείς';
@@ -155,9 +155,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get homeWelcome => 'Καλώς ήρθες';
-
-  @override
-  String get homeAvailableToSpend => 'ΔΙΑΘΕΣΙΜΑ ΓΙΑ ΝΑ ΞΟΔΕΨΕΙΣ';
 
   @override
   String homeWholeMonthAhead(String month) {
