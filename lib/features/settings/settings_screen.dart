@@ -21,6 +21,7 @@ import 'package:pulse/data/models/models.dart';
 import 'package:pulse/data/providers.dart';
 import 'package:pulse/features/onboarding/income_widgets.dart';
 import 'package:pulse/features/settings/app_lock.dart';
+import 'package:pulse/features/settings/backup.dart';
 import 'package:pulse/features/settings/csv_export.dart';
 import 'package:pulse/features/transactions/receipt_store.dart';
 import 'package:pulse/features/transactions/txn_display.dart';
@@ -38,6 +39,9 @@ String paydayLabel(Payday p, AppLocalizations l10n) => switch (p.kind) {
 
 @Riverpod(keepAlive: true)
 ReceiptStorage receiptStorage(Ref ref) => const DocumentsReceiptStorage();
+
+@Riverpod(keepAlive: true)
+BackupPicker backupPicker(Ref ref) => const SystemBackupPicker();
 
 /// Deletes all data and returns to onboarding.
 Future<void> resetAllData(WidgetRef ref) async {
@@ -137,6 +141,17 @@ class SettingsScreen extends ConsumerWidget {
                     _Row(icon: LucideIcons.euro, title: l10n.settingsCurrency, value: l10n.currencyEur),
                     _Row(icon: LucideIcons.download, title: l10n.settingsExportCsv, onTap: () => _export(context, ref)),
                     _Row(
+                      icon: LucideIcons.databaseBackup,
+                      title: l10n.settingsBackup,
+                      subtitle: l10n.settingsBackupSub,
+                      onTap: () => _backup(context, ref),
+                    ),
+                    _Row(
+                      icon: LucideIcons.archiveRestore,
+                      title: l10n.settingsImportBackup,
+                      onTap: () => _import(context, ref),
+                    ),
+                    _Row(
                       icon: LucideIcons.fileText,
                       title: l10n.settingsLicenses,
                       onTap: () => showLicensePage(context: context, applicationName: 'Pulse', useRootNavigator: true),
@@ -181,6 +196,59 @@ class SettingsScreen extends ConsumerWidget {
     await exportAndShareCsv(txns, lookups, l10n, ref.read(clockProvider).now());
   }
 
+  Future<void> _backup(BuildContext context, WidgetRef ref) async {
+    final l10n = context.l10n;
+    final data = await ref.read(backupRepositoryProvider).snapshot();
+    await shareBackup(data, l10n, ref.read(clockProvider).now());
+  }
+
+  Future<void> _import(BuildContext context, WidgetRef ref) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final l10n = context.l10n;
+    void fail(BackupProblem problem) => messenger.showSnackBar(
+      SnackBar(
+        content: Text(switch (problem) {
+          BackupProblem.notABackup => l10n.importNotBackup,
+          BackupProblem.newerVersion => l10n.importNewerVersion,
+          BackupProblem.failed => l10n.importFailed,
+        }),
+      ),
+    );
+
+    final file = await ref.read(backupPickerProvider).pick();
+    if (file == null) return;
+    final Backup backup;
+    try {
+      backup = await readBackup(file);
+    } on BackupException catch (e) {
+      fail(e.problem);
+      return;
+    }
+    if (!context.mounted) return;
+    final made = backup.createdAt;
+    final ok = await _confirmReplace(
+      context,
+      title: l10n.importDialogTitle,
+      body: l10n.importDialogBody('${dayMonthShort(made)} ${made.year}', backup.data.txns.length),
+      action: l10n.importConfirm,
+    );
+    if (!ok) return;
+    try {
+      await restoreBackup(
+        file,
+        backup,
+        repository: ref.read(backupRepositoryProvider),
+        receiptsDir: await ref.read(receiptStorageProvider).directory(),
+      );
+    } on BackupException catch (e) {
+      fail(e.problem);
+      return;
+    }
+    // Rules that fell due since the backup was made.
+    await ref.read(recurringRepositoryProvider).materializeDue();
+    messenger.showSnackBar(SnackBar(content: Text(l10n.importDone)));
+  }
+
   Future<void> _editName(BuildContext context, WidgetRef ref, AppSettings settings) async {
     final controller = TextEditingController(text: settings.displayName ?? '');
     final name = await showPulseSheet<String>(
@@ -221,13 +289,32 @@ class SettingsScreen extends ConsumerWidget {
   }
 
   Future<void> _confirmReset(BuildContext context, WidgetRef ref) async {
+    final l10n = context.l10n;
+    final ok = await _confirmReplace(
+      context,
+      title: l10n.resetDialogTitle,
+      body: l10n.resetDialogBody,
+      action: l10n.resetConfirm,
+    );
+    if (!ok) return;
+    await HapticFeedback.heavyImpact();
+    await resetAllData(ref);
+  }
+
+  /// Asks before an action that overwrites all data; true if confirmed.
+  Future<bool> _confirmReplace(
+    BuildContext context, {
+    required String title,
+    required String body,
+    required String action,
+  }) async {
     final c = context.colors;
     final l10n = context.l10n;
     final ok = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(l10n.resetDialogTitle),
-        content: Text(l10n.resetDialogBody),
+        title: Text(title),
+        content: Text(body),
         actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
         actions: [
           Row(
@@ -247,7 +334,7 @@ class SettingsScreen extends ConsumerWidget {
                       constraints: const BoxConstraints(minHeight: 52),
                       child: Center(
                         child: Text(
-                          l10n.resetConfirm,
+                          action,
                           style: PulseText.label.copyWith(color: c.onAccent, fontWeight: FontWeight.w800),
                         ),
                       ),
@@ -260,9 +347,7 @@ class SettingsScreen extends ConsumerWidget {
         ],
       ),
     );
-    if (ok != true) return;
-    await HapticFeedback.heavyImpact();
-    await resetAllData(ref);
+    return ok ?? false;
   }
 }
 

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart';
@@ -104,6 +106,9 @@ class FakeBiometricAuth implements BiometricAuth {
 }
 
 class _NoReceipts implements ReceiptStorage {
+  @override
+  Future<Directory> directory() => Directory.systemTemp.createTemp('pulse-receipts-');
+
   @override
   Future<void> deleteAll() async {}
 }

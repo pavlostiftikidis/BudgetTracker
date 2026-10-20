@@ -1545,4 +1545,328 @@ as String?,
 
 }
 
+
+/// @nodoc
+mixin _$DataSnapshot {
+
+ AppSettings get settings; List<Account> get accounts; List<TxnCategory> get categories; List<RecurringRule> get recurringRules; List<Txn> get txns;
+/// Create a copy of DataSnapshot
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DataSnapshotCopyWith<DataSnapshot> get copyWith => _$DataSnapshotCopyWithImpl<DataSnapshot>(this as DataSnapshot, _$identity);
+
+  /// Serializes this DataSnapshot to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as DataSnapshot;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DataSnapshot&&(identical(other.settings, _this.settings) || other.settings == _this.settings)&&const DeepCollectionEquality().equals(other.accounts, _this.accounts)&&const DeepCollectionEquality().equals(other.categories, _this.categories)&&const DeepCollectionEquality().equals(other.recurringRules, _this.recurringRules)&&const DeepCollectionEquality().equals(other.txns, _this.txns));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as DataSnapshot;
+  return Object.hash(runtimeType,_this.settings,const DeepCollectionEquality().hash(_this.accounts),const DeepCollectionEquality().hash(_this.categories),const DeepCollectionEquality().hash(_this.recurringRules),const DeepCollectionEquality().hash(_this.txns));
+}
+
+@override
+String toString() {
+  final _this = this as DataSnapshot;
+  return 'DataSnapshot(settings: ${_this.settings}, accounts: ${_this.accounts}, categories: ${_this.categories}, recurringRules: ${_this.recurringRules}, txns: ${_this.txns})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DataSnapshotCopyWith<$Res>  {
+  factory $DataSnapshotCopyWith(DataSnapshot value, $Res Function(DataSnapshot) _then) = _$DataSnapshotCopyWithImpl;
+@useResult
+$Res call({
+ AppSettings settings, List<Account> accounts, List<TxnCategory> categories, List<RecurringRule> recurringRules, List<Txn> txns
+});
+
+
+$AppSettingsCopyWith<$Res> get settings;
+
+}
+/// @nodoc
+class _$DataSnapshotCopyWithImpl<$Res>
+    implements $DataSnapshotCopyWith<$Res> {
+  _$DataSnapshotCopyWithImpl(this._self, this._then);
+
+  final DataSnapshot _self;
+  final $Res Function(DataSnapshot) _then;
+
+/// Create a copy of DataSnapshot
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? settings = null,Object? accounts = null,Object? categories = null,Object? recurringRules = null,Object? txns = null,}) {
+  return _then(DataSnapshot(
+settings: null == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
+as AppSettings,accounts: null == accounts ? _self.accounts : accounts // ignore: cast_nullable_to_non_nullable
+as List<Account>,categories: null == categories ? _self.categories : categories // ignore: cast_nullable_to_non_nullable
+as List<TxnCategory>,recurringRules: null == recurringRules ? _self.recurringRules : recurringRules // ignore: cast_nullable_to_non_nullable
+as List<RecurringRule>,txns: null == txns ? _self.txns : txns // ignore: cast_nullable_to_non_nullable
+as List<Txn>,
+  ));
+}
+/// Create a copy of DataSnapshot
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AppSettingsCopyWith<$Res> get settings {
+  
+  return $AppSettingsCopyWith<$Res>(_self.settings, (value) {
+    return _then(_self.copyWith(settings: value));
+  });
+}
+}
+
+
+/// Adds pattern-matching-related methods to [DataSnapshot].
+extension DataSnapshotPatterns on DataSnapshot {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _DataSnapshot value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _DataSnapshot() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _DataSnapshot value)  $default,){
+final _that = this;
+switch (_that) {
+case _DataSnapshot():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _DataSnapshot value)?  $default,){
+final _that = this;
+switch (_that) {
+case _DataSnapshot() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( AppSettings settings,  List<Account> accounts,  List<TxnCategory> categories,  List<RecurringRule> recurringRules,  List<Txn> txns)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _DataSnapshot() when $default != null:
+return $default(_that.settings,_that.accounts,_that.categories,_that.recurringRules,_that.txns);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( AppSettings settings,  List<Account> accounts,  List<TxnCategory> categories,  List<RecurringRule> recurringRules,  List<Txn> txns)  $default,) {final _that = this;
+switch (_that) {
+case _DataSnapshot():
+return $default(_that.settings,_that.accounts,_that.categories,_that.recurringRules,_that.txns);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( AppSettings settings,  List<Account> accounts,  List<TxnCategory> categories,  List<RecurringRule> recurringRules,  List<Txn> txns)?  $default,) {final _that = this;
+switch (_that) {
+case _DataSnapshot() when $default != null:
+return $default(_that.settings,_that.accounts,_that.categories,_that.recurringRules,_that.txns);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _DataSnapshot implements DataSnapshot {
+  const _DataSnapshot({required this.settings,  List<Account> accounts = const <Account>[],  List<TxnCategory> categories = const <TxnCategory>[],  List<RecurringRule> recurringRules = const <RecurringRule>[],  List<Txn> txns = const <Txn>[]}): _accounts = accounts,_categories = categories,_recurringRules = recurringRules,_txns = txns;
+  factory _DataSnapshot.fromJson(Map<String, dynamic> json) => _$DataSnapshotFromJson(json);
+
+@override final  AppSettings settings;
+ final  List<Account> _accounts;
+@override@JsonKey() List<Account> get accounts {
+  if (_accounts is EqualUnmodifiableListView) return _accounts;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_accounts);
+}
+
+ final  List<TxnCategory> _categories;
+@override@JsonKey() List<TxnCategory> get categories {
+  if (_categories is EqualUnmodifiableListView) return _categories;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_categories);
+}
+
+ final  List<RecurringRule> _recurringRules;
+@override@JsonKey() List<RecurringRule> get recurringRules {
+  if (_recurringRules is EqualUnmodifiableListView) return _recurringRules;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_recurringRules);
+}
+
+ final  List<Txn> _txns;
+@override@JsonKey() List<Txn> get txns {
+  if (_txns is EqualUnmodifiableListView) return _txns;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_txns);
+}
+
+
+/// Create a copy of DataSnapshot
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$DataSnapshotCopyWith<_DataSnapshot> get copyWith => __$DataSnapshotCopyWithImpl<_DataSnapshot>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$DataSnapshotToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _DataSnapshot&&(identical(other.settings, settings) || other.settings == settings)&&const DeepCollectionEquality().equals(other.accounts, _accounts)&&const DeepCollectionEquality().equals(other.categories, _categories)&&const DeepCollectionEquality().equals(other.recurringRules, _recurringRules)&&const DeepCollectionEquality().equals(other.txns, _txns));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,settings,const DeepCollectionEquality().hash(_accounts),const DeepCollectionEquality().hash(_categories),const DeepCollectionEquality().hash(_recurringRules),const DeepCollectionEquality().hash(_txns));
+}
+
+@override
+String toString() {
+    return 'DataSnapshot(settings: $settings, accounts: $accounts, categories: $categories, recurringRules: $recurringRules, txns: $txns)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$DataSnapshotCopyWith<$Res> implements $DataSnapshotCopyWith<$Res> {
+  factory _$DataSnapshotCopyWith(_DataSnapshot value, $Res Function(_DataSnapshot) _then) = __$DataSnapshotCopyWithImpl;
+@override @useResult
+$Res call({
+ AppSettings settings, List<Account> accounts, List<TxnCategory> categories, List<RecurringRule> recurringRules, List<Txn> txns
+});
+
+
+@override $AppSettingsCopyWith<$Res> get settings;
+
+}
+/// @nodoc
+class __$DataSnapshotCopyWithImpl<$Res>
+    implements _$DataSnapshotCopyWith<$Res> {
+  __$DataSnapshotCopyWithImpl(this._self, this._then);
+
+  final _DataSnapshot _self;
+  final $Res Function(_DataSnapshot) _then;
+
+/// Create a copy of DataSnapshot
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? settings = null,Object? accounts = null,Object? categories = null,Object? recurringRules = null,Object? txns = null,}) {
+  return _then(_DataSnapshot(
+settings: null == settings ? _self.settings : settings // ignore: cast_nullable_to_non_nullable
+as AppSettings,accounts: null == accounts ? _self._accounts : accounts // ignore: cast_nullable_to_non_nullable
+as List<Account>,categories: null == categories ? _self._categories : categories // ignore: cast_nullable_to_non_nullable
+as List<TxnCategory>,recurringRules: null == recurringRules ? _self._recurringRules : recurringRules // ignore: cast_nullable_to_non_nullable
+as List<RecurringRule>,txns: null == txns ? _self._txns : txns // ignore: cast_nullable_to_non_nullable
+as List<Txn>,
+  ));
+}
+
+/// Create a copy of DataSnapshot
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$AppSettingsCopyWith<$Res> get settings {
+  
+  return $AppSettingsCopyWith<$Res>(_self.settings, (value) {
+    return _then(_self.copyWith(settings: value));
+  });
+}
+}
+
 // dart format on

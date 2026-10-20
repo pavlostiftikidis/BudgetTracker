@@ -1681,6 +1681,72 @@ abstract class AppLocalizations {
   /// **'Pulse — κινήσεις'**
   String get exportSubject;
 
+  /// No description provided for @settingsBackup.
+  ///
+  /// In el, this message translates to:
+  /// **'Αντίγραφο ασφαλείας'**
+  String get settingsBackup;
+
+  /// No description provided for @settingsBackupSub.
+  ///
+  /// In el, this message translates to:
+  /// **'Όλα τα δεδομένα σε ένα αρχείο.'**
+  String get settingsBackupSub;
+
+  /// No description provided for @settingsImportBackup.
+  ///
+  /// In el, this message translates to:
+  /// **'Εισαγωγή αντιγράφου'**
+  String get settingsImportBackup;
+
+  /// No description provided for @backupSubject.
+  ///
+  /// In el, this message translates to:
+  /// **'Pulse — αντίγραφο ασφαλείας'**
+  String get backupSubject;
+
+  /// No description provided for @importDialogTitle.
+  ///
+  /// In el, this message translates to:
+  /// **'Εισαγωγή αντιγράφου;'**
+  String get importDialogTitle;
+
+  /// No description provided for @importDialogBody.
+  ///
+  /// In el, this message translates to:
+  /// **'Αντίγραφο της {date} με {count, plural, =1{1 κίνηση} other{{count} κινήσεις}}. Θα αντικαταστήσει όλα τα τωρινά δεδομένα και η ενέργεια δεν αναιρείται.'**
+  String importDialogBody(String date, int count);
+
+  /// No description provided for @importConfirm.
+  ///
+  /// In el, this message translates to:
+  /// **'Εισαγωγή'**
+  String get importConfirm;
+
+  /// No description provided for @importDone.
+  ///
+  /// In el, this message translates to:
+  /// **'Τα δεδομένα επανήλθαν από το αντίγραφο.'**
+  String get importDone;
+
+  /// No description provided for @importNotBackup.
+  ///
+  /// In el, this message translates to:
+  /// **'Αυτό το αρχείο δεν είναι αντίγραφο του Pulse.'**
+  String get importNotBackup;
+
+  /// No description provided for @importNewerVersion.
+  ///
+  /// In el, this message translates to:
+  /// **'Το αντίγραφο είναι από νεότερη έκδοση του Pulse. Ενημέρωσε την εφαρμογή και ξαναδοκίμασε.'**
+  String get importNewerVersion;
+
+  /// No description provided for @importFailed.
+  ///
+  /// In el, this message translates to:
+  /// **'Η εισαγωγή απέτυχε. Τα δεδομένα σου δεν άλλαξαν.'**
+  String get importFailed;
+
   /// No description provided for @biometricUnavailable.
   ///
   /// In el, this message translates to:

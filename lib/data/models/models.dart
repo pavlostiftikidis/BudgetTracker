@@ -163,3 +163,18 @@ abstract class AppSettings with _$AppSettings {
 
   Payday get payday => Payday(paydayKind, paydayDay.clamp(1, 31));
 }
+
+/// Everything the user has entered, for the backup file: archived accounts
+/// and categories included, soft-deleted transactions left out.
+@freezed
+abstract class DataSnapshot with _$DataSnapshot {
+  const factory({
+    required AppSettings settings,
+    @Default(<Account>[]) List<Account> accounts,
+    @Default(<TxnCategory>[]) List<TxnCategory> categories,
+    @Default(<RecurringRule>[]) List<RecurringRule> recurringRules,
+    @Default(<Txn>[]) List<Txn> txns,
+  }) = _DataSnapshot;
+
+  factory fromJson(Map<String, dynamic> json) => _$DataSnapshotFromJson(json);
+}

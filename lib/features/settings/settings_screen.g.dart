@@ -44,3 +44,39 @@ final class ReceiptStorageProvider extends $FunctionalProvider<ReceiptStorage, R
 }
 
 String _$receiptStorageHash() => r'ce83a0715dfc315cb1f525a15e5e868d4d246020';
+
+@ProviderFor(backupPicker)
+final backupPickerProvider = BackupPickerProvider._();
+
+final class BackupPickerProvider extends $FunctionalProvider<BackupPicker, BackupPicker, BackupPicker>
+    with $Provider<BackupPicker> {
+  BackupPickerProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'backupPickerProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$backupPickerHash();
+
+  @$internal
+  @override
+  $ProviderElement<BackupPicker> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+
+  @override
+  BackupPicker create(Ref ref) {
+    return backupPicker(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BackupPicker value) {
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<BackupPicker>(value));
+  }
+}
+
+String _$backupPickerHash() => r'8a96ef3b5cf9877608baf0497887a95a67747e41';

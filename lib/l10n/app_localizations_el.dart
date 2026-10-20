@@ -905,6 +905,43 @@ class AppLocalizationsEl extends AppLocalizations {
   String get exportSubject => 'Pulse — κινήσεις';
 
   @override
+  String get settingsBackup => 'Αντίγραφο ασφαλείας';
+
+  @override
+  String get settingsBackupSub => 'Όλα τα δεδομένα σε ένα αρχείο.';
+
+  @override
+  String get settingsImportBackup => 'Εισαγωγή αντιγράφου';
+
+  @override
+  String get backupSubject => 'Pulse — αντίγραφο ασφαλείας';
+
+  @override
+  String get importDialogTitle => 'Εισαγωγή αντιγράφου;';
+
+  @override
+  String importDialogBody(String date, int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count κινήσεις', one: '1 κίνηση');
+    return 'Αντίγραφο της $date με $_temp0. Θα αντικαταστήσει όλα τα τωρινά δεδομένα και η ενέργεια δεν αναιρείται.';
+  }
+
+  @override
+  String get importConfirm => 'Εισαγωγή';
+
+  @override
+  String get importDone => 'Τα δεδομένα επανήλθαν από το αντίγραφο.';
+
+  @override
+  String get importNotBackup => 'Αυτό το αρχείο δεν είναι αντίγραφο του Pulse.';
+
+  @override
+  String get importNewerVersion =>
+      'Το αντίγραφο είναι από νεότερη έκδοση του Pulse. Ενημέρωσε την εφαρμογή και ξαναδοκίμασε.';
+
+  @override
+  String get importFailed => 'Η εισαγωγή απέτυχε. Τα δεδομένα σου δεν άλλαξαν.';
+
+  @override
   String get biometricUnavailable => 'Η συσκευή δεν υποστηρίζει βιομετρικό κλείδωμα.';
 
   @override

@@ -157,7 +157,7 @@ void main() {
     unawaited(container.read(routerProvider).push(Routes.settings));
     await settle(tester);
 
-    await tester.ensureVisible(find.text('Επαναφορά δεδομένων'));
+    await tester.scrollUntilVisible(find.text('Επαναφορά δεδομένων'), 200);
     await settle(tester);
     await tester.tap(find.text('Επαναφορά δεδομένων'));
     await settle(tester);

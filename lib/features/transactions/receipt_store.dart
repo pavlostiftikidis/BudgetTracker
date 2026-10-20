@@ -14,7 +14,7 @@ Future<String?> pickAndStoreReceipt(String txnId, {required bool camera}) async 
     imageQuality: 85,
   );
   if (file == null) return null;
-  final dir = Directory(p.join((await getApplicationDocumentsDirectory()).path, 'receipts'));
+  final dir = await receiptsDirectory();
   await dir.create(recursive: true);
   final ext = p.extension(file.path).isEmpty ? '.jpg' : p.extension(file.path);
   final target = p.join(dir.path, '$txnId-${DateTime.now().millisecondsSinceEpoch}$ext');
@@ -29,8 +29,16 @@ Future<void> deleteReceipt(String? path) async {
   if (f.existsSync()) await f.delete();
 }
 
-/// Removes every stored receipt (Ρυθμίσεις › Επαναφορά δεδομένων).
+/// Where receipts are stored: `receipts/` in the app's documents folder.
+Future<Directory> receiptsDirectory() async =>
+    Directory(p.join((await getApplicationDocumentsDirectory()).path, 'receipts'));
+
+/// The receipts folder, for Ρυθμίσεις › Επαναφορά δεδομένων and the backup.
 abstract interface class ReceiptStorage {
+  /// The folder; it may not exist yet.
+  Future<Directory> directory();
+
+  /// Removes every stored receipt.
   Future<void> deleteAll();
 }
 
@@ -38,8 +46,11 @@ class DocumentsReceiptStorage implements ReceiptStorage {
   const new();
 
   @override
+  Future<Directory> directory() => receiptsDirectory();
+
+  @override
   Future<void> deleteAll() async {
-    final dir = Directory(p.join((await getApplicationDocumentsDirectory()).path, 'receipts'));
+    final dir = await receiptsDirectory();
     if (dir.existsSync()) await dir.delete(recursive: true);
   }
 }

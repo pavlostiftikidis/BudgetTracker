@@ -54,7 +54,7 @@ flutter test --update-goldens --tags golden   # regenerate screenshots
 - **Unit:** money parsing and formatting, budget periods (month ends, leap
   years), balances with transfers and credit cards, daily allowance,
   category thresholds, recurring materialisation (idempotency, paused,
-  every N months), insights, CSV.
+  every N months), insights, CSV, backup round trip and import.
 - **Integration:** every repository against an in-memory SQLite database,
   including the demo seed. Schema migrations are checked by the generated
   tests in `test/drift/` (schema shape and data integrity, v1 → v2).

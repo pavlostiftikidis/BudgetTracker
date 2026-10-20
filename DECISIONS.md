@@ -289,3 +289,51 @@ have broken another requirement. Newest decisions are appended per phase.
     deleted yet; they are removed on "Επαναφορά δεδομένων".
   - Lucide ships every weight of its icon font; tree-shaking keeps only the
     used glyphs in release builds.
+
+## Launch splash
+
+- **The app icon builds itself** on a cold start (`lib/app/splash.dart`):
+  the wallet settles in, the lime ring sweeps to 75%, the dot pops and one
+  pulse ripples out (1.1 s), then it fades into the app. It mirrors the
+  motion on the website. The geometry is the 1024 px icon's (the site's
+  `app/icon.svg`), drawn by `AppMarkPainter` in
+  `lib/core/widgets/app_mark.dart`; a new icon means updating it. The same
+  painter draws `AppMark`, the icon next to "Pulse" on the welcome page.
+- **It never cuts startup short and never waits on it twice:** the app is
+  built underneath from the first frame, and the splash leaves once startup
+  has finished *and* the intro has played. A slow startup holds the finished
+  icon. With the lock on, the biometric prompt can appear over the splash.
+- **Always dark,** like the icon. The native launch screens (Android
+  `LaunchTheme`/`NormalTheme`, iOS `LaunchScreen.storyboard`) use the same
+  `#0B0C0E`, so there is no white flash before it. Android 12+ shows its
+  own system splash regardless; its icon is made transparent so the logo
+  is not shown twice.
+- **Reduced motion:** the finished icon shows until startup is done and
+  goes at once. Widget tests run that way, so they never wait on it.
+
+## Backup and import
+
+- **"Αντίγραφο ασφαλείας" is the whole app in one zip** (`pulse-backup-
+  yyyy-MM-dd.zip`), shared through the system share sheet like the CSV:
+  `backup.json` holds settings, accounts and categories (archived ones too),
+  recurring rules and the live transactions; `receipts/` holds the receipt
+  images. Soft-deleted transactions are left out, as in the CSV. Theme, the
+  lock flag and the onboarding flag are per device and are not included.
+- **Receipt paths are stored relative** (`receipts/<name>`) because the
+  documents folder differs between installs; on import they are pointed at
+  this install's folder. A receipt whose file is gone is dropped.
+- **"Εισαγωγή αντιγράφου" replaces everything, it does not merge.** The file
+  is read and checked first; a dialog then shows its date and number of
+  transactions before anything changes. The database swap is one
+  transaction (`AppDatabase.replaceAll`), so a file the database rejects
+  (e.g. a transaction on a missing account) leaves the data as it was.
+  Receipts are unpacked beside the live folder and swapped in only after the
+  database accepted the data. Recurring rules that fell due since the backup
+  are materialised right after.
+- **Versioned:** `backup.json` carries `"format": "pulse-backup"` and
+  `"version": 1` (`kBackupVersion`). A newer version is refused with a
+  message to update the app; when the layout changes, bump the version and
+  keep older files restoring. Only flat files directly under `receipts/` are
+  unpacked, so a crafted entry name cannot write elsewhere.
+- **Packages:** `archive` for the zip, `file_picker` to choose the file
+  (Android may return a content URI, which is copied to a temporary file).

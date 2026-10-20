@@ -264,6 +264,42 @@ final class SettingsRepositoryProvider
 
 String _$settingsRepositoryHash() => r'0eda22c9c7a5e68c8661bf58b528d73264ef9a19';
 
+@ProviderFor(backupRepository)
+final backupRepositoryProvider = BackupRepositoryProvider._();
+
+final class BackupRepositoryProvider extends $FunctionalProvider<BackupRepository, BackupRepository, BackupRepository>
+    with $Provider<BackupRepository> {
+  BackupRepositoryProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'backupRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$backupRepositoryHash();
+
+  @$internal
+  @override
+  $ProviderElement<BackupRepository> $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
+
+  @override
+  BackupRepository create(Ref ref) {
+    return backupRepository(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(BackupRepository value) {
+    return $ProviderOverride(origin: this, providerOverride: $SyncValueProvider<BackupRepository>(value));
+  }
+}
+
+String _$backupRepositoryHash() => r'4f5bbd2eed0109757468581543ff3bb899fd5053';
+
 @ProviderFor(settings)
 final settingsProvider = SettingsProvider._();
 

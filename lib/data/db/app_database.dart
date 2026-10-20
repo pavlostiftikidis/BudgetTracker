@@ -42,12 +42,35 @@ class AppDatabase extends _$AppDatabase {
   );
 
   /// Deletes every row (Ρυθμίσεις › Επαναφορά δεδομένων).
-  Future<void> wipe() => transaction(() async {
+  Future<void> wipe() => transaction(_deleteAll);
+
+  /// Swaps every row for the given ones (Ρυθμίσεις › Εισαγωγή αντιγράφου).
+  /// One transaction: if any row is rejected, nothing changes.
+  Future<void> replaceAll({
+    required SettingsEntriesCompanion settings,
+    required List<AccountsCompanion> accountRows,
+    required List<CategoriesCompanion> categoryRows,
+    required List<RecurringRulesCompanion> ruleRows,
+    required List<TxnsCompanion> txnRows,
+  }) => transaction(() async {
+    await _deleteAll();
+    await into(settingsEntries).insert(settings);
+    // Parents before children so foreign keys hold at every step.
+    await batch(
+      (b) => b
+        ..insertAll(accounts, accountRows)
+        ..insertAll(categories, categoryRows)
+        ..insertAll(recurringRules, ruleRows)
+        ..insertAll(txns, txnRows),
+    );
+  });
+
+  Future<void> _deleteAll() async {
     // Children before parents so foreign keys hold at every step.
     await delete(txns).go();
     await delete(recurringRules).go();
     await delete(categories).go();
     await delete(accounts).go();
     await delete(settingsEntries).go();
-  });
+  }
 }

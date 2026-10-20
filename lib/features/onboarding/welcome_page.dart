@@ -4,6 +4,7 @@ import 'package:pulse/core/money/money.dart';
 import 'package:pulse/core/theme/palette.dart';
 import 'package:pulse/core/theme/pulse_text.dart';
 import 'package:pulse/core/utils/context_ext.dart';
+import 'package:pulse/core/widgets/app_mark.dart';
 import 'package:pulse/core/widgets/buttons.dart';
 import 'package:pulse/core/widgets/hero_amount.dart';
 import 'package:pulse/core/widgets/icon_tile.dart';
@@ -39,12 +40,7 @@ class WelcomePage extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(color: c.accent, shape: BoxShape.circle),
-                              child: Icon(LucideIcons.activity, size: 20, color: c.onAccent),
-                            ),
+                            const AppMark(),
                             const SizedBox(width: 10),
                             Text(l10n.appTitle, style: PulseText.sectionTitle),
                           ],

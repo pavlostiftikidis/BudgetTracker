@@ -200,3 +200,27 @@ const _$PaydayKindEnumMap = {
   PaydayKind.last: 'last',
   PaydayKind.custom: 'custom',
 };
+
+_DataSnapshot _$DataSnapshotFromJson(Map<String, dynamic> json) => _DataSnapshot(
+  settings: AppSettings.fromJson(json['settings'] as Map<String, dynamic>),
+  accounts:
+      (json['accounts'] as List<dynamic>?)?.map((e) => Account.fromJson(e as Map<String, dynamic>)).toList() ??
+      const <Account>[],
+  categories:
+      (json['categories'] as List<dynamic>?)?.map((e) => TxnCategory.fromJson(e as Map<String, dynamic>)).toList() ??
+      const <TxnCategory>[],
+  recurringRules:
+      (json['recurringRules'] as List<dynamic>?)
+          ?.map((e) => RecurringRule.fromJson(e as Map<String, dynamic>))
+          .toList() ??
+      const <RecurringRule>[],
+  txns: (json['txns'] as List<dynamic>?)?.map((e) => Txn.fromJson(e as Map<String, dynamic>)).toList() ?? const <Txn>[],
+);
+
+Map<String, dynamic> _$DataSnapshotToJson(_DataSnapshot instance) => <String, dynamic>{
+  'settings': instance.settings.toJson(),
+  'accounts': instance.accounts.map((e) => e.toJson()).toList(),
+  'categories': instance.categories.map((e) => e.toJson()).toList(),
+  'recurringRules': instance.recurringRules.map((e) => e.toJson()).toList(),
+  'txns': instance.txns.map((e) => e.toJson()).toList(),
+};

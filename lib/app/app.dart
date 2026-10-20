@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pulse/app/app_providers.dart';
 import 'package:pulse/app/router.dart';
+import 'package:pulse/app/splash.dart';
 import 'package:pulse/app/startup.dart';
 import 'package:pulse/core/theme/pulse_theme.dart';
 import 'package:pulse/core/widgets/error_view.dart';
@@ -52,11 +53,14 @@ class _PulseAppState extends ConsumerState<PulseApp> {
       routerConfig: router,
       builder: (context, child) => MediaQuery.withClampedTextScaling(
         maxScaleFactor: 1.3,
-        child: switch (ready) {
-          AsyncData() => AppLockGate(child: child ?? const SizedBox.shrink()),
-          AsyncError(:final error) => _StartupError(error: error),
-          _ => ColoredBox(color: Theme.of(context).scaffoldBackgroundColor),
-        },
+        child: StartupSplash(
+          ready: !ready.isLoading,
+          child: switch (ready) {
+            AsyncData() => AppLockGate(child: child ?? const SizedBox.shrink()),
+            AsyncError(:final error) => _StartupError(error: error),
+            _ => ColoredBox(color: Theme.of(context).scaffoldBackgroundColor),
+          },
+        ),
       ),
     );
   }

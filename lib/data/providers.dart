@@ -4,6 +4,7 @@ import 'package:pulse/core/utils/clock.dart';
 import 'package:pulse/data/db/app_database.dart';
 import 'package:pulse/data/models/models.dart';
 import 'package:pulse/data/repositories/account_repository.dart';
+import 'package:pulse/data/repositories/backup_repository.dart';
 import 'package:pulse/data/repositories/category_repository.dart';
 import 'package:pulse/data/repositories/recurring_repository.dart';
 import 'package:pulse/data/repositories/settings_repository.dart';
@@ -37,6 +38,9 @@ RecurringRepository recurringRepository(Ref ref) =>
 
 @Riverpod(keepAlive: true)
 SettingsRepository settingsRepository(Ref ref) => DriftSettingsRepository(ref.watch(appDatabaseProvider));
+
+@Riverpod(keepAlive: true)
+BackupRepository backupRepository(Ref ref) => DriftBackupRepository(ref.watch(appDatabaseProvider));
 
 // ---------------------------------------------------------------------------
 // Shared streams. Feature view-models combine these; every number on screen
