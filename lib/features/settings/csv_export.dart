@@ -54,7 +54,7 @@ String buildCsv(List<Txn> txns, Lookups lookups, AppLocalizations l10n) {
 /// Writes the CSV to a temporary file and opens the share sheet.
 Future<void> exportAndShareCsv(List<Txn> txns, Lookups lookups, AppLocalizations l10n, DateTime now) async {
   final dir = await getTemporaryDirectory();
-  final file = File(p.join(dir.path, 'pulse-${dayKey(now)}.csv'));
+  final file = File(p.join(dir.path, 'budget-pace-${dayKey(now)}.csv'));
   await file.writeAsString(buildCsv(txns, lookups, l10n), flush: true);
   await SharePlus.instance.share(
     ShareParams(

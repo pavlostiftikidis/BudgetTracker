@@ -42,7 +42,7 @@ void main() {
     final semantics = tester.ensureSemantics();
     await tester.pumpWidget(host(ready: false));
     expect(splash, findsOneWidget);
-    expect(find.bySemanticsLabel('Pulse'), findsOneWidget);
+    expect(find.bySemanticsLabel('Budget Pace'), findsOneWidget);
     expect(find.bySemanticsLabel('app'), findsNothing);
 
     // The intro is over but startup is not: the icon stays.

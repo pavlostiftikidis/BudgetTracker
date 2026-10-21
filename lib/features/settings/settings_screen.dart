@@ -259,7 +259,7 @@ class SettingsScreen extends ConsumerWidget {
                     _Row(
                       icon: LucideIcons.fileText,
                       title: l10n.settingsLicenses,
-                      onTap: () => showLicensePage(context: context, applicationName: 'Pulse', useRootNavigator: true),
+                      onTap: () => showLicensePage(context: context, applicationName: 'Budget Pace', useRootNavigator: true),
                     ),
                   ],
                 ),

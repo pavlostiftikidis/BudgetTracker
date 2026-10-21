@@ -91,17 +91,17 @@ void main() {
     await settle(tester);
     expect(auth.prompts, 1);
     expect(flags.lock, isTrue);
-    expect(find.text('Το Pulse είναι κλειδωμένο'), findsNothing, reason: 'not locked right after enabling');
+    expect(find.text('Το Budget Pace είναι κλειδωμένο'), findsNothing, reason: 'not locked right after enabling');
 
     container.invalidate(appLockProvider);
     auth.succeed = false;
     await settle(tester);
-    expect(find.text('Το Pulse είναι κλειδωμένο'), findsOneWidget);
+    expect(find.text('Το Budget Pace είναι κλειδωμένο'), findsOneWidget);
 
     auth.succeed = true;
     await tester.tap(find.text('Ξεκλείδωμα'));
     await settle(tester);
-    expect(find.text('Το Pulse είναι κλειδωμένο'), findsNothing);
+    expect(find.text('Το Budget Pace είναι κλειδωμένο'), findsNothing);
   });
 
   testWidgets('no biometrics: the switch stays off and explains why', (tester) async {
@@ -131,19 +131,19 @@ void main() {
       secureFlags: MemorySecureFlags(lock: true),
       clock: clock,
     );
-    expect(find.text('Το Pulse είναι κλειδωμένο'), findsNothing, reason: 'fake auth unlocked on open');
+    expect(find.text('Το Budget Pace είναι κλειδωμένο'), findsNothing, reason: 'fake auth unlocked on open');
 
     final lock = container.read(appLockProvider.notifier)..onBackground();
     clock.fixed = t0.add(const Duration(seconds: 10));
     lock.onForeground();
     await settle(tester);
-    expect(find.text('Το Pulse είναι κλειδωμένο'), findsNothing);
+    expect(find.text('Το Budget Pace είναι κλειδωμένο'), findsNothing);
 
     lock.onBackground();
     clock.fixed = t0.add(const Duration(minutes: 2));
     lock.onForeground();
     await tester.pump();
-    expect(find.text('Το Pulse είναι κλειδωμένο'), findsOneWidget);
+    expect(find.text('Το Budget Pace είναι κλειδωμένο'), findsOneWidget);
   });
 
   testWidgets('reset deletes everything and returns to onboarding', (tester) async {

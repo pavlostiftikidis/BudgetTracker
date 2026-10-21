@@ -10,7 +10,7 @@ class AppLocalizationsEl extends AppLocalizations {
   AppLocalizationsEl([String locale = 'el']) : super(locale);
 
   @override
-  String get appTitle => 'Pulse';
+  String get appTitle => 'Budget Pace';
 
   @override
   String get navHome => 'Αρχική';
@@ -902,7 +902,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get exportEmpty => 'Δεν υπάρχουν κινήσεις για εξαγωγή.';
 
   @override
-  String get exportSubject => 'Pulse — κινήσεις';
+  String get exportSubject => 'Budget Pace — κινήσεις';
 
   @override
   String get settingsBackup => 'Αντίγραφο ασφαλείας';
@@ -914,7 +914,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get settingsImportBackup => 'Εισαγωγή αντιγράφου';
 
   @override
-  String get backupSubject => 'Pulse — αντίγραφο ασφαλείας';
+  String get backupSubject => 'Budget Pace — αντίγραφο ασφαλείας';
 
   @override
   String get importDialogTitle => 'Εισαγωγή αντιγράφου;';
@@ -938,11 +938,11 @@ class AppLocalizationsEl extends AppLocalizations {
   String get importDone => 'Τα δεδομένα επανήλθαν από το αντίγραφο.';
 
   @override
-  String get importNotBackup => 'Αυτό το αρχείο δεν είναι αντίγραφο του Pulse.';
+  String get importNotBackup => 'Αυτό το αρχείο δεν είναι αντίγραφο του Budget Pace.';
 
   @override
   String get importNewerVersion =>
-      'Το αντίγραφο είναι από νεότερη έκδοση του Pulse. Ενημέρωσε την εφαρμογή και ξαναδοκίμασε.';
+      'Το αντίγραφο είναι από νεότερη έκδοση του Budget Pace. Ενημέρωσε την εφαρμογή και ξαναδοκίμασε.';
 
   @override
   String get importFailed => 'Η εισαγωγή απέτυχε. Τα δεδομένα σου δεν άλλαξαν.';
@@ -954,7 +954,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get biometricReason => 'Ξεκλείδωσε για να δεις τα οικονομικά σου';
 
   @override
-  String get lockTitle => 'Το Pulse είναι κλειδωμένο';
+  String get lockTitle => 'Το Budget Pace είναι κλειδωμένο';
 
   @override
   String get lockUnlock => 'Ξεκλείδωμα';
@@ -1039,7 +1039,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get onbWelcomeBody =>
-      'Βάζεις εισόδημα και όρια, καταγράφεις τα έξοδα, και το Pulse σου λέει πόσα μένουν για σήμερα.';
+      'Βάζεις εισόδημα και όρια, καταγράφεις τα έξοδα, και το Budget Pace σου λέει πόσα μένουν για σήμερα.';
 
   @override
   String get onbWelcomePrivacy => 'Τα δεδομένα μένουν στο κινητό σου. Χωρίς λογαριασμό.';

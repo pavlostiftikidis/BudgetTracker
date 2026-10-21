@@ -40,7 +40,7 @@ class _PulseAppState extends ConsumerState<PulseApp> {
     final router = ref.watch(routerProvider);
     final ready = ref.watch(appStartupProvider);
     return MaterialApp.router(
-      title: 'Pulse',
+      title: 'Budget Pace',
       debugShowCheckedModeBanner: false,
       theme: PulseTheme.light(),
       darkTheme: PulseTheme.dark(),

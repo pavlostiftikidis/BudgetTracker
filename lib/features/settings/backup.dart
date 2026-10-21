@@ -199,7 +199,7 @@ class SystemBackupPicker implements BackupPicker {
 /// can be saved to Files or Drive or sent to another phone.
 Future<void> shareBackup(DataSnapshot data, AppLocalizations l10n, DateTime now) async {
   final dir = await getTemporaryDirectory();
-  final file = File(p.join(dir.path, 'pulse-backup-${dayKey(now)}.zip'));
+  final file = File(p.join(dir.path, 'budget-pace-backup-${dayKey(now)}.zip'));
   await writeBackup(data, now, file);
   await SharePlus.instance.share(
     ShareParams(

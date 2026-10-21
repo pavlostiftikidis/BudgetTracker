@@ -1,4 +1,4 @@
-# Pulse
+# Budget Pace
 
 Offline-first personal budget app for iOS and Android. Greek UI (`el_GR`),
 euros, dark by default.

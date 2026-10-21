@@ -300,7 +300,7 @@ have broken another requirement. Newest decisions are appended per phase.
   motion on the website. The geometry is the 1024 px icon's (the site's
   `app/icon.svg`), drawn by `AppMarkPainter` in
   `lib/core/widgets/app_mark.dart`; a new icon means updating it. The same
-  painter draws `AppMark`, the icon next to "Pulse" on the welcome page.
+  painter draws `AppMark`, the icon next to the app name on the welcome page.
 - **It never cuts startup short and never waits on it twice:** the app is
   built underneath from the first frame, and the splash leaves once startup
   has finished *and* the intro has played. A slow startup holds the finished
@@ -315,8 +315,8 @@ have broken another requirement. Newest decisions are appended per phase.
 
 ## Backup and import
 
-- **"Αντίγραφο ασφαλείας" is the whole app in one zip** (`pulse-backup-
-  yyyy-MM-dd.zip`), shared through the system share sheet like the CSV:
+- **"Αντίγραφο ασφαλείας" is the whole app in one zip**
+  (`budget-pace-backup-yyyy-MM-dd.zip`), shared through the system share sheet like the CSV:
   `backup.json` holds settings, accounts and categories (archived ones too),
   recurring rules and the live transactions; `receipts/` holds the receipt
   images. Soft-deleted transactions are left out, as in the CSV. Theme, the
@@ -343,3 +343,17 @@ have broken another requirement. Newest decisions are appended per phase.
   unpacked, so a crafted entry name cannot write elsewhere.
 - **Packages:** `archive` for the zip, `file_picker` to choose the file
   (Android may return a content URI, which is copied to a temporary file).
+
+## Name
+
+- **The app is "Budget Pace"** (App Store name "Budget Pace: Μισθός σε
+  Μισθό"). It was called Pulse until 2026-10-21; "Pulse" alone is taken on
+  the App Store, and "Pulse Budget Tracker" is already a budget app.
+- **Only what people see was renamed:** the home-screen label
+  (`CFBundleDisplayName`, `android:label`), the ARB strings, the permission
+  prompts, the licence page and the CSV/backup file names. The Dart package
+  (`pulse`), the `Pulse*` classes, the database file (`pulse.sqlite`) and the
+  bundle IDs keep the old name: renaming the database would orphan existing
+  data, and a bundle ID cannot change once the app is in a store.
+- **Backups keep `"format": "pulse-backup"`,** so files made before the
+  rename still import.

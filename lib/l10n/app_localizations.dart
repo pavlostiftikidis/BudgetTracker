@@ -94,7 +94,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In el, this message translates to:
-  /// **'Pulse'**
+  /// **'Budget Pace'**
   String get appTitle;
 
   /// No description provided for @navHome.
@@ -1678,7 +1678,7 @@ abstract class AppLocalizations {
   /// No description provided for @exportSubject.
   ///
   /// In el, this message translates to:
-  /// **'Pulse — κινήσεις'**
+  /// **'Budget Pace — κινήσεις'**
   String get exportSubject;
 
   /// No description provided for @settingsBackup.
@@ -1702,7 +1702,7 @@ abstract class AppLocalizations {
   /// No description provided for @backupSubject.
   ///
   /// In el, this message translates to:
-  /// **'Pulse — αντίγραφο ασφαλείας'**
+  /// **'Budget Pace — αντίγραφο ασφαλείας'**
   String get backupSubject;
 
   /// No description provided for @importDialogTitle.
@@ -1738,13 +1738,13 @@ abstract class AppLocalizations {
   /// No description provided for @importNotBackup.
   ///
   /// In el, this message translates to:
-  /// **'Αυτό το αρχείο δεν είναι αντίγραφο του Pulse.'**
+  /// **'Αυτό το αρχείο δεν είναι αντίγραφο του Budget Pace.'**
   String get importNotBackup;
 
   /// No description provided for @importNewerVersion.
   ///
   /// In el, this message translates to:
-  /// **'Το αντίγραφο είναι από νεότερη έκδοση του Pulse. Ενημέρωσε την εφαρμογή και ξαναδοκίμασε.'**
+  /// **'Το αντίγραφο είναι από νεότερη έκδοση του Budget Pace. Ενημέρωσε την εφαρμογή και ξαναδοκίμασε.'**
   String get importNewerVersion;
 
   /// No description provided for @importFailed.
@@ -1768,7 +1768,7 @@ abstract class AppLocalizations {
   /// No description provided for @lockTitle.
   ///
   /// In el, this message translates to:
-  /// **'Το Pulse είναι κλειδωμένο'**
+  /// **'Το Budget Pace είναι κλειδωμένο'**
   String get lockTitle;
 
   /// No description provided for @lockUnlock.
@@ -1924,7 +1924,7 @@ abstract class AppLocalizations {
   /// No description provided for @onbWelcomeBody.
   ///
   /// In el, this message translates to:
-  /// **'Βάζεις εισόδημα και όρια, καταγράφεις τα έξοδα, και το Pulse σου λέει πόσα μένουν για σήμερα.'**
+  /// **'Βάζεις εισόδημα και όρια, καταγράφεις τα έξοδα, και το Budget Pace σου λέει πόσα μένουν για σήμερα.'**
   String get onbWelcomeBody;
 
   /// No description provided for @onbWelcomePrivacy.

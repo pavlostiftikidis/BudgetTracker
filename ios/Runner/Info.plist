@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Pulse</string>
+	<string>Budget Pace</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>pulse</string>
+	<string>Budget Pace</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -27,11 +27,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Το Pulse χρησιμοποιεί την κάμερα για να φωτογραφίσεις αποδείξεις.</string>
+	<string>Το Budget Pace χρησιμοποιεί την κάμερα για να φωτογραφίσεις αποδείξεις.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Το Pulse χρησιμοποιεί το Face ID για να κλειδώνει τα οικονομικά σου.</string>
+	<string>Το Budget Pace χρησιμοποιεί το Face ID για να κλειδώνει τα οικονομικά σου.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Το Pulse χρειάζεται πρόσβαση στις φωτογραφίες για να επισυνάψεις αποδείξεις.</string>
+	<string>Το Budget Pace χρειάζεται πρόσβαση στις φωτογραφίες για να επισυνάψεις αποδείξεις.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
