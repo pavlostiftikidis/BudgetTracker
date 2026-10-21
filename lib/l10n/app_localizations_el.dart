@@ -926,6 +926,12 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
+  String importDialogBodyFresh(String date, int count) {
+    String _temp0 = intl.Intl.pluralLogic(count, locale: localeName, other: '$count κινήσεις', one: '1 κίνηση');
+    return 'Αντίγραφο της $date με $_temp0.';
+  }
+
+  @override
   String get importConfirm => 'Εισαγωγή';
 
   @override
@@ -1037,6 +1043,9 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get onbWelcomePrivacy => 'Τα δεδομένα μένουν στο κινητό σου. Χωρίς λογαριασμό.';
+
+  @override
+  String get onbWelcomeRestore => 'Έχω αντίγραφο ασφαλείας';
 
   @override
   String stepperDecrease(String name) {

@@ -1717,6 +1717,12 @@ abstract class AppLocalizations {
   /// **'Αντίγραφο της {date} με {count, plural, =1{1 κίνηση} other{{count} κινήσεις}}. Θα αντικαταστήσει όλα τα τωρινά δεδομένα και η ενέργεια δεν αναιρείται.'**
   String importDialogBody(String date, int count);
 
+  /// No description provided for @importDialogBodyFresh.
+  ///
+  /// In el, this message translates to:
+  /// **'Αντίγραφο της {date} με {count, plural, =1{1 κίνηση} other{{count} κινήσεις}}.'**
+  String importDialogBodyFresh(String date, int count);
+
   /// No description provided for @importConfirm.
   ///
   /// In el, this message translates to:
@@ -1926,6 +1932,12 @@ abstract class AppLocalizations {
   /// In el, this message translates to:
   /// **'Τα δεδομένα μένουν στο κινητό σου. Χωρίς λογαριασμό.'**
   String get onbWelcomePrivacy;
+
+  /// No description provided for @onbWelcomeRestore.
+  ///
+  /// In el, this message translates to:
+  /// **'Έχω αντίγραφο ασφαλείας'**
+  String get onbWelcomeRestore;
 
   /// No description provided for @stepperDecrease.
   ///

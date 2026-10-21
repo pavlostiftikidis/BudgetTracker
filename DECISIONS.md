@@ -173,8 +173,10 @@ have broken another requirement. Newest decisions are appended per phase.
   account it shows the period's net (income − expenses).
 - **Week:** Monday–Sunday around today. When looking at a past period, it
   is the week of that period's last day.
-- **The period pill** opens a picker of the last 12 periods; Home then shows
-  that period (no days left or allowance for past periods).
+- **The period pill** opens a picker of past periods; Home then shows that
+  period (no days left or allowance for past periods). It goes back only to
+  the period of the oldest transaction, at most 12, so someone who started
+  today sees just the current month (`pickerPeriods`).
 - **Avatar initials** come from an optional `displayName` setting (schema
   v2, see phase 7). Without a name the avatar shows a person icon.
 - **Budgets:** the 20-tick bar fills proportionally; ticks 18–20 (≥ 85 %)
@@ -330,6 +332,10 @@ have broken another requirement. Newest decisions are appended per phase.
   Receipts are unpacked beside the live folder and swapped in only after the
   database accepted the data. Recurring rules that fell due since the backup
   are materialised right after.
+- **A new phone restores from the first screen.** The welcome page has "Έχω
+  αντίγραφο ασφαλείας" under "Ξεκίνα": the same import, with a lime confirm
+  button instead of coral since there is nothing to lose yet, and on success
+  it marks onboarding done and goes straight to Home, skipping the steps.
 - **Versioned:** `backup.json` carries `"format": "pulse-backup"` and
   `"version": 1` (`kBackupVersion`). A newer version is refused with a
   message to update the app; when the layout changes, bump the version and

@@ -247,6 +247,20 @@ HomeVm buildHomeVm({
   );
 }
 
+/// Most periods the Home picker offers.
+const int kPickerPeriods = 12;
+
+/// Periods the Home picker offers, newest first: the current one and the
+/// earlier ones back to the period of the oldest transaction ([first]), so a
+/// new user is not offered months from before they started.
+List<BudgetPeriod> pickerPeriods(DateTime now, Payday payday, DateTime? first) {
+  final periods = [BudgetPeriod.containing(now, payday)];
+  while (periods.length < kPickerPeriods && first != null && first.isBefore(periods.last.start)) {
+    periods.add(periods.last.previous(payday));
+  }
+  return periods;
+}
+
 /// Which period Home shows: 0 = current, 1 = previous, …
 @riverpod
 class HomePeriodOffset extends _$HomePeriodOffset {

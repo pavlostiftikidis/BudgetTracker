@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:pulse/app/router.dart';
 import 'package:pulse/core/money/money.dart';
-import 'package:pulse/core/period/budget_period.dart';
 import 'package:pulse/core/theme/pulse_text.dart';
 import 'package:pulse/core/theme/pulse_theme.dart';
 import 'package:pulse/core/utils/context_ext.dart';
@@ -328,10 +327,9 @@ class _Header extends ConsumerWidget {
   Future<void> _pickPeriod(BuildContext context, WidgetRef ref) async {
     final settings = ref.read(settingsProvider).value ?? const AppSettings();
     final now = ref.read(clockProvider).now();
-    final periods = <BudgetPeriod>[BudgetPeriod.containing(now, settings.payday)];
-    for (var i = 1; i < 12; i++) {
-      periods.add(periods.last.previous(settings.payday));
-    }
+    final first = await ref.read(txnRepositoryProvider).firstDate();
+    if (!context.mounted) return;
+    final periods = pickerPeriods(now, settings.payday, first);
     final selected = ref.read(homePeriodOffsetProvider);
     final picked = await showPulseSheet<int>(
       context,

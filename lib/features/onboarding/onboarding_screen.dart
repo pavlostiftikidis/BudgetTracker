@@ -20,6 +20,7 @@ import 'package:pulse/features/accounts/account_display.dart';
 import 'package:pulse/features/onboarding/income_widgets.dart';
 import 'package:pulse/features/onboarding/onboarding_actions.dart';
 import 'package:pulse/features/onboarding/welcome_page.dart';
+import 'package:pulse/features/settings/settings_screen.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const new({super.key});
@@ -57,6 +58,17 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
     await ref.read(onboardingDoneProvider.notifier).set(done: true);
   }
 
+  /// A new phone: the backup replaces onboarding entirely.
+  Future<void> _restore() async {
+    if (_saving) return;
+    setState(() => _saving = true);
+    final restored = await importBackup(context, ref, fresh: true);
+    if (!mounted) return;
+    setState(() => _saving = false);
+    // The router redirects to Home once this flips.
+    if (restored) await ref.read(onboardingDoneProvider.notifier).set(done: true);
+  }
+
   void _next() {
     FocusScope.of(context).unfocus();
     if (_step == _steps - 1) {
@@ -68,7 +80,9 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_welcome) return WelcomePage(onStart: () => setState(() => _welcome = false));
+    if (_welcome) {
+      return WelcomePage(onStart: () => setState(() => _welcome = false), onRestore: _restore);
+    }
     final c = context.colors;
     final l10n = context.l10n;
     final (title, subtitle) = switch (_step) {

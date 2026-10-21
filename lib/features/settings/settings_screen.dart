@@ -52,6 +52,111 @@ Future<void> resetAllData(WidgetRef ref) async {
   await ref.read(onboardingDoneProvider.notifier).set(done: false);
 }
 
+/// Ρυθμίσεις › Εισαγωγή αντιγράφου, and "Έχω αντίγραφο ασφαλείας" on the
+/// welcome page, where [fresh] says there is nothing to overwrite yet. Picks
+/// a backup, shows its date and size, and replaces all data with it.
+/// Returns whether it did.
+Future<bool> importBackup(BuildContext context, WidgetRef ref, {bool fresh = false}) async {
+  final messenger = ScaffoldMessenger.of(context);
+  final l10n = context.l10n;
+  void fail(BackupProblem problem) => messenger.showSnackBar(
+    SnackBar(
+      content: Text(switch (problem) {
+        BackupProblem.notABackup => l10n.importNotBackup,
+        BackupProblem.newerVersion => l10n.importNewerVersion,
+        BackupProblem.failed => l10n.importFailed,
+      }),
+    ),
+  );
+
+  final file = await ref.read(backupPickerProvider).pick();
+  if (file == null) return false;
+  final Backup backup;
+  try {
+    backup = await readBackup(file);
+  } on BackupException catch (e) {
+    fail(e.problem);
+    return false;
+  }
+  if (!context.mounted) return false;
+  final made = '${dayMonthShort(backup.createdAt)} ${backup.createdAt.year}';
+  final count = backup.data.txns.length;
+  final ok = await _confirm(
+    context,
+    title: l10n.importDialogTitle,
+    body: fresh ? l10n.importDialogBodyFresh(made, count) : l10n.importDialogBody(made, count),
+    action: l10n.importConfirm,
+    destructive: !fresh,
+  );
+  if (!ok) return false;
+  try {
+    await restoreBackup(
+      file,
+      backup,
+      repository: ref.read(backupRepositoryProvider),
+      receiptsDir: await ref.read(receiptStorageProvider).directory(),
+    );
+  } on BackupException catch (e) {
+    fail(e.problem);
+    return false;
+  }
+  // Rules that fell due since the backup was made.
+  await ref.read(recurringRepositoryProvider).materializeDue();
+  messenger.showSnackBar(SnackBar(content: Text(l10n.importDone)));
+  return true;
+}
+
+/// Asks before [action]; true if confirmed. A [destructive] action, one that
+/// overwrites data, gets a coral button.
+Future<bool> _confirm(
+  BuildContext context, {
+  required String title,
+  required String body,
+  required String action,
+  bool destructive = true,
+}) async {
+  final c = context.colors;
+  final l10n = context.l10n;
+  final ok = await showDialog<bool>(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(title),
+      content: Text(body),
+      actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+      actions: [
+        Row(
+          children: [
+            Expanded(
+              child: OutlineButtonPill(label: l10n.actionCancel, onPressed: () => Navigator.pop(context, false)),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: Material(
+                color: destructive ? c.coral : c.accent,
+                shape: const StadiumBorder(),
+                child: InkWell(
+                  customBorder: const StadiumBorder(),
+                  onTap: () => Navigator.pop(context, true),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(minHeight: 52),
+                    child: Center(
+                      child: Text(
+                        action,
+                        style: PulseText.label.copyWith(color: c.onAccent, fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
+  return ok ?? false;
+}
+
 class SettingsScreen extends ConsumerWidget {
   const new({super.key});
 
@@ -149,7 +254,7 @@ class SettingsScreen extends ConsumerWidget {
                     _Row(
                       icon: LucideIcons.archiveRestore,
                       title: l10n.settingsImportBackup,
-                      onTap: () => _import(context, ref),
+                      onTap: () => importBackup(context, ref),
                     ),
                     _Row(
                       icon: LucideIcons.fileText,
@@ -202,53 +307,6 @@ class SettingsScreen extends ConsumerWidget {
     await shareBackup(data, l10n, ref.read(clockProvider).now());
   }
 
-  Future<void> _import(BuildContext context, WidgetRef ref) async {
-    final messenger = ScaffoldMessenger.of(context);
-    final l10n = context.l10n;
-    void fail(BackupProblem problem) => messenger.showSnackBar(
-      SnackBar(
-        content: Text(switch (problem) {
-          BackupProblem.notABackup => l10n.importNotBackup,
-          BackupProblem.newerVersion => l10n.importNewerVersion,
-          BackupProblem.failed => l10n.importFailed,
-        }),
-      ),
-    );
-
-    final file = await ref.read(backupPickerProvider).pick();
-    if (file == null) return;
-    final Backup backup;
-    try {
-      backup = await readBackup(file);
-    } on BackupException catch (e) {
-      fail(e.problem);
-      return;
-    }
-    if (!context.mounted) return;
-    final made = backup.createdAt;
-    final ok = await _confirmReplace(
-      context,
-      title: l10n.importDialogTitle,
-      body: l10n.importDialogBody('${dayMonthShort(made)} ${made.year}', backup.data.txns.length),
-      action: l10n.importConfirm,
-    );
-    if (!ok) return;
-    try {
-      await restoreBackup(
-        file,
-        backup,
-        repository: ref.read(backupRepositoryProvider),
-        receiptsDir: await ref.read(receiptStorageProvider).directory(),
-      );
-    } on BackupException catch (e) {
-      fail(e.problem);
-      return;
-    }
-    // Rules that fell due since the backup was made.
-    await ref.read(recurringRepositoryProvider).materializeDue();
-    messenger.showSnackBar(SnackBar(content: Text(l10n.importDone)));
-  }
-
   Future<void> _editName(BuildContext context, WidgetRef ref, AppSettings settings) async {
     final controller = TextEditingController(text: settings.displayName ?? '');
     final name = await showPulseSheet<String>(
@@ -290,7 +348,7 @@ class SettingsScreen extends ConsumerWidget {
 
   Future<void> _confirmReset(BuildContext context, WidgetRef ref) async {
     final l10n = context.l10n;
-    final ok = await _confirmReplace(
+    final ok = await _confirm(
       context,
       title: l10n.resetDialogTitle,
       body: l10n.resetDialogBody,
@@ -299,55 +357,6 @@ class SettingsScreen extends ConsumerWidget {
     if (!ok) return;
     await HapticFeedback.heavyImpact();
     await resetAllData(ref);
-  }
-
-  /// Asks before an action that overwrites all data; true if confirmed.
-  Future<bool> _confirmReplace(
-    BuildContext context, {
-    required String title,
-    required String body,
-    required String action,
-  }) async {
-    final c = context.colors;
-    final l10n = context.l10n;
-    final ok = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(body),
-        actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-        actions: [
-          Row(
-            children: [
-              Expanded(
-                child: OutlineButtonPill(label: l10n.actionCancel, onPressed: () => Navigator.pop(context, false)),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Material(
-                  color: c.coral,
-                  shape: const StadiumBorder(),
-                  child: InkWell(
-                    customBorder: const StadiumBorder(),
-                    onTap: () => Navigator.pop(context, true),
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(minHeight: 52),
-                      child: Center(
-                        child: Text(
-                          action,
-                          style: PulseText.label.copyWith(color: c.onAccent, fontWeight: FontWeight.w800),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-    return ok ?? false;
   }
 }
 

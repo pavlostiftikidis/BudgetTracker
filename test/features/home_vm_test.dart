@@ -172,4 +172,35 @@ void main() {
       expect(dateOnly(vm.week.last.day), past.lastDay.isBefore(vm.week.last.day) ? vm.week.last.day : vm.week.last.day);
     });
   });
+
+  group('period picker', () {
+    // t0 is 18 Oct 2026; with payday on the 1st the periods are months.
+    test('a new user is offered only the current month', () {
+      expect(pickerPeriods(t0, Payday.first, null), [BudgetPeriod.containing(t0, Payday.first)]);
+      expect(pickerPeriods(t0, Payday.first, DateTime(2026, 10, 18, 9)), hasLength(1));
+      expect(pickerPeriods(t0, Payday.first, DateTime(2026, 10)), hasLength(1));
+    });
+
+    test('goes back to the month of the oldest transaction', () {
+      final periods = pickerPeriods(t0, Payday.first, DateTime(2026, 8, 31, 23, 59));
+      expect([for (final p in periods) p.start], [DateTime(2026, 10), DateTime(2026, 9), DateTime(2026, 8)]);
+    });
+
+    test('never more than a year', () {
+      expect(pickerPeriods(t0, Payday.first, DateTime(2020)), hasLength(kPickerPeriods));
+    });
+
+    test('the oldest live transaction is what counts', () async {
+      final db = memoryDb();
+      addTearDown(db.close);
+      final repo = DriftTxnRepository(db, FixedClock(t0));
+      expect(await repo.firstDate(), isNull);
+
+      final a = account(id: 'a');
+      await DriftAccountRepository(db).save(a);
+      await repo.add(txn(account: 'a', cents: 100, date: DateTime(2026, 9, 3, 10)));
+      await repo.add(txn(account: 'a', cents: 100, date: DateTime(2026, 7), deletedAt: t0));
+      expect(await repo.firstDate(), DateTime(2026, 9, 3, 10));
+    });
+  });
 }

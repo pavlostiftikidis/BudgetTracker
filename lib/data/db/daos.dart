@@ -160,6 +160,15 @@ class TxnsDao extends DatabaseAccessor<AppDatabase> with _$TxnsDaoMixin {
     return q.map((r) => (r.read(count) ?? 0) > 0).watchSingle();
   }
 
+  /// Date of the oldest live transaction, or null if there are none.
+  Future<DateTime?> firstDate() {
+    final first = txns.date.min();
+    final q = selectOnly(txns)
+      ..addColumns([first])
+      ..where(txns.deletedAt.isNull());
+    return q.map((r) => r.read(first)).getSingle();
+  }
+
   Future<int> countForCategory(String categoryId) async {
     final count = txns.id.count();
     final q = selectOnly(txns)

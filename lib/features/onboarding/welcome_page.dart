@@ -14,11 +14,13 @@ import 'package:pulse/core/widgets/surface_card.dart';
 import 'package:pulse/features/onboarding/onboarding_actions.dart';
 
 /// First screen of a fresh install, before the onboarding steps: what the
-/// app does, with a preview of Home.
+/// app does, with a preview of Home. [onRestore] imports a backup instead,
+/// for a new phone.
 class WelcomePage extends StatelessWidget {
-  const new({required this.onStart, super.key});
+  const new({required this.onStart, required this.onRestore, super.key});
 
   final VoidCallback onStart;
+  final VoidCallback onRestore;
 
   @override
   Widget build(BuildContext context) {
@@ -82,12 +84,24 @@ class WelcomePage extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 16),
-            child: PrimaryButton(
-              key: const ValueKey('onboarding-welcome-start'),
-              label: l10n.actionStart,
-              trailingArrow: true,
-              onPressed: onStart,
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 8),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                PrimaryButton(
+                  key: const ValueKey('onboarding-welcome-start'),
+                  label: l10n.actionStart,
+                  trailingArrow: true,
+                  onPressed: onStart,
+                ),
+                const SizedBox(height: 4),
+                TextButton(
+                  key: const ValueKey('onboarding-welcome-restore'),
+                  onPressed: onRestore,
+                  style: TextButton.styleFrom(minimumSize: const Size.fromHeight(48)),
+                  child: Text(l10n.onbWelcomeRestore, style: PulseText.label.copyWith(color: c.muted)),
+                ),
+              ],
             ),
           ),
         ],

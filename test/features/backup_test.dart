@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:archive/archive_io.dart';
 import 'package:collection/collection.dart';
 import 'package:drift/drift.dart' show driftRuntimeOptions;
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart' as p;
 import 'package:pulse/app/router.dart';
@@ -254,6 +255,54 @@ void main() {
     expect(find.text('Από αντίγραφο'), findsOneWidget);
     final restored = await tester.runAsync(() => DriftBackupRepository(appDb).snapshot());
     expect(restored!.accounts, isNotEmpty);
+  });
+
+  testWidgets('a new phone restores from the welcome page and skips onboarding', (tester) async {
+    final zip = File(p.join(tmp.path, 'backup.zip'));
+    late DataSnapshot original;
+    await tester.runAsync(() async {
+      original = await seedSource();
+      await writeBackup(original, DateTime(2026, 10, 5, 9), zip);
+    });
+
+    final prefs = MemoryAppPrefs();
+    final appDb = memoryDb();
+    await pumpPulseApp(
+      tester,
+      db: appDb,
+      prefs: prefs,
+      overrides: [backupPickerProvider.overrideWithValue(_FakePicker(zip))],
+    );
+    await tester.tap(find.byKey(const ValueKey('onboarding-welcome-restore')));
+    await settle(tester);
+    expect(find.text('Αντίγραφο της 5 Οκτ 2026 με ${original.txns.length} κινήσεις.'), findsOneWidget);
+
+    await tester.tap(find.text('Εισαγωγή'));
+    for (var i = 0; i < 4; i++) {
+      await settle(tester);
+    }
+    expect(prefs.onboardingDone, isTrue);
+    expect(find.text('Τα δεδομένα επανήλθαν από το αντίγραφο.'), findsOneWidget);
+    expect(find.byKey(const ValueKey('onboarding-welcome-start')), findsNothing);
+    final restored = await tester.runAsync(() => DriftBackupRepository(appDb).snapshot());
+    expect(restored!.txns, hasLength(original.txns.length));
+  });
+
+  testWidgets('cancelling on the welcome page stays there', (tester) async {
+    final zip = File(p.join(tmp.path, 'backup.zip'));
+    await tester.runAsync(() async {
+      await writeBackup(await seedSource(), t0, zip);
+    });
+
+    final prefs = MemoryAppPrefs();
+    await pumpPulseApp(tester, prefs: prefs, overrides: [backupPickerProvider.overrideWithValue(_FakePicker(zip))]);
+    await tester.tap(find.byKey(const ValueKey('onboarding-welcome-restore')));
+    await settle(tester);
+    await tester.tap(find.text('Ακύρωση'));
+    await settle(tester);
+
+    expect(prefs.onboardingDone, isFalse);
+    expect(find.byKey(const ValueKey('onboarding-welcome-start')), findsOneWidget);
   });
 }
 

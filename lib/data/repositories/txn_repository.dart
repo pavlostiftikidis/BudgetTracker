@@ -17,6 +17,9 @@ abstract interface class TxnRepository {
 
   Stream<bool> watchHasAny();
 
+  /// Date of the oldest live transaction; null if there are none.
+  Future<DateTime?> firstDate();
+
   Future<void> add(Txn txn);
 
   /// Replaces the stored row; bumps `updatedAt`.
@@ -53,6 +56,9 @@ class DriftTxnRepository implements TxnRepository {
 
   @override
   Stream<bool> watchHasAny() => _db.txnsDao.watchHasAny();
+
+  @override
+  Future<DateTime?> firstDate() => _db.txnsDao.firstDate();
 
   @override
   Future<void> add(Txn txn) => _db.txnsDao.insertRow(txn.toCompanion());
